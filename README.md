@@ -1,8 +1,1 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+e-Smartphone is a smart device management system designed to enhance digital experiences through AI-powered automation, cloud connectivity, and seamless integration with IoT and cloud-based services. The system allows users to manage their digital presence, applications, and cloud-connected devices efficiently.
