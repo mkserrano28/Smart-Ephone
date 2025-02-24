@@ -4,6 +4,7 @@ import Navbar from "./pages/Navbar";
 import Hero from "./pages/Hero";
 import Carousel from "./pages/Carousel";
 import Cart from "./pages/Cart";
+import Footer from "./pages/Footer"
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
@@ -52,6 +53,7 @@ function App() {
             <Hero darkMode={darkMode} />  {/* ✅ Pass darkMode to Hero */}
             <Carousel darkMode={darkMode} />
             <Cart addToCart={addToCart} darkMode={darkMode} />
+            <Footer />
 
         </div>
     );
