@@ -1,55 +1,74 @@
-import React, { useState } from "react";
-import "../css/Card.css";
+import React, { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-function Carousel({ darkMode }) { 
-    const [flippedIndex, setFlippedIndex] = useState(null);
+function Carousel({ darkMode }) {
+    const carouselRef = useRef(null);
 
-    const images = [
-        { front: "/images/iphone1.jpg", back: "/images/iphone2.jpg" },
-        { front: "/images/iphone3.jpg", back: "/images/iphone4.jpg" },
-        { front: "/images/iphone5.jpg", back: "/images/iphone6.jpg" },
+    // Ensure images are correctly referenced
+    const imageUrls = [
+        "/images/card.jpeg",
+        "/images/card1.jpg",
+        "/images/card2.jpg",
+        "/images/card5.png",
     ];
 
+    const scroll = (direction) => {
+        if (carouselRef.current) {
+            const scrollAmount = 400;
+            carouselRef.current.scrollBy({
+                left: direction === "left" ? -scrollAmount : scrollAmount,
+                behavior: "smooth",
+            });
+        }
+    };
+
     return (
-        <div className={`card flex flex-col items-center h-auto min-h-screen p-6 transition-colors duration-300 ${
-            darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
-        }`}>
-            <h1 className={`text-center font-serif text-4xl sm:text-5xl ${darkMode ? "text-yellow-200" : "text-blue-800"}`}>
-                About Ephone
-            </h1>
-            <div className="flex flex-wrap justify-center gap-6 md:gap-14 mt-5">
-                {images.map((image, index) => (
-                    <div
-                        key={index}
-                        className="relative w-40 sm:w-64 h-56 sm:h-[20rem] perspective-1000 cursor-pointer"
-                        onClick={() => setFlippedIndex(index === flippedIndex ? null : index)}
-                    >
-                        {/* Front Side */}
+        <div className={`py-10 px-4 transition-all duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-slate-100 text-black"}`}>
+            {/* Header */}
+            <div className="text-center mb-6">
+                <h2 className="text-3xl font-bold">
+                    Why E-SmartPhone is important <span className="text-green-600">and number 1?</span>.
+                </h2>
+            </div>
+
+            {/* Carousel Wrapper */}
+            <div className="relative max-w-7xl mx-auto">
+                {/* Left Navigation Button */}
+                <button
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-md rounded-full p-3 z-10 hover:bg-gray-300 dark:hover:bg-gray-600"
+                    onClick={() => scroll("left")}
+                >
+                    <ChevronLeft size={28} className="text-gray-700 dark:text-white" />
+                </button>
+
+                {/* Scrollable Carousel Container */}
+                <div
+                    ref={carouselRef}
+                    className="flex space-x-6 overflow-x-auto scrollbar-hide px-4 py-4 snap-x snap-mandatory"
+                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Hide Scrollbar for all browsers
+                >
+                    {imageUrls.map((src, index) => (
                         <div
-                            className={`absolute w-full h-full rounded-lg transition-transform duration-500 transform-style-3d ${
-                                flippedIndex === index ? "rotate-y-180" : ""
-                            }`}
+                            key={index}
+                            className="snap-center flex-shrink-0 w-[350px] h-[450px] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform"
                         >
                             <img 
-                                className="w-full h-full object-cover rounded-lg " 
-                                src={image.front} 
-                                alt="Iphone"
+                                src={src} 
+                                alt={`Template ${index}`} 
+                                className="w-full h-full object-cover" 
+                                onError={(e) => { e.target.src = "/images/placeholder.jpg"; }} // Fallback for broken images
                             />
                         </div>
-                        {/* Back Side */}
-                        <div
-                            className={`absolute w-full h-full rounded-lg transition-transform duration-500 transform-style-3d ${
-                                flippedIndex === index ? "rotate-y-0" : "rotate-y-180"
-                            }`}
-                        >
-                            <img 
-                                className="w-full h-full object-cover rounded-lg" 
-                                src={image.back} 
-                                alt="Iphone"
-                            />
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+
+                {/* Right Navigation Button */}
+                <button
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-md rounded-full p-3 z-10 hover:bg-gray-300 dark:hover:bg-gray-600"
+                    onClick={() => scroll("right")}
+                >
+                    <ChevronRight size={28} className="text-gray-700 dark:text-white" />
+                </button>
             </div>
         </div>
     );
