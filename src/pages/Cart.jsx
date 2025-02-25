@@ -64,7 +64,7 @@ function Cart({ addToCart, darkMode }) {
                         </div>
 
                         <h3 className="font-semibold mt-2 text-slate-900 dark:text-white text-center text-sm">{phone.model}</h3>
-                        <p className="text-gray-500 dark:text-gray-300 text-xs text-center">${phone.price.toFixed(2)}</p>
+                        <p className="text-gray-500 dark:text-gray-300 text-xs text-center">Php{phone.price.toFixed(2)}</p>
 
                         <button
                             className="absolute bottom-3 right-3 bg-slate-500 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-md"

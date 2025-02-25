@@ -15,41 +15,64 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
                     <div className="flex flex-col md:flex-row gap-6">
                         {/* Left Side - Cart Items */}
                         <div className="w-full md:w-2/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                            <table className="w-full">
+                            <table className="w-full border-collapse">
                                 <thead>
                                     <tr className="border-b">
-                                        <th className="text-left pb-2">Product</th>
-                                        <th className="text-center pb-2">Price</th>
-                                        <th className="text-center pb-2">Quantity</th>
-                                        <th className="text-right pb-2">Subtotal</th>
+                                        <th className="text-left pb-2 w-1/2">Product</th>
+                                        <th className="text-center pb-2 w-1/4 hidden sm:table-cell">Quantity</th>
+                                        <th className="text-right pb-2 w-1/4 hidden sm:table-cell">Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {cartItems.map((item) => (
-                                        <tr key={item.id} className="border-b">
-                                            <td className="py-4 flex items-center">
+                                        <tr key={item.id} className="border-b flex flex-col sm:table-row">
+                                            <td className="py-4 flex items-center sm:table-cell w-full sm:w-auto">
                                                 <img src={item.image} alt={item.model} className="w-16 h-16 object-contain rounded-lg mr-4" />
-                                                <div>
-                                                    <h3 className="font-semibold">{item.model}</h3>
-                                                    <p className="text-gray-500 text-sm">Color: {item.color}</p>
-                                                    <p className="text-gray-500 text-sm">Size: {item.size}</p>
+                                                <div className="text-left">
+                                                    <h3 className="font-semibold text-sm sm:text-base">{item.model}</h3>
+                                                    <p className="text-gray-500 text-xs sm:text-sm">Color: {item.color}</p>
+                                                    <p className="text-gray-500 text-xs sm:text-sm">Size: {item.size}</p>
+
+                                                    {/* Quantity Selector - Visible Only on Small Screens */}
+                                                    <div className="sm:hidden flex items-center justify-start space-x-2 mt-2">
+                                                        <button 
+                                                            className="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
+                                                            onClick={() => updateCartQuantity(item.id, "decrease")}
+                                                        >-</button>
+                                                        <span className="w-8 text-center font-semibold">{item.quantity}</span>
+                                                        <button 
+                                                            className="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
+                                                            onClick={() => updateCartQuantity(item.id, "increase")}
+                                                        >+</button>
+                                                    </div>
                                                 </div>
                                             </td>
-                                            <td className="text-center">${item.price.toFixed(2)}</td>
-                                            <td className="text-center">
-                                                <div className="flex items-center justify-center">
+
+                                            {/* Quantity Column - Hidden on Small Screens */}
+                                            <td className="text-center w-1/4 hidden sm:table-cell">
+                                                <div className="flex items-center justify-center space-x-2">
                                                     <button 
-                                                        className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
+                                                        className="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
                                                         onClick={() => updateCartQuantity(item.id, "decrease")}
                                                     >-</button>
-                                                    <span className="mx-2">{item.quantity}</span>
+                                                    <span className="w-8 text-center font-semibold">{item.quantity}</span>
                                                     <button 
-                                                        className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
+                                                        className="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
                                                         onClick={() => updateCartQuantity(item.id, "increase")}
                                                     >+</button>
                                                 </div>
                                             </td>
-                                            <td className="text-right font-semibold">${(item.price * item.quantity).toFixed(2)}</td>
+
+                                            {/* Subtotal - Hidden on small screens, moved inside Price */}
+                                            <td className="text-right w-1/4 hidden sm:table-cell font-semibold whitespace-nowrap">
+                                                ${(item.price * item.quantity).toFixed(2)}
+                                            </td>
+
+                                            {/* Mobile Price & Subtotal Display */}
+                                            <td className="sm:hidden text-left mt-2 text-gray-500">
+                                                <p>Price: <span className="font-semibold">${item.price.toFixed(2)}</span></p>
+                                                <p>Subtotal: <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span></p>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
