@@ -26,7 +26,7 @@ function Carousel({ darkMode }) {
             {/* Header */}
             <div className="text-center mb-6">
                 <h2 className="text-3xl font-bold">
-                    Why E-SmartPhone is important <span className="text-green-600">and number 1?</span>.
+                    Why Smart-Ephone is Number <span className="text-yellow-600">and still Growing?</span>.
                 </h2>
             </div>
 

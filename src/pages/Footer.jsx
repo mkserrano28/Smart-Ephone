@@ -8,7 +8,7 @@ function Footer() {
                     {/* Logo and Brand Name */}
                     <div className="mb-6 md:mb-0 flex items-center space-x-3">
                         <img src="/images/ephone-logo.webp" alt="Ephone Logo" className="h-12 w-auto rounded-4xl" />
-                        <span className="text-2xl font-semibold dark:text-white">Ephone</span>
+                        <span className="text-2xl font-semibold dark:text-white">Smart-Ephone</span>
                     </div>
 
                     {/* Navigation Links */}
@@ -54,7 +54,7 @@ function Footer() {
                 {/* Footer Bottom */}
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                        © 2025 <a href="#" className="hover:underline">Ephone™</a>. All Rights Reserved.
+                        © 2025 <a href="#" className="hover:underline">Smart-Ephone</a>. All Rights Reserved.
                     </span>
 
                     {/* Social Icons */}

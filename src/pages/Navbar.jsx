@@ -22,7 +22,7 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
                 <Link to="/" className="flex items-center space-x-3">
                     <img src="/images/ephone-logo.webp" alt="Ephone Logo" className="h-8 w-auto rounded-4xl" />
                     <span className={`text-lg sm:text-xl font-bold ${darkMode ? "text-yellow-400" : "text-blue-700"}`}>
-                        E-SmartPhone
+                       Smart-Ephone
                     </span>
                 </Link>
 
