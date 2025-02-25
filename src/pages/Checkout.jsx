@@ -27,11 +27,17 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
                                     {cartItems.map((item) => (
                                         <tr key={item.id} className="border-b flex flex-col sm:table-row">
                                             <td className="py-4 flex items-center sm:table-cell w-full sm:w-auto">
-                                                <img src={item.image} alt={item.model} className="w-16 h-16 object-contain rounded-lg mr-4" />
+                                            <img src={item.image} alt={item.model} className="w-32 h-32 object-contain rounded-lg mr-6" />
+
                                                 <div className="text-left">
                                                     <h3 className="font-semibold text-sm sm:text-base">{item.model}</h3>
-                                                    <p className="text-gray-500 text-xs sm:text-sm">Color: {item.color}</p>
-                                                    <p className="text-gray-500 text-xs sm:text-sm">Size: {item.size}</p>
+                                                    <p className="text-gray-500 text-xs sm:text-sm">Brand: {item.brand}</p>
+                                                    <p className="text-gray-500 text-xs sm:text-sm">RAM: {item.specifications.ram}</p>
+                                                    <p className="text-gray-500 text-xs sm:text-sm">
+                                                        Storage: {Array.isArray(item.specifications.storage)
+                                                            ? item.specifications.storage.join(" / ")
+                                                            : item.specifications.storage}
+                                                    </p>
 
                                                     {/* Quantity Selector - Visible Only on Small Screens */}
                                                     <div className="sm:hidden flex items-center justify-start space-x-2 mt-2">
