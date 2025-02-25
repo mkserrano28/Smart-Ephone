@@ -6,7 +6,7 @@ import Hero from "./pages/Hero";
 import Carousel from "./pages/Carousel";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import AuthPage from "./pages/AuthPage";
+import Authpage from "./pages/Authpage";
 import Footer from "./pages/Footer";
 
 function App() {
@@ -74,7 +74,7 @@ function AppContent({ cartItems, darkMode, setDarkMode, addToCart, updateCartQua
                 } />
                 {/* ✅ Pass updateCartQuantity to Checkout */}
                 <Route path="/checkout" element={<Checkout cartItems={cartItems} updateCartQuantity={updateCartQuantity} darkMode={darkMode} />} />
-                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/auth" element={<Authpage />} />
             </Routes>
         </div>
     );

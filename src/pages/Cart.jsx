@@ -46,7 +46,7 @@ function Cart({ addToCart, darkMode }) {
                 {filteredSmartphones.map((phone) => (
                     <div 
                         key={phone.id} 
-                        className="relative bg-slate-100 dark:bg-gray-700 shadow-lg rounded-xl p-4 
+                        className="relative bg-slate-100 dark:bg-gray-800 shadow-lg rounded-xl p-4 
                         transition-transform duration-500 ease-in-out transform 
                         hover:scale-105 hover:-translate-y-2 hover:shadow-2xl"
                     >
