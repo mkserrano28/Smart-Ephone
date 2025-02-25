@@ -4,9 +4,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 function Carousel({ darkMode }) {
     const carouselRef = useRef(null);
 
-    // Ensure images are correctly referenced
     const imageUrls = [
-        "/images/card.jpeg",
+        "/images/hero1.jpeg",
         "/images/card1.jpg",
         "/images/card2.jpg",
         "/images/card5.png",
@@ -45,12 +44,17 @@ function Carousel({ darkMode }) {
                 <div
                     ref={carouselRef}
                     className="flex space-x-6 overflow-x-auto scrollbar-hide px-4 py-4 snap-x snap-mandatory"
-                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Hide Scrollbar for all browsers
+                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Hide Scrollbar
                 >
                     {imageUrls.map((src, index) => (
                         <div
                             key={index}
-                            className="snap-center flex-shrink-0 w-[350px] h-[450px] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform"
+                            className="
+                                snap-center flex-shrink-0 
+                                w-[90%] sm:w-[320px] md:w-[350px] lg:w-[400px] 
+                                h-[250px] sm:h-[350px] md:h-[450px] 
+                                rounded-xl overflow-hidden shadow-lg 
+                                hover:shadow-2xl transform hover:scale-105 transition-transform"
                         >
                             <img 
                                 src={src} 

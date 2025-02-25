@@ -48,7 +48,7 @@ export default function AuthPage() {
               />
               <button
                 type="submit"
-                className="w-full px-4 py-2 text-white bg-gray-900 rounded-lg hover:bg-gray-700 transition duration-300"
+                className="w-full px-4 py-2 text-white bg-slate-500 rounded-lg hover:bg-gray-700 transition duration-300"
               >
                 Login
               </button>
@@ -72,7 +72,7 @@ export default function AuthPage() {
               />
               <button
                 type="submit"
-                className="w-full px-4 py-2 text-white bg-gray-900 rounded-lg hover:bg-gray-700 transition duration-300"
+                className="w-full px-4 py-2 text-white bg-slate-500 rounded-lg hover:bg-gray-700 transition duration-300"
               >
                 Register
               </button>

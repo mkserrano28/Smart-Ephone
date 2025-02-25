@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import Navbar from "./pages/Navbar";
@@ -31,10 +31,9 @@ function App() {
             prevCart
                 .map((item) =>
                     item.id === id
-                        ? { ...item, quantity: action === "increase" ? item.quantity + 1 : item.quantity - 1 }
+                        ? { ...item, quantity: action === "increase" ? item.quantity + 1 : Math.max(1, item.quantity - 1) }
                         : item
                 )
-                .filter((item) => item.quantity > 0)
         );
     };
 
@@ -44,23 +43,40 @@ function App() {
 
     return (
         <Router>
-            <div className={darkMode ? "dark bg-black text-white" : "bg-white text-black"}>
-                <Navbar cartItems={cartItems} darkMode={darkMode} setDarkMode={setDarkMode} />
-
-                <Routes>
-                    <Route path="/" element={
-                        <>
-                            <Hero darkMode={darkMode} />
-                            <Carousel darkMode={darkMode} />
-                            <Cart addToCart={addToCart} cartItems={cartItems} updateCartQuantity={updateCartQuantity} removeFromCart={removeFromCart} darkMode={darkMode} />
-                            <Footer />
-                        </>
-                    } />
-                    <Route path="/checkout" element={<Checkout cartItems={cartItems} darkMode={darkMode} />} />
-                    <Route path="/auth" element={<AuthPage />} />
-                </Routes>
-            </div>
+            <AppContent 
+                cartItems={cartItems} 
+                darkMode={darkMode} 
+                setDarkMode={setDarkMode} 
+                addToCart={addToCart} 
+                updateCartQuantity={updateCartQuantity} 
+                removeFromCart={removeFromCart} 
+            />
         </Router>
+    );
+}
+
+function AppContent({ cartItems, darkMode, setDarkMode, addToCart, updateCartQuantity, removeFromCart }) {
+    const location = useLocation();  // Get the current route
+
+    return (
+        <div className={darkMode ? "dark bg-black text-white" : "bg-white text-black"}>
+            {/* Hide Navbar on /auth page */}
+            {location.pathname !== "/auth" && <Navbar cartItems={cartItems} darkMode={darkMode} setDarkMode={setDarkMode} />}
+
+            <Routes>
+                <Route path="/" element={
+                    <>
+                        <Hero darkMode={darkMode} />
+                        <Carousel darkMode={darkMode} />
+                        <Cart addToCart={addToCart} cartItems={cartItems} updateCartQuantity={updateCartQuantity} removeFromCart={removeFromCart} darkMode={darkMode} />
+                        <Footer />
+                    </>
+                } />
+                {/* ✅ Pass updateCartQuantity to Checkout */}
+                <Route path="/checkout" element={<Checkout cartItems={cartItems} updateCartQuantity={updateCartQuantity} darkMode={darkMode} />} />
+                <Route path="/auth" element={<AuthPage />} />
+            </Routes>
+        </div>
     );
 }
 
