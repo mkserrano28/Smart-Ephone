@@ -18,7 +18,6 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
     return (
         <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-opacity-90 shadow-lg" : ""} ${darkMode ? "dark bg-gray-900 text-white" : "bg-white text-black"}`}>
             <div className="container mx-auto flex justify-between items-center py-4 px-6">
-
                 {/* Logo and Brand Name */}
                 <Link to="/" className="flex items-center space-x-3">
                     <img src="/images/ephone-logo.webp" alt="Ephone Logo" className="h-8 w-auto rounded-4xl" />
@@ -35,7 +34,7 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
                     <li><Link to="#" className="hover:text-gray-600">Contact Me</Link></li>
                 </ul>
 
-                {/* Right Side Icons: Dark Mode, Cart, Menu */}
+                {/* Right Side Icons: Dark Mode, Cart, Login */}
                 <div className="flex items-center space-x-4 md:space-x-6">
                     {/* Dark Mode Toggle */}
                     <button 
@@ -53,6 +52,15 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
                                 {cartItems.reduce((total, item) => total + item.quantity, 0)}
                             </span>
                         )}
+                    </Link>
+
+                    {/* Login Button for Desktop */}
+                    <Link
+                        to="/auth"
+                        className="border border-gray-800 dark:border-white px-4 py-1 rounded-lg font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    >
+                        <User size={18} className="inline-block mr-1" />
+                        Login
                     </Link>
 
                     {/* Mobile Menu Button */}
@@ -73,7 +81,7 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
                         <li><Link to="#" className="hover:text-gray-600" onClick={() => setMenuOpen(false)}>Contact Me</Link></li>
                     </ul>
 
-                    {/* Login Button */}
+                    {/* Login Button for Mobile */}
                     <div className="mt-6 flex justify-center">
                         <Link
                             to="/auth"

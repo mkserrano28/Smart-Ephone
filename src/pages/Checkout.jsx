@@ -27,13 +27,13 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
                                     {cartItems.map((item) => (
                                         <tr key={item.id} className="border-b flex flex-col sm:table-row">
                                             <td className="py-4 flex items-center sm:table-cell w-full sm:w-auto">
-                                            <img src={item.image} alt={item.model} className="w-32 h-32 object-contain rounded-lg mr-6" />
+                                            <img src={item.image} alt={item.model} className="w-23 h-32 object-contain rounded-lg mr-6" />
 
                                                 <div className="text-left">
                                                     <h3 className="font-semibold text-sm sm:text-base">{item.model}</h3>
-                                                    <p className="text-gray-500 text-xs sm:text-sm">Brand: {item.brand}</p>
-                                                    <p className="text-gray-500 text-xs sm:text-sm">RAM: {item.specifications.ram}</p>
-                                                    <p className="text-gray-500 text-xs sm:text-sm">
+                                                    <p className="text-white text-xs sm:text-sm">Brand: {item.brand}</p>
+                                                    <p className="text-white text-xs sm:text-sm">RAM: {item.specifications.ram}</p>
+                                                    <p className="text-white text-xs sm:text-sm">
                                                         Storage: {Array.isArray(item.specifications.storage)
                                                             ? item.specifications.storage.join(" / ")
                                                             : item.specifications.storage}
@@ -71,7 +71,7 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
 
                                             {/* Subtotal - Hidden on small screens, moved inside Price */}
                                             <td className="text-right w-1/4 hidden sm:table-cell font-semibold whitespace-nowrap">
-                                                P{(item.price * item.quantity).toFixed(2)}
+                                            ₱{(item.price * item.quantity).toFixed(2)}
                                             </td>
 
                                             {/* Mobile Price & Subtotal Display */}
@@ -90,15 +90,15 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
                             <h3 className="text-xl font-bold border-b pb-2">CART TOTALS</h3>
                             <div className="flex justify-between text-lg py-3">
                                 <span>Subtotal:</span>
-                                <span>P{subtotal.toFixed(2)}</span>
+                                <span>₱{subtotal.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between text-lg pb-3">
                                 <span>Shipping:</span>
-                                <span className="text-green-500">{shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}</span>
+                                <span className="text-white">{shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}</span>
                             </div>
                             <div className="flex justify-between text-xl font-bold py-3 border-t">
                                 <span>Total:</span>
-                                <span>P{(subtotal + shipping).toFixed(2)}</span>
+                                <span>₱{(subtotal + shipping).toFixed(2)}</span>
                             </div>
                             <button className="w-full mt-4 bg-slate-500 text-white py-3 rounded-xl text-lg font-semibold hover:bg-blue-300 transition">
                                 ⚡ CHECKOUT
