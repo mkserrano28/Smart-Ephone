@@ -71,7 +71,7 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
 
                                             {/* Subtotal - Hidden on small screens, moved inside Price */}
                                             <td className="text-right w-1/4 hidden sm:table-cell font-semibold whitespace-nowrap">
-                                                ${(item.price * item.quantity).toFixed(2)}
+                                                P{(item.price * item.quantity).toFixed(2)}
                                             </td>
 
                                             {/* Mobile Price & Subtotal Display */}
@@ -90,7 +90,7 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
                             <h3 className="text-xl font-bold border-b pb-2">CART TOTALS</h3>
                             <div className="flex justify-between text-lg py-3">
                                 <span>Subtotal:</span>
-                                <span>${subtotal.toFixed(2)}</span>
+                                <span>P{subtotal.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between text-lg pb-3">
                                 <span>Shipping:</span>
@@ -98,7 +98,7 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
                             </div>
                             <div className="flex justify-between text-xl font-bold py-3 border-t">
                                 <span>Total:</span>
-                                <span>${(subtotal + shipping).toFixed(2)}</span>
+                                <span>P{(subtotal + shipping).toFixed(2)}</span>
                             </div>
                             <button className="w-full mt-4 bg-slate-500 text-white py-3 rounded-xl text-lg font-semibold hover:bg-blue-300 transition">
                                 ⚡ CHECKOUT
