@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ShoppingCart, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Cart({ addToCart, darkMode }) {
     const [smartphones, setSmartphones] = useState([]);
@@ -8,7 +9,7 @@ function Cart({ addToCart, darkMode }) {
     useEffect(() => {
         fetch("/smartphones.json")
             .then(response => response.json())
-            .then(data => setSmartphones(data.smartphones.map((phone, index) => ({ ...phone, id: index }))))
+            .then(data => setSmartphones(data.smartphones))  // ✅ Use actual IDs from JSON
             .catch(error => console.error("Error loading smartphones:", error));
     }, []);
 
@@ -21,7 +22,6 @@ function Cart({ addToCart, darkMode }) {
 
     return (
         <div className={`min-h-screen p-5 transition-all duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-            {/* Category Filter */}
             <div className="mb-6">
                 <h2 className="text-lg font-bold mb-3">Category</h2>
                 <div className="flex gap-3 overflow-x-auto scrollbar-hide">
@@ -41,10 +41,10 @@ function Cart({ addToCart, darkMode }) {
                 </div>
             </div>
 
-            {/* Product Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {filteredSmartphones.map((phone) => (
-                    <div 
+                    <Link 
+                        to={`/cartdetails/${phone.id}`}   // ✅ Use actual ID from JSON
                         key={phone.id} 
                         className="relative bg-slate-100 dark:bg-gray-800 shadow-lg rounded-xl p-4 
                         transition-transform duration-500 ease-in-out transform 
@@ -54,7 +54,6 @@ function Cart({ addToCart, darkMode }) {
                             <Heart size={14} />
                         </button>
 
-                        {/* Image Zoom Effect */}
                         <div className="h-32 w-full flex items-center justify-center overflow-hidden rounded-lg group">
                             <img 
                                 src={phone.image} 
@@ -68,11 +67,14 @@ function Cart({ addToCart, darkMode }) {
 
                         <button
                             className="absolute bottom-3 right-3 bg-slate-500 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-md"
-                            onClick={() => addToCart(phone)}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                addToCart(phone);
+                            }}
                         >
                             <ShoppingCart size={18} />
                         </button>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

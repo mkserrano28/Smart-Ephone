@@ -22,7 +22,7 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
                 <Link to="/" className="flex items-center space-x-3">
                     <img src="/images/ephone-logo.webp" alt="Ephone Logo" className="h-8 w-auto rounded-4xl" />
                     <span className={`text-lg sm:text-xl font-bold ${darkMode ? "text-yellow-400" : "text-blue-700"}`}>
-                       Smart-Ephone
+                        Smart-Ephone
                     </span>
                 </Link>
 
@@ -37,8 +37,8 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
                 {/* Right Side Icons: Dark Mode, Cart, Login */}
                 <div className="flex items-center space-x-4 md:space-x-6">
                     {/* Dark Mode Toggle */}
-                    <button 
-                        onClick={() => setDarkMode(!darkMode)} 
+                    <button
+                        onClick={() => setDarkMode(!darkMode)}
                         className="text-gray-800 dark:text-white"
                     >
                         {darkMode ? <Sun size={24} /> : <Moon size={24} />}
@@ -54,14 +54,16 @@ function Navbar({ cartItems, darkMode, setDarkMode }) {
                         )}
                     </Link>
 
-                    {/* Login Button for Desktop */}
+
+                    {/* Login Button for Desktop - Hidden on Small Screens */}
                     <Link
                         to="/auth"
-                        className="border border-gray-800 dark:border-white px-4 py-1 rounded-lg font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                        className="hidden sm:block border border-gray-800 dark:border-white px-4 py-1 rounded-lg font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                     >
                         <User size={18} className="inline-block mr-1" />
                         Login
                     </Link>
+
 
                     {/* Mobile Menu Button */}
                     <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden focus:outline-none">

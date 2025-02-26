@@ -4,10 +4,10 @@ export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-2xl overflow-hidden w-full max-w-4xl h-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-2xl overflow-hidden w-full max-w-sm md:max-w-4xl md:h-[500px]">
         
-        {/* Left Side Welcome Message */}
+        {/* Left Side Welcome Message (Only for Desktop) */}
         <div className="hidden md:flex w-1/2 h-full bg-slate-700 flex-col justify-center items-center p-6 text-center text-white">
           <h2 className="text-2xl font-bold mb-4">Welcome to Ephone Online Shopping</h2>
           <p className="text-lg">If you don't have an account, register now and enjoy a seamless shopping experience.</p>

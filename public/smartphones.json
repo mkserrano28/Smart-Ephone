@@ -2,7 +2,7 @@
     "smartphones": [
       {
         "id": "1",
-        "image": "images/iphone1.jpg",
+        "image": "/images/iphone1.jpg",
         "brand": "Apple",
         "model": "EPhone 15 Pro",
         "price": 50000,
@@ -28,7 +28,7 @@
       },
       {
         "id": "2",
-        "image": "images/iphone2.jpg",
+        "image": "/images/iphone2.jpg",
         "brand": "Samsung",
         "model": "EGalaxy S23 Ultra",
         "price": 45000.99,
@@ -54,7 +54,7 @@
       },
       {
         "id": "3",
-        "image": "images/iphone3.jpg",
+        "image": "/images/iphone3.jpg",
         "brand": "Google",
         "model": "EPixel 9 Pro",
         "price": 16000.99,
@@ -80,7 +80,7 @@
       },
       {
         "id": "4",
-        "image": "images/iphone4.jpg",
+        "image": "/images/iphone4.jpg",
         "brand": "Google",
         "model": "EPixel 8 Pro",
         "price": 15000.99,
@@ -106,7 +106,7 @@
       },
       {
         "id": "5",
-        "image": "images/iphone6.jpg",
+        "image": "/images/iphone6.jpg",
         "brand": "Samsung",
         "model": "ESamsung s24",
         "price": 35000.99,
@@ -132,7 +132,7 @@
       },
       {
         "id": "6",
-        "image": "images/xiamome.jpg",
+        "image": "/images/xiamome.jpg",
         "brand": "Xiaomi",
         "model": "Xiaomi 13 Pro",
         "price": 5000.99,
@@ -158,7 +158,7 @@
       },
       {
         "id": "7",
-        "image": "images/galaxyfold.jpg",
+        "image": "/images/galaxyfold.jpg",
         "brand": "Samsung",
         "model": "Galaxy Z Fold 5",
         "price": 32000.99,
@@ -236,7 +236,7 @@
       },
       {
         "id": "10",
-        "image": "images/realmegt3.jpg",
+        "image": "/images/realmegt3.jpg",
         "brand": "Realme",
         "model": "Realme GT 3",
         "price": 12000.99,
@@ -262,7 +262,7 @@
       },
       {
         "id": "11",
-        "image": "https://fdn2.gsmarena.com/vv/pics/sony/sony-xperia-1-v-1.jpg",
+        "image": "/images/xperia1.jpg",
         "brand": "Sony",
         "model": "Xperia 1 V",
         "price": 16000.99,
