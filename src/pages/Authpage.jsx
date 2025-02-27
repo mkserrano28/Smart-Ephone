@@ -2,6 +2,48 @@ import React, { useState } from "react";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  // Replace with your deployed API Gateway endpoint
+  const API_BASE_URL = "https://your-api-gateway-url/prod";
+
+  // Handle Registration
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setMessage("Registering...");
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setMessage("✅ Registration successful! Please login.");
+        setIsLogin(true); // Switch to login mode
+      } else {
+        setMessage(`❌ ${data.message}`);
+      }
+    } catch (error) {
+      setMessage("❌ Error: Unable to register.");
+    }
+  };
+
+  // Handle Login (To be implemented with authentication)
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setMessage("Logging in...");
+
+    // TODO: Integrate with authentication API (Cognito / Custom Auth)
+    setTimeout(() => {
+      setMessage("✅ Login successful!");
+    }, 1000);
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -34,17 +76,26 @@ export default function AuthPage() {
             </button>
           </div>
 
+          {/* Display API Response Messages */}
+          {message && <p className="text-center text-sm text-red-600 mb-4">{message}</p>}
+
           {isLogin ? (
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleLogin}>
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100 text-gray-900 placeholder-gray-500"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100 text-gray-900 placeholder-gray-500"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <button
                 type="submit"
@@ -54,21 +105,30 @@ export default function AuthPage() {
               </button>
             </form>
           ) : (
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleRegister}>
               <input
                 type="text"
                 placeholder="Username"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100 text-gray-900 placeholder-gray-500"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
               />
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100 text-gray-900 placeholder-gray-500"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100 text-gray-900 placeholder-gray-500"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-gray-100"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <button
                 type="submit"
