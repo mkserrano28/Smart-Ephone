@@ -7,33 +7,26 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  // Replace with your deployed API Gateway endpoint
-  const API_BASE_URL = "https://your-api-gateway-url/prod";
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-  // Handle Registration
   const handleRegister = async (e) => {
     e.preventDefault();
-    setMessage("Registering...");
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setMessage("✅ Registration successful! Please login.");
-        setIsLogin(true); // Switch to login mode
-      } else {
-        setMessage(`❌ ${data.message}`);
-      }
-    } catch (error) {
-      setMessage("❌ Error: Unable to register.");
+  
+    const response = await fetch(`${API_BASE_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+    });
+  
+    const data = await response.json();
+    
+    if (response.ok) {
+      alert("Registration Successful!");
+    } else {
+      alert(data.message);
     }
   };
-
+  
   // Handle Login (To be implemented with authentication)
   const handleLogin = async (e) => {
     e.preventDefault();
