@@ -7,8 +7,10 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const API_BASE_URL = process.env.REACT_APP_API_URL;
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "https://65juj4tpo5.execute-api.us-east-1.amazonaws.com/prod";
 
+  console.log("API URL:", API_BASE_URL); // Debugging
+  
   const handleRegister = async (e) => {
     e.preventDefault();
   
@@ -26,6 +28,7 @@ export default function AuthPage() {
       alert(data.message);
     }
   };
+  
   
   // Handle Login (To be implemented with authentication)
   const handleLogin = async (e) => {
