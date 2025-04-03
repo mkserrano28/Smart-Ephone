@@ -1,39 +1,52 @@
 import React from "react";
 
 function Hero({ darkMode }) {
-    return (
-        <div className={`py-10 transition-colors duration-300 mt-10 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-            <div className="container mx-auto flex flex-col md:flex-row items-center text-center md:text-left px-5 gap-10">
+  return (
+    <div
+      className={`relative w-full py-16 px-4 overflow-hidden ${
+        darkMode ? "bg-gray-900 text-white" : "hero-gradient-animate text-black"
+      }`}
+    >
+      {/* Main Content */}
+      <div className="relative z-20 flex mt-30 flex-col items-center text-center max-w-5xl mx-auto">
+        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
+          Save big on <span className="text-yellow-500">on every Season</span>
+        </h1>
+        <p className="text-lg sm:text-xl max-w-xl">
+          Discover the best discounts on tech. Grab limited-time offers now!
+        </p>
+        <button
+          className={`mt-6 py-3 px-6 font-semibold rounded shadow-md transition-all ${
+            darkMode
+              ? "bg-yellow-300 text-black hover:bg-yellow-400"
+              : "bg-yellow-500 text-white hover:bg-yellow-600"
+          }`}
+        >
+          Shop Now
+        </button>
+      </div>
 
-                {/* Text Section (Left) */}
-                <div className="flex flex-col w-full md:w-[55%] justify-center items-start p-5">
-                    <h1 className={`text-3xl sm:text-4xl md:text-5xl font-serif ${darkMode ? "text-yellow-300" : "text-blue-800"}`}>
-                        Smart-Ephone
-                    </h1>
-                    <p className="mt-4 text-base sm:text-lg max-w-lg">
-                        "Upgrade your lifestyle with our latest smartphone—sleek design,
-                        powerful performance, and a camera that captures every moment in stunning detail.
-                        Get yours today and experience the future of mobile technology!"
-                    </p>
-                    <button className={`mt-6 py-3 px-6 sm:px-8 font-semibold border rounded transition-all
-                        ${darkMode ? "bg-transparent text-yellow-300 border-yellow-300 hover:bg-yellow-300 hover:text-black" 
-                        : "bg-blue-600 text-white border-blue-600 hover:bg-blue-800"}`}>
-                        Explore Now
-                    </button>
-                </div>
-
-                {/* Image Section (Right) */}
-                <div className="flex justify-center w-full md:w-[45%]">
-                    <img 
-                        className="w-[90%] sm:w-[350px] md:w-[450px] lg:w-[500px] xl:w-[600px] rounded-lg hover:scale-105 transition-transform duration-300 object-contain" 
-                        src="/images/card.jpeg" 
-                        alt="Smart-Ephone" 
-                    />
-                </div>
-
-            </div>
+      {/* Product Tiles */}
+      <div className="relative z-20 mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 text-left">
+          <h3 className="font-bold mb-2">Pick up where you left off</h3>
+          <img src="/images/hero1.jpeg" alt="Product 1" className="w-full h-32 object-cover rounded" />
         </div>
-    );
+        <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 text-left">
+          <h3 className="font-bold mb-2">FREE Shipping to Philippines</h3>
+          <img src="/images/card1.jpg" alt="Product 2" className="w-full h-32 object-cover rounded" />
+        </div>
+        <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 text-left">
+          <h3 className="font-bold mb-2">Free Shipping Zone</h3>
+          <img src="/images/card2.jpg" alt="Product 3" className="w-full h-32 object-cover rounded" />
+        </div>
+        <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 text-left">
+          <h3 className="font-bold mb-2">Shop for Home Essentials</h3>
+          <img src="/images/card4.jpg" alt="Product 4" className="w-full h-32 object-cover rounded" />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Hero;

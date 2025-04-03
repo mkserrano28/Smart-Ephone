@@ -1,18 +1,103 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+
+function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }) {
+    const navigate = useNavigate();
+    const [paymentMethod, setPaymentMethod] = useState("cod");
+
     const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    const shipping = subtotal >= 79.99 ? 0 : 5.00; // Free shipping for orders above ₱79.99
+    const shipping = subtotal >= 79.99 ? 0 : 5.00;
+    const totalAmount = subtotal + shipping;
+
+    const handleRemoveItem = async (id) => {
+        const userId = localStorage.getItem("userId");
+        const updatedCart = cartItems.filter((item) => item.id !== id);
+
+        setCartItems(updatedCart);
+        localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
+
+        try {
+            await fetch(`${API_BASE_URL}/cart`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId, cartItems: updatedCart }),
+            });
+        } catch (error) {
+            console.error("❌ Failed to update cart:", error);
+        }
+    };
+
+
+
+    const handleCheckout = async () => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert("❌ Please log in to proceed with checkout.");
+            return;
+        }
+
+        try {
+            let response;
+            let data;
+
+            if (paymentMethod === "cod") {
+                response = await fetch(`${API_BASE_URL}/checkout/cod`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ userId, cartItems, totalAmount }),
+                });
+
+                data = await response.json();
+                if (!response.ok) throw new Error(data.message);
+
+                // ✅ Clear cart from localStorage and state
+                localStorage.removeItem(`cart_${userId}`);
+                setCartItems([]);
+
+                // ✅ Navigate to orders page
+                navigate("/orders");
+
+            } else if (paymentMethod === "gcash" || paymentMethod === "paymaya") {
+                // ✅ PayMongo checkout
+                response = await fetch(`${API_BASE_URL}/checkout/paymongo-link`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ userId, cartItems, totalAmount }),
+                });
+
+                data = await response.json();
+                if (!response.ok) throw new Error(data.message);
+
+                // ✅ Clear cart
+                localStorage.removeItem(`cart_${userId}`);
+                setCartItems([]);
+
+                // ✅ Navigate to orders and open PayMongo link
+                navigate("/orders");
+                window.open(data.paymentUrl, "_blank");
+            } else {
+                alert("❌ Please select a payment method.");
+            }
+
+        } catch (error) {
+            alert("❌ Error: " + error.message);
+        }
+    };
+
+
 
     return (
-        <div className={`min-h-screen p-5 transition-all duration-300 mt-10 ₱{darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
+        <div className={`min-h-screen p-5 transition-all duration-300 mt-10 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
             <div className="container mx-auto max-w-6xl p-6">
-                <h2 className="text-3xl font-bold mb-6 text-center">YOUR CART</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center">🛒 YOUR CART</h2>
 
                 {cartItems.length === 0 ? (
                     <p className="text-center text-gray-500 dark:text-gray-300">Your cart is empty.</p>
                 ) : (
                     <div className="flex flex-col md:flex-row gap-6">
+                        {/* Cart Items */}
                         <div className="w-full md:w-2/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                             <table className="w-full">
                                 <thead>
@@ -21,56 +106,77 @@ function Checkout({ cartItems = [], darkMode, updateCartQuantity }) {
                                         <th className="text-center pb-2">Price</th>
                                         <th className="text-center pb-2">Quantity</th>
                                         <th className="text-right pb-2">Subtotal</th>
+                                        <th className="text-center pb-2">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {cartItems.map((item) => (
                                         <tr key={item.id} className="border-b">
                                             <td className="py-4 flex items-center">
-                                                <img src={item.image} alt={item.model} className="w-16 h-16 object-contain rounded-lg mr-4" />
+                                                <img
+                                                    src={Array.isArray(item.image) ? item.image[0] : item.image}
+                                                    alt={item.model}
+                                                    className="w-16 h-16 object-contain rounded-lg mr-4"
+                                                    onError={(e) => (e.target.src = "/images/placeholder.jpg")}
+                                                />
+
                                                 <div>
                                                     <h3 className="font-semibold">{item.model}</h3>
-                                                    <p className="text-gray-500 text-sm">Ram: {item.specifications?.ram || 'N/A'}</p>
-                                                    <p className="text-gray-500 text-sm">Storage: {Array.isArray(item.specifications?.storage) ? item.specifications.storage.join(', ') : item.specifications?.storage || 'N/A'}</p>
+                                                    <p className="text-gray-500 text-sm">RAM: {item.specifications?.ram || 'N/A'}</p>
+                                                    <p className="text-gray-500 text-sm">Storage: {item.selectedStorage || 'N/A'}</p>
+                                                    <p className="text-gray-500 text-sm">
+                                                        Color:{" "}
+                                                        <span
+                                                            className="inline-block w-4 h-4 rounded-full align-middle ml-1"
+                                                            style={{ backgroundColor: item.selectedColor || "#ccc" }}
+                                                        ></span>
+                                                    </p>
                                                 </div>
                                             </td>
                                             <td className="text-center">₱{item.price.toFixed(2)}</td>
                                             <td className="text-center">
                                                 <div className="flex items-center justify-center">
-                                                    <button 
-                                                        className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
-                                                        onClick={() => updateCartQuantity(item.id, "decrease")}
-                                                    >-</button>
+                                                    <button className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onClick={() => updateCartQuantity(item.id, "decrease")}>-</button>
                                                     <span className="mx-2">{item.quantity}</span>
-                                                    <button 
-                                                        className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" 
-                                                        onClick={() => updateCartQuantity(item.id, "increase")}
-                                                    >+</button>
+                                                    <button className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onClick={() => updateCartQuantity(item.id, "increase")}>+</button>
                                                 </div>
                                             </td>
                                             <td className="text-right font-semibold">₱{(item.price * item.quantity).toFixed(2)}</td>
+                                            <td className="text-center">
+                                                <button onClick={() => handleRemoveItem(item.id)} className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                                                    Delete
+                                                </button>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         </div>
 
+                        {/* Order Summary */}
                         <div className="w-full md:w-1/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                            <h3 className="text-xl font-bold border-b pb-2">CART TOTALS</h3>
+                            <h3 className="text-xl font-bold border-b pb-2">📦 CART TOTALS</h3>
                             <div className="flex justify-between text-lg py-3">
-                                <span>Subtotal:</span>
-                                <span>₱{subtotal.toFixed(2)}</span>
+                                <span>Subtotal:</span><span>₱{subtotal.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between text-lg pb-3">
-                                <span>Shipping:</span>
-                                <span className="text-green-500">{shipping === 0 ? "FREE" : `₱{shipping.toFixed(2)}`}</span>
+                                <span>Shipping:</span><span className="text-green-500">{shipping === 0 ? "FREE" : `₱${shipping.toFixed(2)}`}</span>
                             </div>
                             <div className="flex justify-between text-xl font-bold py-3 border-t">
-                                <span>Total:</span>
-                                <span>₱{(subtotal + shipping).toFixed(2)}</span>
+                                <span>Total:</span><span>₱{totalAmount.toFixed(2)}</span>
                             </div>
-                            <button className="w-full mt-4 bg-slate-500 text-white py-3 rounded-xl text-lg font-semibold hover:bg-blue-300 transition">
-                                ⚡ CHECKOUT
+
+                            <h3 className="text-lg font-bold mt-4">Choose Payment Method</h3>
+                            <select
+                                onChange={(e) => setPaymentMethod(e.target.value)}
+                                className="w-full mt-2 p-2 border rounded-lg"
+                            >
+                                <option value="cod">Cash on Delivery</option>
+                                <option value="gcash">GCash / PayMaya</option>
+                            </select>
+
+                            <button onClick={handleCheckout} className="w-full mt-4 py-3 bg-blue-600 text-white rounded-xl text-lg font-semibold hover:bg-blue-700">
+                                {paymentMethod === "gcash" || paymentMethod === "paymaya" ? "💳 Pay Now" : " Confirm Order"}
                             </button>
                         </div>
                     </div>

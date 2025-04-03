@@ -1,317 +1,507 @@
 {
-    "smartphones": [
-      {
-        "id": "1",
-        "image": "/images/iphone1.jpg",
-        "brand": "Apple",
-        "model": "EPhone 15 Pro",
-        "price": 50000,
-        "currency": "PHP",
-        "release_date": "2023-09-22",
-        "specifications": {
-          "display": "6.1-inch Super Retina XDR",
-          "processor": "A17 Pro",
-          "ram": "8GB",
-          "storage": ["128GB", "256GB", "512GB", "1TB"],
-          "camera": {
-            "rear": "48MP + 12MP + 12MP",
-            "front": "12MP"
-          },
-          "battery": "3274mAh",
-          "os": "EOS 17",
-          "connectivity": ["5G", "Wi-Fi 6E", "Bluetooth 5.3", "USB-C"]
+  "smartphones": [
+    {
+      "id": "1",
+      "image": [
+        "/products/iphone/ip15.jpg",
+        "/products/iphone/ip15pink.jpg"
+      ],
+      "brand": "Apple",
+      "model": "EPhone 15 Pro",
+      "price": 50000,
+      "currency": "PHP",
+      "colors": ["#dbeafe", "#d1fae5", "#fce7f3", "#ffffff", "#d1d5db"],
+      "release_date": "2023-09-22",
+      "specifications": {
+        "display": "6.1-inch Super Retina XDR",
+        "processor": "A17 Pro",
+        "ram": "8GB",
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB",
+          "1TB"
+        ],
+        "camera": {
+          "rear": "48MP + 12MP + 12MP",
+          "front": "12MP"
         },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Apple Store", "Best Buy", "Amazon"]
-        }
+        "battery": "3274mAh",
+        "os": "EOS 17",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
       },
-      {
-        "id": "2",
-        "image": "/images/iphone2.jpg",
-        "brand": "Samsung",
-        "model": "EGalaxy S23 Ultra",
-        "price": 45000.99,
-        "currency": "PHP",
-        "release_date": "2023-02-17",
-        "specifications": {
-          "display": "6.8-inch Dynamic AMOLED 2X",
-          "processor": "Snapdragon 8 Gen 2",
-          "ram": "12GB",
-          "storage": ["256GB", "512GB", "1TB"],
-          "camera": {
-            "rear": "200MP + 10MP + 10MP + 12MP",
-            "front": "12MP"
-          },
-          "battery": "5000mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6E", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": false,
-          "stores": ["Amazon", "Samsung Store"]
-        }
-      },
-      {
-        "id": "3",
-        "image": "/images/iphone3.jpg",
-        "brand": "Google",
-        "model": "EPixel 9 Pro",
-        "price": 16000.99,
-        "currency": "PHP",
-        "release_date": "2023-10-04",
-        "specifications": {
-          "display": "6.7-inch LTPO OLED",
-          "processor": "Google Tensor G3",
-          "ram": "12GB",
-          "storage": ["128GB", "256GB", "512GB"],
-          "camera": {
-            "rear": "50MP + 48MP + 48MP",
-            "front": "10.5MP"
-          },
-          "battery": "5050mAh",
-          "os": "Android 14",
-          "connectivity": ["5G", "Wi-Fi 7", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Google Store", "Amazon", "Best Buy"]
-        }
-      },
-      {
-        "id": "4",
-        "image": "/images/iphone4.jpg",
-        "brand": "Google",
-        "model": "EPixel 8 Pro",
-        "price": 15000.99,
-        "currency": "PHP",
-        "release_date": "2023-10-04",
-        "specifications": {
-          "display": "6.7-inch LTPO OLED",
-          "processor": "Google Tensor G3",
-          "ram": "12GB",
-          "storage": ["128GB", "256GB", "512GB"],
-          "camera": {
-            "rear": "50MP + 48MP + 48MP",
-            "front": "10.5MP"
-          },
-          "battery": "5050mAh",
-          "os": "Android 14",
-          "connectivity": ["5G", "Wi-Fi 7", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Google Store", "Amazon", "Best Buy"]
-        }
-      },
-      {
-        "id": "5",
-        "image": "/images/iphone6.jpg",
-        "brand": "Samsung",
-        "model": "ESamsung s24",
-        "price": 35000.99,
-        "currency": "PHP",
-        "release_date": "2023-10-04",
-        "specifications": {
-          "display": "6.7-inch LTPO OLED",
-          "processor": "Google Tensor G3",
-          "ram": "12GB",
-          "storage": ["128GB", "256GB", "512GB"],
-          "camera": {
-            "rear": "50MP + 48MP + 48MP",
-            "front": "10.5MP"
-          },
-          "battery": "5050mAh",
-          "os": "Android 14",
-          "connectivity": ["5G", "Wi-Fi 7", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Google Store", "Amazon", "Best Buy"]
-        }
-      },
-      {
-        "id": "6",
-        "image": "/images/xiamome.jpg",
-        "brand": "Xiaomi",
-        "model": "Xiaomi 13 Pro",
-        "price": 5000.99,
-        "currency": "PHP",
-        "release_date": "2023-03-14",
-        "specifications": {
-          "display": "6.73-inch LTPO AMOLED",
-          "processor": "Snapdragon 8 Gen 2",
-          "ram": "12GB",
-          "storage": ["256GB", "512GB"],
-          "camera": {
-            "rear": "50MP + 50MP + 50MP",
-            "front": "32MP"
-          },
-          "battery": "4820mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6E", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Xiaomi Store", "Amazon", "Best Buy"]
-        }
-      },
-      {
-        "id": "7",
-        "image": "/images/galaxyfold.jpg",
-        "brand": "Samsung",
-        "model": "Galaxy Z Fold 5",
-        "price": 32000.99,
-        "currency": "PHP",
-        "release_date": "2023-07-26",
-        "specifications": {
-          "display": "7.6-inch Foldable Dynamic AMOLED",
-          "processor": "Snapdragon 8 Gen 2",
-          "ram": "12GB",
-          "storage": ["256GB", "512GB"],
-          "camera": {
-            "rear": "50MP + 12MP + 10MP",
-            "front": "10MP + 4MP"
-          },
-          "battery": "4400mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6E", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Samsung Store", "Amazon"]
-        }
-      },
-      {
-        "id": "8",
-        "image": "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-7a-2.jpg",
-        "brand": "Google",
-        "model": "Pixel 7a",
-        "price": 14000.99,
-        "currency": "PHP",
-        "release_date": "2023-05-10",
-        "specifications": {
-          "display": "6.1-inch OLED",
-          "processor": "Google Tensor G2",
-          "ram": "8GB",
-          "storage": ["128GB"],
-          "camera": {
-            "rear": "64MP + 13MP",
-            "front": "13MP"
-          },
-          "battery": "4385mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6E", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Google Store", "Amazon", "Best Buy"]
-        }
-      },
-      {
-        "id": "9",
-        "image": "https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-nord-3-5g-1.jpg",
-        "brand": "OnePlus",
-        "model": "OnePlus Nord 3",
-        "price": 16000.99,
-        "currency": "PHP",
-        "release_date": "2023-06-15",
-        "specifications": {
-          "display": "6.74-inch AMOLED",
-          "processor": "Dimensity 9000",
-          "ram": "12GB",
-          "storage": ["256GB"],
-          "camera": {
-            "rear": "50MP + 8MP + 2MP",
-            "front": "16MP"
-          },
-          "battery": "5000mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6", "Bluetooth 5.2", "USB-C"]
-        },
-        "availability": {
-          "in_stock": false,
-          "stores": ["OnePlus Store", "Amazon"]
-        }
-      },
-      {
-        "id": "10",
-        "image": "/images/realmegt3.jpg",
-        "brand": "Realme",
-        "model": "Realme GT 3",
-        "price": 12000.99,
-        "currency": "PHP",
-        "release_date": "2023-03-05",
-        "specifications": {
-          "display": "6.74-inch AMOLED",
-          "processor": "Snapdragon 8+ Gen 1",
-          "ram": "16GB",
-          "storage": ["256GB", "512GB"],
-          "camera": {
-            "rear": "50MP + 8MP + 2MP",
-            "front": "16MP"
-          },
-          "battery": "4600mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6", "Bluetooth 5.2", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Realme Store", "Amazon"]
-        }
-      },
-      {
-        "id": "11",
-        "image": "/images/xperia1.jpg",
-        "brand": "Sony",
-        "model": "Xperia 1 V",
-        "price": 16000.99,
-        "currency": "PHP",
-        "release_date": "2023-05-11",
-        "specifications": {
-          "display": "6.5-inch 4K OLED",
-          "processor": "Snapdragon 8 Gen 2",
-          "ram": "12GB",
-          "storage": ["256GB", "512GB"],
-          "camera": {
-            "rear": "48MP + 12MP + 12MP",
-            "front": "12MP"
-          },
-          "battery": "5000mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6E", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Sony Store", "Amazon", "Best Buy"]
-        }
-      },
-      {
-        "id": "12",
-        "image": "https://fdn2.gsmarena.com/vv/pics/asus/asus-rog-phone-7-1.jpg",
-        "brand": "Asus",
-        "model": "ROG Phone 7",
-        "price": 7000.99,
-        "currency": "PHP",
-        "release_date": "2023-04-14",
-        "specifications": {
-          "display": "6.78-inch AMOLED",
-          "processor": "Snapdragon 8 Gen 2",
-          "ram": "16GB",
-          "storage": ["256GB", "512GB"],
-          "camera": {
-            "rear": "50MP + 13MP + 5MP",
-            "front": "32MP"
-          },
-          "battery": "6000mAh",
-          "os": "Android 13",
-          "connectivity": ["5G", "Wi-Fi 6E", "Bluetooth 5.3", "USB-C"]
-        },
-        "availability": {
-          "in_stock": true,
-          "stores": ["Asus Store", "Amazon"]
-        }
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Apple Store",
+          "Best Buy",
+          "Amazon"
+        ]
       }
-    ]
-  }
-  
+    },
+    {
+      "id": "2",
+      "image": [
+        "/products/Samsung/galaxy23.jpg",
+        "/products/Samsung/galaxy23green.png"
+      ],
+      "brand": "Samsung",
+      "model": "EGalaxy S23 Ultra",
+      "price": 45000.99,
+      "colors": ["#dbeafe", "#d1fae5", "#fce7f3", "#ffffff", "#d1d5db"],
+      "currency": "PHP",
+      "release_date": "2023-02-17",
+      "specifications": {
+        "display": "6.8-inch Dynamic AMOLED 2X",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "12GB",
+        "storage": [
+          "256GB",
+          "512GB",
+          "1TB"
+        ],
+        "camera": {
+          "rear": "200MP + 10MP + 10MP + 12MP",
+          "front": "12MP"
+        },
+        "battery": "5000mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": false,
+        "stores": [
+          "Amazon",
+          "Samsung Store"
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "image": [
+        "/products/Google/pixel9.jpg",
+        "/products/Google/pixel91.jpg"
+      ],
+      "brand": "Google",
+      "model": "EPixel 9 Pro",
+      "price": 16000.99,
+      "currency": "PHP",
+      "colors": ["black", "#d1d5db"],
+      "release_date": "2023-10-04",
+      "specifications": {
+        "display": "6.7-inch LTPO OLED",
+        "processor": "Google Tensor G3",
+        "ram": "12GB",
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 48MP + 48MP",
+          "front": "10.5MP"
+        },
+        "battery": "5050mAh",
+        "os": "Android 14",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 7",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Google Store",
+          "Amazon",
+          "Best Buy"
+        ]
+      }
+    },
+    {
+      "id": "4",
+      "image": [
+        "/products/Google/pixel8.jpeg",
+        "/products/Google/pixel81.jpg"
+      ],
+      "brand": "Google",
+      "model": "EPixel 8 Pro",
+      "price": 15000.99,
+      "currency": "PHP",
+      "colors": ["#f1e9dd", "#7dd3fc"],
+      "release_date": "2023-10-04",
+      "specifications": {
+        "display": "6.7-inch LTPO OLED",
+        "processor": "Google Tensor G3",
+        "ram": "12GB",
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 48MP + 48MP",
+          "front": "10.5MP"
+        },
+        "battery": "5050mAh",
+        "os": "Android 14",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 7",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Google Store",
+          "Amazon",
+          "Best Buy"
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "image": [
+        "/products/Samsung/s24.jpg",
+        "/products/Samsung/s241.jpg"
+      ],
+      "brand": "Samsung",
+      "model": "ESamsung s24",
+      "price": 35000.99,
+      "currency": "PHP",
+      "colors": ["#e5d8c4", "#6d5c94"],
+      "release_date": "2023-10-04",
+      "specifications": {
+        "display": "6.7-inch LTPO OLED",
+        "processor": "Google Tensor G3",
+        "ram": "12GB",
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 48MP + 48MP",
+          "front": "10.5MP"
+        },
+        "battery": "5050mAh",
+        "os": "Android 14",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 7",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Google Store",
+          "Amazon",
+          "Best Buy"
+        ]
+      }
+    },
+    {
+      "id": "6",
+      "image": [
+        "/products/xiaomi/x13.jpg",
+        "/products/xiaomi/xiaomi13.jpg"
+      ],
+      "brand": "Xiaomi",
+      "model": "Xiaomi 13 Pro",
+      "price": 5000.99,
+      "currency": "PHP",
+      "colors": ["black", "white"],
+      "release_date": "2023-03-14",
+      "specifications": {
+        "display": "6.73-inch LTPO AMOLED",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "12GB",
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 50MP + 50MP",
+          "front": "32MP"
+        },
+        "battery": "4820mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Xiaomi Store",
+          "Amazon",
+          "Best Buy"
+        ]
+      }
+    },
+    {
+      "id": "7",
+      "image": [
+        "/products/Samsung/fold1.jpg",
+         "/products/Samsung/galaxyfold.jpg"
+      ],
+      "brand": "Samsung",
+      "model": "Galaxy Z Fold 5",
+      "price": 32000.99,
+      "currency": "PHP",
+      "colors": ["white", "gray"],
+      "release_date": "2023-07-26",
+      "specifications": {
+        "display": "7.6-inch Foldable Dynamic AMOLED",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "12GB",
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 12MP + 10MP",
+          "front": "10MP + 4MP"
+        },
+        "battery": "4400mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Samsung Store",
+          "Amazon"
+        ]
+      }
+    },
+    {
+      "id": "8",
+      "image": [
+        "/products/Google/pixel7.jpg",
+         "/products/Google/pixel71.png"
+      ],
+      "brand": "Google",
+      "model": "Pixel 7a",
+      "price": 14000.99,
+      "colors": ["#dbeafe", "gray"],
+      "currency": "PHP",
+      "release_date": "2023-05-10",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "processor": "Google Tensor G2",
+        "ram": "8GB",
+        "storage": [
+          "128GB"
+        ],
+        "camera": {
+          "rear": "64MP + 13MP",
+          "front": "13MP"
+        },
+        "battery": "4385mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Google Store",
+          "Amazon",
+          "Best Buy"
+        ]
+      }
+    },
+    {
+      "id": "9",
+      "image": [
+        "/products/oneplus/one2.jpg",
+         "/products/oneplus/one3.png"
+      ],
+      "brand": "OnePlus",
+      "model": "OnePlus Nord 3",
+      "price": 16000.99,
+      "currency": "PHP",
+      "colors": ["black", "#d1fae5"],
+      "release_date": "2023-06-15",
+      "specifications": {
+        "display": "6.74-inch AMOLED",
+        "processor": "Dimensity 9000",
+        "ram": "12GB",
+        "storage": [
+          "256GB"
+        ],
+        "camera": {
+          "rear": "50MP + 8MP + 2MP",
+          "front": "16MP"
+        },
+        "battery": "5000mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6",
+          "Bluetooth 5.2",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": false,
+        "stores": [
+          "OnePlus Store",
+          "Amazon"
+        ]
+      }
+    },
+    {
+      "id": "10",
+      "image": [
+        "/products/Realme/realme.jpeg",
+         "/products/Realme/realme1.jpg"
+      ],
+      "brand": "Realme",
+      "model": "Realme GT 3",
+      "price": 12000.99,
+      "currency": "PHP",
+      "colors": ["purple", "white"],
+      "release_date": "2023-03-05",
+      "specifications": {
+        "display": "6.74-inch AMOLED",
+        "processor": "Snapdragon 8+ Gen 1",
+        "ram": "16GB",
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 8MP + 2MP",
+          "front": "16MP"
+        },
+        "battery": "4600mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6",
+          "Bluetooth 5.2",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Realme Store",
+          "Amazon"
+        ]
+      }
+    },
+    {
+      "id": "11",
+      "image": [
+        "/products/sony/xperia.jpg",
+         "/products/sony/xperia1.jpg"
+      ],
+      "brand": "Sony",
+      "model": "Xperia 1 V",
+      "price": 16000.99,
+      "colors": ["silver", "black"],
+      "currency": "PHP",
+      "release_date": "2023-05-11",
+      "specifications": {
+        "display": "6.5-inch 4K OLED",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "12GB",
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "48MP + 12MP + 12MP",
+          "front": "12MP"
+        },
+        "battery": "5000mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Sony Store",
+          "Amazon",
+          "Best Buy"
+        ]
+      }
+    },
+    {
+      "id": "12",
+      "image": [
+        "/products/rog/rog1.jpeg",
+         "/products/rog/rog2.png"
+      ],
+      "brand": "Asus",
+      "model": "ROG Phone 7",
+      "price": 7000.99,
+      "currency": "PHP",
+      "colors": ["black"],
+      "release_date": "2023-04-14",
+      "specifications": {
+        "display": "6.78-inch AMOLED",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "16GB",
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 13MP + 5MP",
+          "front": "32MP"
+        },
+        "battery": "6000mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Asus Store",
+          "Amazon"
+        ]
+      }
+    }
+  ]
+}

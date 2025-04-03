@@ -1,81 +1,50 @@
-import React, { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React from "react";
 
-function Carousel({ darkMode }) {
-    const carouselRef = useRef(null);
+function InfiniteCarousel({ darkMode }) {
+  const images = [
+    "/logo/AWS.jpg",
+    "/logo/chatgpt.jpeg",
+    "/logo/JS.jpg",
+    "/logo/node.jpg",
+    "/logo/paymongo.png",
+    "/logo/postman.jpg",
+    "/logo/React.png",
+    "/logo/tailwind.png",
+    "/logo/api.jpg",
+  ];
 
-    const imageUrls = [
-        "/images/hero1.jpeg",
-        "/images/card1.jpg",
-        "/images/card2.jpg",
-        "/images/card5.png",
-    ];
+  // Tripled for seamless infinite loop
+  const loopImages = [...images, ...images, ...images];
 
-    const scroll = (direction) => {
-        if (carouselRef.current) {
-            const scrollAmount = 400;
-            carouselRef.current.scrollBy({
-                left: direction === "left" ? -scrollAmount : scrollAmount,
-                behavior: "smooth",
-            });
-        }
-    };
+  return (
+    <div className={`py-10 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+      <h2 className="text-center text-4xl font-bold mb-6">
+        Powered <span className="text-yellow-500">By</span>
+      </h2>
 
-    return (
-        <div className={`py-10 px-4 transition-all duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-slate-100 text-black"}`}>
-            {/* Header */}
-            <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold">
-                    Why Smart-Ephone is Number <span className="text-yellow-600">and still Growing?</span>.
-                </h2>
+      {/* Carousel wrapper without fading edges */}
+      <div className="relative overflow-hidden hover-pause">
+        {/* Removed fade overlay */}
+
+        {/* Scrolling track */}
+        <div className="flex animate-infinite-scroll w-max">
+          {loopImages.map((src, index) => (
+            <div
+              key={index}
+              className="w-48 h-32 mx-3 flex-shrink-0 rounded-xl bg-white shadow-md overflow-hidden"
+            >
+              <img
+                src={src}
+                alt={`carousel-img-${index}`}
+                className="w-full h-full object-cover"
+                onError={(e) => (e.target.src = "/images/placeholder.jpg")}
+              />
             </div>
-
-            {/* Carousel Wrapper */}
-            <div className="relative max-w-7xl mx-auto">
-                {/* Left Navigation Button */}
-                <button
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-md rounded-full p-3 z-10 hover:bg-gray-300 dark:hover:bg-gray-600"
-                    onClick={() => scroll("left")}
-                >
-                    <ChevronLeft size={28} className="text-gray-700 dark:text-white" />
-                </button>
-
-                {/* Scrollable Carousel Container */}
-                <div
-                    ref={carouselRef}
-                    className="flex space-x-6 overflow-x-auto scrollbar-hide px-4 py-4 snap-x snap-mandatory"
-                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Hide Scrollbar
-                >
-                    {imageUrls.map((src, index) => (
-                        <div
-                            key={index}
-                            className="
-                                snap-center flex-shrink-0 
-                                w-[90%] sm:w-[320px] md:w-[350px] lg:w-[400px] 
-                                h-[250px] sm:h-[350px] md:h-[450px] 
-                                rounded-xl overflow-hidden shadow-lg 
-                                hover:shadow-2xl transform hover:scale-105 transition-transform"
-                        >
-                            <img 
-                                src={src} 
-                                alt={`Template ${index}`} 
-                                className="w-full h-full object-cover" 
-                                onError={(e) => { e.target.src = "/images/placeholder.jpg"; }} // Fallback for broken images
-                            />
-                        </div>
-                    ))}
-                </div>
-
-                {/* Right Navigation Button */}
-                <button
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-md rounded-full p-3 z-10 hover:bg-gray-300 dark:hover:bg-gray-600"
-                    onClick={() => scroll("right")}
-                >
-                    <ChevronRight size={28} className="text-gray-700 dark:text-white" />
-                </button>
-            </div>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
-export default Carousel;
+export default InfiniteCarousel;

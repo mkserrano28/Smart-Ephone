@@ -1,3 +1,40 @@
 @import "tailwindcss";
 
+
 @custom-variant dark (&:where(.dark, .dark *));
+@layer utilities {
+  @keyframes infinite-scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-66.6667%);
+    }
+  }
+  
+  .animate-infinite-scroll {
+    animation: infinite-scroll 80s linear infinite;
+  }
+  
+  .hover-pause:hover .animate-infinite-scroll {
+    animation-play-state: paused;
+  }
+    /* 🎨 Gradient background animation for Hero */
+    @keyframes gradient-bg-slide {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  
+    .hero-gradient-animate {
+      background: linear-gradient(270deg, #facc15, #22d3ee, #fb923c, #3b82f6);
+      background-size: 800% 800%;
+      animation: gradient-bg-slide 15s ease infinite;
+    }
+}
