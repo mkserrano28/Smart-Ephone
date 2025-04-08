@@ -22,13 +22,7 @@ if (!global.ObjectId) {
 // Middleware
 app.use(express.json());
 const cors = require('cors');
-app.use(cors({
-  origin: 'http://djuvfvjpgozm1.cloudfront.net', // Frontend URL (CloudFront URL in production)
-  methods: ['GET', 'POST', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
 
-  
 app.use(express.json({ type: ['application/json'] }));
 
 const corsOptions = {
@@ -37,7 +31,7 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
-app.use(cors(corsOptions));  // Apply the CORS configuration
+app.use(cors(corsOptions));  // Apply the combined CORS configuration
 
 
 
@@ -55,7 +49,9 @@ async function connectToDB() {
         db = client.db("Smart-Ephone");
         console.log("✅ Connected to MongoDB: Smart-Ephone");
 
-        app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+        app.listen(process.env.PORT || 8080, () => {
+            console.log(`🚀 Server running on http://localhost:${process.env.PORT || 8080}`);
+        });
     } catch (error) {
         console.error("❌ MongoDB Connection Error:", error);
         process.exit(1);
