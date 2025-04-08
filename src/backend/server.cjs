@@ -21,7 +21,24 @@ if (!global.ObjectId) {
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Fallback for local development
+}));
+app.use(express.json({ type: ['application/json'] }));
+
+const corsOptions = {
+    origin: FRONTEND_URL, // Set the frontend URL for CORS
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+};
+
+app.use(cors(corsOptions)); // Apply CORS middleware
+
+
+app.get("/", (req, res) => {
+    res.send(" Server is running");
+  });
+  
 
 // Connect to MongoDB
 const client = new MongoClient(MONGO_URI);

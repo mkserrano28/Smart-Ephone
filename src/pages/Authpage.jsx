@@ -19,33 +19,31 @@ export default function Authpage() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      console.log(`🛠️ Debug: Sending registration request to ${API_BASE_URL}/register`);
-
       const response = await fetch(`${API_BASE_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
       });
-
+  
       if (!response.ok) {
+        // Show more informative error message based on the server response
         const errorData = await response.json();
-        console.error(" Registration Failed:", errorData);
-        throw new Error(errorData.message || "Registration failed!");
+        console.error("Registration Failed:", errorData);
+        setMessage(errorData.message || "Registration failed!");
+        return;
       }
-
+  
       const data = await response.json();
-      console.log(" Registration Successful:", data);
-
+      console.log("Registration Successful:", data);
+  
       alert("Registration Successful! Please log in.");
-
-      // Switch to login form
-      setIsLogin(true); //  Automatically switch to login form
-
+      setIsLogin(true);
     } catch (error) {
-      console.error(" Registration Error:", error);
+      console.error("Registration Error:", error);
       setMessage(error.message);
     }
   };
+  
 
 
   // Handle Login and Sync Cart
