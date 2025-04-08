@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import updateCart from "./updateCart"; // ✅ Import updateCart
 
 //const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-const API_URL = "https://d26vkzdpde5qsvt.cloudfront.net"; // CloudFront URL directly
-
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 
 
