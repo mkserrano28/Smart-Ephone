@@ -2,10 +2,10 @@ const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
 require("dotenv").config({ path: __dirname + "/.env" }); // ✅ Manually set path
-const cors = require("cors");
+const cors = require("cors"); // Remove duplicate import
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8080;  // Update to use PORT 8080
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017";
 let db;
 
@@ -18,27 +18,21 @@ if (!global.ObjectId) {
     global.ObjectId = require("mongodb").ObjectId; // ✅ Set it globally to avoid re-import
 }
 
-
 // Middleware
 app.use(express.json());
-const cors = require('cors');
 
-app.use(express.json({ type: ['application/json'] }));
-
+// CORS configuration
 const corsOptions = {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',  // Fallback to local during development
     methods: ['GET', 'POST', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
-app.use(cors(corsOptions));  // Apply the combined CORS configuration
-
-
+app.use(cors(corsOptions));  // Apply the CORS configuration
 
 app.get("/", (req, res) => {
-    res.send(" Server is running");
-  });
-  
+    res.send("Server is running");
+});
 
 // Connect to MongoDB
 const client = new MongoClient(MONGO_URI);
@@ -49,8 +43,9 @@ async function connectToDB() {
         db = client.db("Smart-Ephone");
         console.log("✅ Connected to MongoDB: Smart-Ephone");
 
-        app.listen(process.env.PORT || 8080, () => {
-            console.log(`🚀 Server running on http://localhost:${process.env.PORT || 8080}`);
+        // Update to listen on all interfaces for external access
+        app.listen(PORT, '0.0.0.0', () => {
+            console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
         });
     } catch (error) {
         console.error("❌ MongoDB Connection Error:", error);
@@ -58,7 +53,6 @@ async function connectToDB() {
     }
 }
 connectToDB();
-
 
 // ✅ User Registration Route
 app.post("/register", async (req, res) => {
