@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ShoppingCart, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
     const [smartphones, setSmartphones] = useState([]);
