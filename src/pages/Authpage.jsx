@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import updateCart from "./updateCart"; // ✅ Import updateCart
 
-//const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-
-const API_BASE_URL = import.meta.env.VITE_API_URL;
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
 export default function Authpage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -22,31 +19,33 @@ export default function Authpage() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
+      console.log(`🛠️ Debug: Sending registration request to ${API_BASE_URL}/register`);
+
       const response = await fetch(`${API_BASE_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
       });
-  
+
       if (!response.ok) {
-        // Show more informative error message based on the server response
         const errorData = await response.json();
-        console.error("Registration Failed:", errorData);
-        setMessage(errorData.message || "Registration failed!");
-        return;
+        console.error(" Registration Failed:", errorData);
+        throw new Error(errorData.message || "Registration failed!");
       }
-  
+
       const data = await response.json();
-      console.log("Registration Successful:", data);
-  
+      console.log(" Registration Successful:", data);
+
       alert("Registration Successful! Please log in.");
-      setIsLogin(true);
+
+      // Switch to login form
+      setIsLogin(true); //  Automatically switch to login form
+
     } catch (error) {
-      console.error("Registration Error:", error);
+      console.error(" Registration Error:", error);
       setMessage(error.message);
     }
   };
-  
 
 
   // Handle Login and Sync Cart
@@ -90,7 +89,7 @@ export default function Authpage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-2xl overflow-hidden w-full max-w-sm md:max-w-4xl md:h-[500px]">
         <div className="hidden md:flex w-1/2 h-full bg-slate-700 flex-col justify-center items-center p-6 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Welcome to Ephone Online Shopping1</h2>
+          <h2 className="text-2xl font-bold mb-4">Welcome to Ephone Online Shopping</h2>
           <p className="text-lg">If you don't have an account, register now and enjoy a seamless shopping experience.</p>
         </div>
         <div className="w-full md:w-1/2 p-8 bg-white text-gray-900">
