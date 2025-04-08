@@ -21,13 +21,13 @@ if (!global.ObjectId) {
 // Middleware
 app.use(express.json());
 
+
 // CORS configuration
 const corsOptions = {
-    origin: 'https://d26vkzdpde5qsvt.cloudfront.net',  // Directly use the CloudFront URL
-    methods: ['GET', 'POST', 'PATCH'],
+    origin: process.env.FRONTEND_URL,  // This should match your CloudFront URL or local URL during dev
+    methods: ['GET', 'POST', 'PATCH'],  // Adjust methods as necessary
     allowedHeaders: ['Content-Type', 'Authorization'],
-  };
-  app.use(cors(corsOptions));  // Apply CORS configuration
+};
   
 
 app.get("/", (req, res) => {
