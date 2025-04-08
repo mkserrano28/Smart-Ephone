@@ -5,8 +5,8 @@ require("dotenv").config({ path: __dirname + "/.env" }); // ✅ Manually set pat
 const cors = require("cors"); // Remove duplicate import
 
 const app = express();
-const PORT = process.env.PORT || 8080;  // Update to use PORT 8080
-const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017";
+const PORT = process.env.PORT || 8080;  // Use the environment-defined port or 8080
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017";  // MongoDB URI
 let db;
 
 console.log("🔍 PAYMONGO_SECRET_KEY:", process.env.PAYMONGO_SECRET_KEY);
@@ -31,7 +31,7 @@ const corsOptions = {
 app.use(cors(corsOptions));  // Apply the CORS configuration
 
 app.get("/", (req, res) => {
-    res.send("Serverrr is running");
+    res.send("Server is running");
 });
 
 // Connect to MongoDB
@@ -45,11 +45,11 @@ async function connectToDB() {
 
         // Update to listen on all interfaces for external access
         app.listen(PORT, '0.0.0.0', () => {
-            console.log(` Serverr running on http://0.0.0.0:${PORT}`);
+            console.log(` Server running on http://0.0.0.0:${PORT}`);
         });
     } catch (error) {
         console.error(" MongoDB Connection Error:", error);
-        process.exit(1);
+        process.exit(1);  // Ensure process exits on DB connection failure
     }
 }
 connectToDB();
@@ -78,6 +78,7 @@ app.post("/register", async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 
 
 // ✅ Login Route
