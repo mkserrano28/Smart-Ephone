@@ -4,6 +4,8 @@ import updateCart from "./updateCart"; // ✅ Import updateCart
 
 //const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
+console.log("API URL:", API_BASE_URL);  // Ensure this logs the correct URL
+
 
 export default function Authpage() {
   const [isLogin, setIsLogin] = useState(true);
