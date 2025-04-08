@@ -8,7 +8,7 @@ console.log("API URL:", API_BASE_URL);  // Ensure this logs the correct URL
 
 
 export default function Authpage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true);z
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
