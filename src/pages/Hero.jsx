@@ -33,15 +33,15 @@ function Hero({ darkMode }) {
           <img src="/images/hero1.jpeg" alt="Product 1" className="w-full h-32 object-cover rounded" />
         </div>
         <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 text-left">
-          <h3 className="font-bold mb-2">FREE Shipping to Philippines</h3>
+          <h3 className="font-bold mb-2">FREE Shipping</h3>
           <img src="/images/card1.jpg" alt="Product 2" className="w-full h-32 object-cover rounded" />
         </div>
         <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 text-left">
-          <h3 className="font-bold mb-2">Free Shipping Zone</h3>
+          <h3 className="font-bold mb-2">Shop anywhere</h3>
           <img src="/images/card2.jpg" alt="Product 3" className="w-full h-32 object-cover rounded" />
         </div>
         <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 text-left">
-          <h3 className="font-bold mb-2">Shop for Home Essentials</h3>
+          <h3 className="font-bold mb-2">We Deliver worldwide</h3>
           <img src="/images/card4.jpg" alt="Product 4" className="w-full h-32 object-cover rounded" />
         </div>
       </div>
