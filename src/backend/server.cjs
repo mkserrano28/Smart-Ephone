@@ -23,12 +23,12 @@ app.use(express.json());
 
 // CORS configuration
 const corsOptions = {
-    origin: process.env.FRONTEND_URL,  // Use the correct frontend URL
+    origin: 'https://d26vkzdpde5qsvt.cloudfront.net',  // Directly use the CloudFront URL
     methods: ['GET', 'POST', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-};
-
-app.use(cors(corsOptions));  // Apply the CORS configuration
+  };
+  app.use(cors(corsOptions));  // Apply CORS configuration
+  
 
 app.get("/", (req, res) => {
     res.send("Server is running");
