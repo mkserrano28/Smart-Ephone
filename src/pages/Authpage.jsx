@@ -5,6 +5,9 @@ import updateCart from "./updateCart"; // ✅ Import updateCart
 //const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 console.log("API URL:", API_BASE_URL);
+console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);  // Check if the environment variable is being correctly loaded
+
+
 
 export default function Authpage() {
   const [isLogin, setIsLogin] = useState(true);
