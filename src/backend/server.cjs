@@ -23,7 +23,7 @@ app.use(express.json());
 
 // CORS configuration
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',  // Fallback to local during development
+    origin: process.env.FRONTEND_URL,  // Use the correct frontend URL
     methods: ['GET', 'POST', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -31,7 +31,7 @@ const corsOptions = {
 app.use(cors(corsOptions));  // Apply the CORS configuration
 
 app.get("/", (req, res) => {
-    res.send("Server is running");
+    res.send("Serverrr123 is running");
 });
 
 // Connect to MongoDB
@@ -41,14 +41,14 @@ async function connectToDB() {
     try {
         await client.connect();
         db = client.db("Smart-Ephone");
-        console.log("✅ Connected to MongoDB: Smart-Ephone");
+        console.log(" Connected to MongoDB: Smart-Ephone");
 
         // Update to listen on all interfaces for external access
         app.listen(PORT, '0.0.0.0', () => {
-            console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
+            console.log(` Serverr running on http://0.0.0.0:${PORT}`);
         });
     } catch (error) {
-        console.error("❌ MongoDB Connection Error:", error);
+        console.error(" MongoDB Connection Error:", error);
         process.exit(1);
     }
 }
