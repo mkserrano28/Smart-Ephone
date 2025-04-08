@@ -12,8 +12,6 @@ import Footer from "./pages/Footer";
 import Orders from "./pages/Orders"; // ✅ Import Orders Page
 import updateCart from "./pages/updateCart";
 import ProtectedRoute from "./pages/ProtectedRoute"; // ✅ Import Protected Route
-import PaymentSuccess from "./pages/PaymentSuccess"; // ✅ Import Payment Success Page
-import PaymentFailed from "./pages/PaymentFailed"; // ✅ Import Payment Failed Page
 import Contact from "./pages/Contact"
 
 
