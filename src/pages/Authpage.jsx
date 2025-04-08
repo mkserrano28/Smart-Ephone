@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import updateCart from "./updateCart"; // ✅ Import updateCart
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function Authpage() {
   const [isLogin, setIsLogin] = useState(true);
