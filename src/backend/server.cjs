@@ -31,7 +31,7 @@ const corsOptions = {
 app.use(cors(corsOptions));  // Apply the CORS configuration
 
 app.get("/", (req, res) => {
-    res.send("Serverrr123 is running");
+    res.send("Serverrr is running");
 });
 
 // Connect to MongoDB
