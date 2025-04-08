@@ -21,11 +21,13 @@ if (!global.ObjectId) {
 
 // Middleware
 app.use(express.json());
+const cors = require('cors');
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Make sure this points to your frontend CloudFront URL in production
-    methods: ['GET', 'POST', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  }));
+  origin: 'http://djuvfvjpgozm1.cloudfront.net', // Frontend URL (CloudFront URL in production)
+  methods: ['GET', 'POST', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
   
 app.use(express.json({ type: ['application/json'] }));
 
