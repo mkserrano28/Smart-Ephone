@@ -1,8 +1,9 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 require("dotenv").config({ path: __dirname + "/.env" }); // ✅ Manually set path
 const cors = require("cors"); // Remove duplicate import
+const orderRoutes = require('./routes/orderRoutes.cjs');
 
 const app = express();
 const PORT = process.env.PORT || 8080;  // Use the environment-defined port or 8080
@@ -11,8 +12,9 @@ let db;
 
 console.log("🔍 PAYMONGO_SECRET_KEY:", process.env.PAYMONGO_SECRET_KEY);
 if (!process.env.PAYMONGO_SECRET_KEY) {
-    throw new Error("❌ PAYMONGO_SECRET_KEY is missing! Check your .env file.");
+    console.warn("⚠️ PAYMONGO_SECRET_KEY is not defined. Make sure to set it in EB env vars.");
 }
+
 
 if (!global.ObjectId) {
     global.ObjectId = require("mongodb").ObjectId; // ✅ Set it globally to avoid re-import
@@ -22,12 +24,15 @@ if (!global.ObjectId) {
 app.use(express.json());
 
 
-// CORS configuration
 const corsOptions = {
-    origin: process.env.FRONTEND_URL,  // This should match your CloudFront URL or local URL during dev
-    methods: ['GET', 'POST', 'PATCH'],  // Adjust methods as necessary
-    allowedHeaders: ['Content-Type', 'Authorization'],
-};
+    origin: '*', // Or restrict to your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  };
+  
+  app.use(cors(corsOptions));
+
+app.use('/api/orders', orderRoutes);
   
 
 app.get("/", (req, res) => {
@@ -45,8 +50,9 @@ async function connectToDB() {
 
         // Update to listen on all interfaces for external access
         app.listen(PORT, '0.0.0.0', () => {
-            console.log(` Server running on http://0.0.0.0:${PORT}`);
-        });
+            console.log(`Server is running on port ${PORT}`);
+          });
+          
     } catch (error) {
         console.error(" MongoDB Connection Error:", error);
         process.exit(1);  // Ensure process exits on DB connection failure
