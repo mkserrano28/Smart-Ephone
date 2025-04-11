@@ -1,7 +1,9 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require('bcryptjs');
-require("dotenv").config({ path: __dirname + "/.env" }); // ✅ Manually set path
+require("dotenv").config(); // auto-loads from project root
+
+//require("dotenv").config({ path: __dirname + "/.env" }); // ✅ Manually set path
 const cors = require("cors"); // Remove duplicate import
 const orderRoutes = require('./routes/orderRoutes.cjs');
 

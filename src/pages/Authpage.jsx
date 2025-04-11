@@ -7,7 +7,7 @@ console.log("💡 API URL:", import.meta.env.VITE_API_BASE_URL);
 
 
 
-export default function Authpage() {
+export default function Authpage() {  
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
