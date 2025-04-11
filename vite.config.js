@@ -6,6 +6,6 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   define: {
-    'process.env': process.env,  // Make sure environment variables are available in the app
-  },
+    'process.env': {}
+  }
 })

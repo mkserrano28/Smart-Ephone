@@ -25,11 +25,10 @@ app.use(express.json());
 
 
 const corsOptions = {
-    origin: '*', // Or restrict to your frontend URL
+    origin: process.env.FRONTEND_URL || '*', // use your cloudfront url
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
   };
-  
   app.use(cors(corsOptions));
 
 app.use('/api/orders', orderRoutes);
