@@ -25,6 +25,13 @@ if (!global.ObjectId) {
 // Middleware
 app.use(express.json());
 
+app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect('https://' + req.headers.host + req.url);
+    }
+    next();
+  });
+  
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL || '*', // use your cloudfront url
