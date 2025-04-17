@@ -170,6 +170,14 @@ function Navbar({ cartItems, darkMode, setDarkMode, searchTerm, setSearchTerm })
                         <li><Link to="#" onClick={() => setMenuOpen(false)}>About</Link></li>
                         <li><Link to="/products" onClick={() => setMenuOpen(false)}>Products</Link></li>
                         <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Me</Link></li>
+                        <li>      <Link
+                            to="/auth"
+                            onClick={() => setMenuOpen(false)}
+                            className="block w-full text-center px-4 py-2 rounded-md border border-gray-300 dark:border-white text-slate-800 dark:text-white hover:bg-slate-300 dark:hover:bg-gray-700 transition"
+                        >
+                            <User size={18} className="inline-block mr-1" />
+                            Login
+                        </Link></li>
                     </ul>
                 </div>
             )}

@@ -28,19 +28,21 @@ if (!global.ObjectId) {
 app.use(express.json());
 
 app.use((req, res, next) => {
+    if (req.path === "/") return next(); // Allow ELB health check through
     if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect('https://' + req.headers.host + req.url);
+        return res.redirect('https://' + req.headers.host + req.url);
     }
     next();
-  });
+});
   
   
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL || '*', // use your cloudfront url
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // <-- added PATCH
     allowedHeaders: ['Content-Type', 'Authorization'],
-  };
+};
+
   app.use(cors(corsOptions));
 
 app.use('/api/orders', orderRoutes);

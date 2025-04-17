@@ -83,7 +83,12 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
                                 {phone.model}
                             </h3>
                             <p className="text-gray-500 dark:text-gray-400 text-xs text-center">
-                                ₱{phone.price.toFixed(2)}
+                                {new Intl.NumberFormat('en-PH', {
+                                    style: 'currency',
+                                    currency: 'PHP',
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 0
+                                }).format(phone.price)}
                             </p>
                         </Link>
 
