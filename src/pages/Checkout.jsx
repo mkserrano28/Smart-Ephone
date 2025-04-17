@@ -86,6 +86,14 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
         }
     };
 
+    const formatPeso = (amount) =>
+        new Intl.NumberFormat("en-PH", {
+          style: "currency",
+          currency: "PHP",
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(amount ?? 0);
+
 
 
     return (
@@ -133,7 +141,7 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                                                     </p>
                                                 </div>
                                             </td>
-                                            <td className="text-center">₱{item.price.toFixed(2)}</td>
+                                            <td className="text-center">{formatPeso(item.price)}</td>
                                             <td className="text-center">
                                                 <div className="flex items-center justify-center">
                                                     <button className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onClick={() => updateCartQuantity(item.id, "decrease")}>-</button>
@@ -157,13 +165,13 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                         <div className="w-full md:w-1/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                             <h3 className="text-xl font-bold border-b pb-2">📦 CART TOTALS</h3>
                             <div className="flex justify-between text-lg py-3">
-                                <span>Subtotal:</span><span>₱{subtotal.toFixed(2)}</span>
+                            <span>Subtotal:</span><span>{formatPeso(subtotal)}</span>
                             </div>
                             <div className="flex justify-between text-lg pb-3">
-                                <span>Shipping:</span><span className="text-green-500">{shipping === 0 ? "FREE" : `₱${shipping.toFixed(2)}`}</span>
+                            <span>Shipping:</span><span className="text-green-500">{shipping === 0 ? "FREE" : formatPeso(shipping)}</span>
                             </div>
                             <div className="flex justify-between text-xl font-bold py-3 border-t">
-                                <span>Total:</span><span>₱{totalAmount.toFixed(2)}</span>
+                            <span>Total:</span><span>{formatPeso(totalAmount)}</span>
                             </div>
 
                             <h3 className="text-lg font-bold mt-4">Choose Payment Method</h3>
@@ -172,7 +180,7 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                                 className="w-full mt-2 p-2 border rounded-lg"
                             >
                                 <option value="cod">Cash on Delivery</option>
-                                <option value="gcash">GCash / PayMaya</option>
+                                <option value="gcash">Online Payment</option>
                             </select>
 
                             <button onClick={handleCheckout} className="w-full mt-4 py-3 bg-blue-600 text-white rounded-xl text-lg font-semibold hover:bg-blue-700">

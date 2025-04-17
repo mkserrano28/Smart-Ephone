@@ -7,6 +7,11 @@ function CartDetails({ darkMode, addToCart }) {
   const [product, setProduct] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedStorage, setSelectedStorage] = useState(null);
+  const formatPeso = (amount) =>
+    new Intl.NumberFormat("en-PH", {
+      style: "currency",
+      currency: "PHP",
+    }).format(amount ?? 0);
 
   useEffect(() => {
     fetch("/smartphones.json")
@@ -29,16 +34,16 @@ function CartDetails({ darkMode, addToCart }) {
       alert("Please select a color and storage option.");
       return;
     }
-  
+
     const productImage = document.querySelector(".product-image");
     const cartIcon = document.querySelector("#cart-icon");
-  
+
     if (productImage && cartIcon) {
       const imageRect = productImage.getBoundingClientRect();
       const cartRect = cartIcon.getBoundingClientRect();
-  
+
       const imgClone = productImage.cloneNode(true);
-  
+
       imgClone.style.position = "fixed";
       imgClone.style.left = `${imageRect.left + window.scrollX}px`;
       imgClone.style.top = `${imageRect.top + window.scrollY}px`;
@@ -48,9 +53,9 @@ function CartDetails({ darkMode, addToCart }) {
       imgClone.style.zIndex = "9999";
       imgClone.style.borderRadius = "12px";
       imgClone.style.opacity = "1";
-  
+
       document.body.appendChild(imgClone);
-  
+
       requestAnimationFrame(() => {
         imgClone.style.left = `${cartRect.left + window.scrollX + cartRect.width / 2 - 20}px`;
         imgClone.style.top = `${cartRect.top + window.scrollY + cartRect.height / 2 - 20}px`;
@@ -58,21 +63,21 @@ function CartDetails({ darkMode, addToCart }) {
         imgClone.style.height = `40px`;
         imgClone.style.opacity = "0.5";
       });
-  
+
       setTimeout(() => {
         imgClone.remove();
       }, 1600);
     }
-  
+
     const cartProduct = {
       ...product,
       selectedColor,
       selectedStorage,
     };
-  
+
     addToCart(cartProduct);
   };
-  
+
 
   const sliderSettings = {
     dots: true,
@@ -173,7 +178,7 @@ function CartDetails({ darkMode, addToCart }) {
           </div>
 
           <p className="text-xl font-bold">
-            ₱{product.price.toFixed(2)} {product.currency}
+            {formatPeso(product.price)}
           </p>
 
           <button
