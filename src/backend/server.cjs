@@ -8,6 +8,8 @@ const cors = require("cors"); // Remove duplicate import
 const orderRoutes = require('./routes/orderRoutes.cjs');
 
 const app = express();
+
+app.enable('trust proxy');
 const PORT = process.env.PORT || 8080;  // Use the environment-defined port or 8080
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017";  // MongoDB URI
 let db;
@@ -31,6 +33,7 @@ app.use((req, res, next) => {
     }
     next();
   });
+  
   
 
 const corsOptions = {
