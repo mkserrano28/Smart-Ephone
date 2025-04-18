@@ -52,6 +52,8 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                 data = await response.json();
                 if (!response.ok) throw new Error(data.message);
 
+                alert("🎉 Order placed! You can now track it under the 'To Receive' tab.");
+
                 // ✅ Clear cart from localStorage and state
                 localStorage.removeItem(`cart_${userId}`);
                 setCartItems([]);

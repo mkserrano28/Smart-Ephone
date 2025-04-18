@@ -176,7 +176,7 @@ app.post("/checkout/cod", async (req, res) => {
             total, // ✅ Now guaranteed to be correct
             status: "To Receive", // ✅ Update status from "Pending" to "To Receive"
             paymentMethod: "Cash on Delivery",
-            paymentStatus: "To Receive", // ✅ Optional: align with status or use "Unpaid"
+            paymentStatus: "Unpaid", // ✅ Optional: align with status or use "Unpaid"
             createdAt: new Date()
         };
 
