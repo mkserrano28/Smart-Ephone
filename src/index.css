@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 @import "tailwindcss";
 
 
@@ -11,6 +13,12 @@
       transform: translateX(-66.6667%);
     }
   }
+  
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif;
+  }
+}
   
   .animate-infinite-scroll {
     animation: infinite-scroll 80s linear infinite;

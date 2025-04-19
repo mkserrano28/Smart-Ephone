@@ -115,10 +115,10 @@ function CartDetails({ darkMode, addToCart }) {
         </div>
 
         {/* Right: Product Info */}
-        <div className="flex-1 space-y-6 w-full max-w-[500px]">
+        <div className="flex-1 space-y-4 w-full max-w-[500px]">
           <div>
             <p className="text-sm font-semibold text-orange-500">New</p>
-            <h2 className="text-2xl sm:text-3xl font-bold">{product.model}</h2>
+            <h2 className="text-2xl sm:text-3xl font-bolds">{product.model}</h2>
             <p className="mt-2 text-base sm:text-lg">
               Brand: <span className="font-medium">{product.brand}</span>
             </p>

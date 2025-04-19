@@ -36,7 +36,7 @@ function Navbar({ cartItems, darkMode, setDarkMode, searchTerm, setSearchTerm })
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2 min-w-fit">
                         <img src="/images/ephone-logo.webp" alt="Ephone Logo" className="h-8 w-auto rounded-4xl" />
-                        <span className={`text-lg sm:text-xl font-bold font-serif ${darkMode ? "text-yellow-400" : "text-slate-200"}`}>
+                        <span className={`text-lg sm:text-xl font-poppins font-semibold ${darkMode ? "text-yellow-400" : "text-slate-200"}`}>
                             Smart-Ephone
                         </span>
                     </Link>
@@ -95,14 +95,14 @@ function Navbar({ cartItems, darkMode, setDarkMode, searchTerm, setSearchTerm })
                                 className="flex items-center space-x-2 focus:outline-none"
                             >
                                 <User size={22} className="text-white dark:text-white" />
-                                <span className="font-medium font-serif text-white dark:text-white">
+                                <span className="font-medium font-poppins text-white dark:text-white">
                                     {user.username}
                                 </span>
                                 <ChevronDown size={18} className="text-white dark:text-white" />
                             </button>
 
                             {dropdownOpen && (
-                                <div className="absolute right-0 mt-2 w-48 font-serif bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+                                <div className="absolute right-0 mt-2 w-48 font-poppins bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
                                     <Link
                                         to="/profile"
                                         onClick={() => setDropdownOpen(false)}

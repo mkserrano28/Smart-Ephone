@@ -82,7 +82,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
                             <h3 className="font-semibold mt-2 text-slate-900 dark:text-white text-center text-sm">
                                 {phone.model}
                             </h3>
-                            <p className="text-gray-500 dark:text-gray-400 text-xs text-center">
+                            <p className="text-gray-500 dark:text-gray-400 text-xs text-center font-bold">
                                 {new Intl.NumberFormat('en-PH', {
                                     style: 'currency',
                                     currency: 'PHP',

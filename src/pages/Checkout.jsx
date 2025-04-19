@@ -90,10 +90,10 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
 
     const formatPeso = (amount) =>
         new Intl.NumberFormat("en-PH", {
-          style: "currency",
-          currency: "PHP",
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
+            style: "currency",
+            currency: "PHP",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
         }).format(amount ?? 0);
 
 
@@ -167,13 +167,13 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                         <div className="w-full md:w-1/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                             <h3 className="text-xl font-bold border-b pb-2">📦 CART TOTALS</h3>
                             <div className="flex justify-between text-lg py-3">
-                            <span>Subtotal:</span><span>{formatPeso(subtotal)}</span>
+                                <span>Subtotal:</span><span>{formatPeso(subtotal)}</span>
                             </div>
                             <div className="flex justify-between text-lg pb-3">
-                            <span>Shipping:</span><span className="text-green-500">{shipping === 0 ? "FREE" : formatPeso(shipping)}</span>
+                                <span>Shipping:</span><span className="text-green-500">{shipping === 0 ? "FREE" : formatPeso(shipping)}</span>
                             </div>
                             <div className="flex justify-between text-xl font-bold py-3 border-t">
-                            <span>Total:</span><span>{formatPeso(totalAmount)}</span>
+                                <span>Total:</span><span>{formatPeso(totalAmount)}</span>
                             </div>
 
                             <h3 className="text-lg font-bold mt-4">Choose Payment Method</h3>
@@ -185,7 +185,10 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                                 <option value="gcash">Online Payment</option>
                             </select>
 
-                            <button onClick={handleCheckout} className="w-full mt-4 py-3 bg-blue-600 text-white rounded-xl text-lg font-semibold hover:bg-blue-700">
+                            <button onClick={handleCheckout} className={`mt-6 py-3 px-6 font-semibold rounded shadow-md transition-all ${darkMode
+                                    ? "bg-yellow-300 text-black hover:bg-yellow-400"
+                                    : "bg-yellow-500 text-white hover:bg-yellow-600"
+                                }`}>
                                 {paymentMethod === "gcash" || paymentMethod === "paymaya" ? "💳 Pay Now" : " Confirm Order"}
                             </button>
                         </div>

@@ -8,11 +8,11 @@ function Footer() {
                     {/* Logo and Brand Name */}
                     <div className="mb-6 md:mb-0 flex items-center space-x-3">
                         <img src="/images/ephone-logo.webp" alt="Ephone Logo" className="h-12 w-auto rounded-4xl" />
-                        <span className="text-2xl font-semibold dark:text-white">Smart-Ephone</span>
+                        <span className="text-2xl font-poppins dark:text-white">Smart-Ephone</span>
                     </div>
 
                     {/* Navigation Links */}
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div className="grid font-poppins grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                             <ul className="text-gray-500 dark:text-gray-400 font-medium">
