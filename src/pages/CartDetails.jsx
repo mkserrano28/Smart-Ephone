@@ -183,7 +183,11 @@ function CartDetails({ darkMode, addToCart }) {
 
           <button
             onClick={handleAddToCart}
-            className="w-full sm:w-auto bg-slate-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-blue-700 transition"
+            className={`mt-6 py-3 px-6 font-semibold rounded shadow-md transition-all ${
+              darkMode
+                ? "bg-yellow-300 text-black hover:bg-yellow-400"
+                : "bg-yellow-500 text-white hover:bg-yellow-600"
+            }`}
           >
             Add to Cart
           </button>

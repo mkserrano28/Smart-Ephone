@@ -31,11 +31,9 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
         return matchesCategory && matchesSearch;
     });
 
-
-
     return (
         <div
-            className={`min-h-screen p-20 transition-all duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+            className={`min-h-screen px-4 pt-6 pb-24 transition-all duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
                 }`}
         >
             <div className="mb-6">
@@ -56,50 +54,46 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {/* Updated 2-column grid layout like Shopee */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {filteredSmartphones.map((phone) => (
                     <div
                         key={phone.id}
-                        className="relative bg-slate-100 dark:bg-gray-800 shadow-lg rounded-xl p-4 
-              transition-transform duration-500 ease-in-out transform 
-              hover:scale-105 hover:-translate-y-2 hover:shadow-2xl"
+                        className="relative bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
                     >
-                        {/* Favorite Button */}
-                        <button className="absolute top-3 right-3 text-gray-400 hover:text-red-500">
-                            <Heart size={14} />
-                        </button>
-
-                        {/* Clickable section for details */}
-                        <Link to={`/cartdetails/${phone.id}`} className="block">
-                            <div className="h-32 w-full flex items-center justify-center overflow-hidden rounded-lg group">
+                        <Link to={`/cartdetails/${phone.id}`}>
+                        <div className="h-40 sm:h-32 w-full flex items-center justify-center overflow-hidden">
                                 <img
                                     src={Array.isArray(phone.image) ? phone.image[0] : phone.image}
                                     alt={phone.model}
-                                    className="w-28 h-28 object-contain transition-transform duration-500 ease-in-out group-hover:scale-125"
+                                    className="object-contain w-28 h-28"
                                 />
-
                             </div>
-                            <h3 className="font-semibold mt-2 text-slate-900 dark:text-white text-center text-sm">
-                                {phone.model}
-                            </h3>
-                            <p className="text-gray-500 dark:text-gray-400 text-xs text-center font-bold">
-                                {new Intl.NumberFormat('en-PH', {
-                                    style: 'currency',
-                                    currency: 'PHP',
-                                    minimumFractionDigits: 0,
-                                    maximumFractionDigits: 0
-                                }).format(phone.price)}
-                            </p>
+                            <div className="px-2 pb-3">
+                                <h3 className="text-sm font-semibold line-clamp-2">{phone.model}</h3>
+                                <p className="font-bold text-sm">
+                                    {new Intl.NumberFormat("en-PH", {
+                                        style: "currency",
+                                        currency: "PHP",
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0,
+                                    }).format(phone.price)}
+                                </p>
+                            </div>
                         </Link>
 
-                        {/* Add to Cart button */}
+                        {/* Add to Cart Button */}
                         <Link
                             to={`/cartdetails/${phone.id}`}
-                            className="absolute bottom-3 right-3 bg-slate-500 hover:bg-blue-700 text-white p-2 rounded-full transition-all shadow-md z-10"
+                            className="absolute top-2 left-2 bg-yellow-400 hover:bg-yellow-500 text-white p-1 rounded-full shadow"
                         >
-                            <ShoppingCart size={18} />
+                            <ShoppingCart size={16} />
                         </Link>
 
+                        {/* Favorite Button */}
+                        <button className="absolute top-2 right-2 text-gray-400 hover:text-red-500">
+                            <Heart size={16} />
+                        </button>
                     </div>
                 ))}
             </div>

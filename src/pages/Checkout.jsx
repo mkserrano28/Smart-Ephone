@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ChevronDown, ChevronUp, CreditCard, Truck } from "lucide-react"; // ⬅️ add at the top
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }) {
     const navigate = useNavigate();
     const [paymentMethod, setPaymentMethod] = useState("cod");
+    const [showDropdown, setShowDropdown] = useState(false);
 
     const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const shipping = subtotal >= 79.99 ? 0 : 5.00;
@@ -153,7 +155,10 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                                             </td>
                                             <td className="text-right font-semibold">₱{(item.price * item.quantity).toFixed(2)}</td>
                                             <td className="text-center">
-                                                <button onClick={() => handleRemoveItem(item.id)} className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                                                <button onClick={() => handleRemoveItem(item.id)} className={`py-1 text-sm px-4 font-semibold rounded shadow-md transition-all ${darkMode
+                                                    ? "bg-yellow-300 text-black hover:bg-yellow-400"
+                                                    : "bg-yellow-500 text-white hover:bg-yellow-600"
+                                                    }`}>
                                                     Delete
                                                 </button>
                                             </td>
@@ -165,31 +170,56 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
 
                         {/* Order Summary */}
                         <div className="w-full md:w-1/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                            <h3 className="text-xl font-bold border-b pb-2">📦 CART TOTALS</h3>
+                            <h3 className="text-xl font-bold border-b pb-2">CART TOTALS</h3>
                             <div className="flex justify-between text-lg py-3">
                                 <span>Subtotal:</span><span>{formatPeso(subtotal)}</span>
                             </div>
                             <div className="flex justify-between text-lg pb-3">
-                                <span>Shipping:</span><span className="text-green-500">{shipping === 0 ? "FREE" : formatPeso(shipping)}</span>
+                                <span>Shipping:</span><span className="text-yellow-500">{shipping === 0 ? "FREE" : formatPeso(shipping)}</span>
                             </div>
                             <div className="flex justify-between text-xl font-bold py-3 border-t">
                                 <span>Total:</span><span>{formatPeso(totalAmount)}</span>
                             </div>
 
                             <h3 className="text-lg font-bold mt-4">Choose Payment Method</h3>
-                            <select
-                                onChange={(e) => setPaymentMethod(e.target.value)}
-                                className="w-full mt-2 p-2 border rounded-lg"
-                            >
-                                <option value="cod">Cash on Delivery</option>
-                                <option value="gcash">Online Payment</option>
-                            </select>
+                            <div className="relative mt-2">
+                                <button
+                                    onClick={() => setShowDropdown(prev => !prev)}
+                                    className="w-full flex items-center justify-between px-3 py-2 border rounded-md shadow-sm text-sm bg-white dark:bg-gray-700 dark:text-white"
+                                >
+                                    <span className="flex items-center gap-2">
+                                        {paymentMethod === "cod" ? <Truck size={14} /> : <CreditCard size={14} />}
+                                        {paymentMethod === "cod" ? "Cash on Delivery" : "Online Payment (GCash)"}
+                                    </span>
+                                    {showDropdown ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                                </button>
 
-                            <button onClick={handleCheckout} className={`mt-6 py-3 px-6 font-semibold rounded shadow-md transition-all ${darkMode
-                                    ? "bg-yellow-300 text-black hover:bg-yellow-400"
-                                    : "bg-yellow-500 text-white hover:bg-yellow-600"
+
+                                {showDropdown && (
+                                    <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border rounded-md shadow-md">
+                                        {["cod", "gcash"].map((method) => (
+                                            <button
+                                                key={method}
+                                                onClick={() => {
+                                                    setPaymentMethod(method);
+                                                    setShowDropdown(false);
+                                                }}
+                                                className="w-full px-3 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                                            >
+                                                {method === "cod" ? <Truck size={14} /> : <CreditCard size={14} />}
+                                                {method === "cod" ? "Cash on Delivery" : "Online Payment (GCash)"}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                )}
+                            </div>
+
+                            <button onClick={handleCheckout} className={`mt-6 py-2 text-sm px-6 font-semibold rounded shadow-md transition-all ${darkMode
+                                ? "bg-yellow-300 text-black hover:bg-yellow-400"
+                                : "bg-yellow-500 text-white hover:bg-yellow-600"
                                 }`}>
-                                {paymentMethod === "gcash" || paymentMethod === "paymaya" ? "💳 Pay Now" : " Confirm Order"}
+                                {paymentMethod === "gcash" || paymentMethod === "paymaya" ? " Pay Now" : " Confirm Order"}
                             </button>
                         </div>
                     </div>
