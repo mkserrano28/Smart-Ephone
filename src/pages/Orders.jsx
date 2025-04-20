@@ -76,23 +76,28 @@ function Orders() {
         method: "PATCH",
       });
       if (!response.ok) throw new Error("Cancel request failed");
+  
+      alert("🚫 Order has been cancelled.");
       fetchOrders();
     } catch (error) {
       console.error("❌ Failed to cancel order:", error);
     }
   };
-
+  
   const handleOrderReceived = async (orderId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/orders/${orderId}/received`, {
         method: "PATCH",
       });
       if (!response.ok) throw new Error("Order received request failed");
+  
+      alert("✅ Thank you! Your order has been marked as received.");
       fetchOrders();
     } catch (error) {
       console.error("❌ Failed to mark order as received:", error);
     }
   };
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -126,17 +131,18 @@ function Orders() {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div
-      className="
-        container mx-auto p-6
-        bg-white text-black
-        dark:bg-gray-900 dark:text-white
-        transition-colors duration-300
-      "
+    <div className="
+      container mx-auto px-4 sm:px-6 lg:px-8 
+      py-6 sm:py-10
+     bg-white text-black dark:bg-gray-900 dark:text-white
+      transition-colors duration-300"
     >
-      <h2 className="text-2xl font-bold mb-4 text-center mt-20">📦 Your Orders</h2>
-
-      <div className="flex justify-center gap-3 border-b pb-3 mb-6 overflow-x-auto">
+      <h2 className="text-2xl font-bold 
+      mb-4 text-center mt-20">📦 Your Orders</h2>
+      <div className="flex justify-center 
+      gap-3 border-b pb-3 mb-6 
+      overflow-x-auto"
+      >
         {tabs.map((tab, index) => (
           <button
             key={index}
@@ -168,13 +174,12 @@ function Orders() {
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
             return (
-              <div
-                key={order._id}
-                className="
-                  bg-white dark:bg-gray-800
-                  p-6 rounded-lg shadow-md
-                "
-              >
+              <div className="
+            bg-white dark:bg-gray-800
+              p-4 sm:p-6 
+              rounded-xl shadow-md 
+              space-y-2 sm:space-y-3 
+              text-sm sm:text-base">
                 <h3 className="font-semibold text-lg">
                   Order ID: {order.orderId || order._id}
                 </h3>
@@ -182,7 +187,7 @@ function Orders() {
                 <p>
                   Status: <span className={
                     order.status === "To Ship" || order.status === "To Receive"
-                      ? "text-green-600 font-semibold"
+                      ? "text-yellow-600 font-semibold"
                       : "text-yellow-500"
                   }>
                     {order.status}
@@ -230,15 +235,12 @@ function Orders() {
                     selectedTab !== "Completed" && (
                       <>
                         <button
-                          onClick={() => handleOrderReceived(order._id)}
                           className="
-                            px-5 py-2 rounded-full font-semibold
-                            text-white bg-gradient-to-r
-                            from-green-400 to-emerald-500
-                            shadow-lg hover:shadow-xl
-                            transition-all duration-300
-                            hover:brightness-110
-                          "
+                           text-sm sm:text-base
+                            px-4 py-1.5 sm:px-6 sm:py-2
+                            rounded-full font-semibold
+                           text-white bg-gradient-to-r from-green-400 to-emerald-500
+                            shadow-lg hover:shadow-xl transition-all duration-300 hover:brightness-110"
                         >
                           Order Received
                         </button>
@@ -248,7 +250,7 @@ function Orders() {
                           className="
                             px-5 py-2 rounded-full font-semibold
                             text-white bg-gradient-to-r
-                            from-red-500 to-pink-500
+                            from-yellow-500 to-yellow-600
                             shadow-lg hover:shadow-xl
                             transition-all duration-300
                             hover:brightness-110
