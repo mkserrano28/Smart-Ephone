@@ -76,28 +76,28 @@ function Orders() {
         method: "PATCH",
       });
       if (!response.ok) throw new Error("Cancel request failed");
-  
+
       alert("🚫 Order has been cancelled.");
       fetchOrders();
     } catch (error) {
       console.error("❌ Failed to cancel order:", error);
     }
   };
-  
+
   const handleOrderReceived = async (orderId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/orders/${orderId}/received`, {
         method: "PATCH",
       });
       if (!response.ok) throw new Error("Order received request failed");
-  
+
       alert("✅ Thank you! Your order has been marked as received.");
       fetchOrders();
     } catch (error) {
       console.error("❌ Failed to mark order as received:", error);
     }
   };
-  
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -235,15 +235,17 @@ function Orders() {
                     selectedTab !== "Completed" && (
                       <>
                         <button
+                          onClick={() => handleOrderReceived(order._id)}
                           className="
-                           text-sm sm:text-base
-                            px-4 py-1.5 sm:px-6 sm:py-2
-                            rounded-full font-semibold
-                           text-white bg-gradient-to-r from-green-400 to-emerald-500
-                            shadow-lg hover:shadow-xl transition-all duration-300 hover:brightness-110"
+                          text-sm sm:text-base
+                          px-4 py-1.5 sm:px-6 sm:py-2
+                          rounded-full font-semibold
+                        text-white bg-gradient-to-r from-yellow-400 to-yellow-500
+                          shadow-lg hover:shadow-xl transition-all duration-300 hover:brightness-110"
                         >
                           Order Received
                         </button>
+
 
                         <button
                           onClick={() => handleCancel(order._id)}

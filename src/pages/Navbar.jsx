@@ -160,9 +160,10 @@ function Navbar({
                 className="flex items-center space-x-2 focus:outline-none"
               >
                 <User size={22} />
-                <span className="font-medium">{user.username}</span>
+                <span className="font-medium text-white hidden sm:inline-block">{user.username}</span>
                 <ChevronDown size={18} />
               </button>
+
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
                   <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</Link>
