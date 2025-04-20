@@ -103,7 +103,7 @@ function CartDetails({ darkMode, addToCart }) {
     >
       <div
         className="
-          flex flex-col lg:flex-row
+          flex flex-col sm:mt-26 lg:flex-row
           items-center justify-center
           text-center lg:text-left
           max-w-6xl mx-auto gap-10

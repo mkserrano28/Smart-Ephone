@@ -127,12 +127,14 @@ function Navbar({
           </button>
 
           {/* Dark Mode */}
+          {/* Dark Mode (Large screens only) */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="text-slate-200 dark:text-white"
+            className="hidden lg:inline-block text-slate-200 dark:text-white"
           >
             {darkMode ? <Sun size={24} /> : <Moon size={24} />}
           </button>
+
 
           {/* Cart */}
           <Link to="/checkout" className="relative cursor-pointer">
@@ -160,12 +162,20 @@ function Navbar({
                 className="flex text-white  items-center space-x-2 focus:outline-none"
               >
                 <User size={22} />
-                <span className="font-medium text-white hidden sm:inline-block">{user.username}</span>
+                <span className="font-medium text-white 
+                hidden sm:inline-block">
+                  {user.username}
+                </span>
                 <ChevronDown size={18} />
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 text-white bg-white dark:bg-gray-800 shadow-lg rounded-lg">
+                <div className="
+                  absolute right-0 mt-2 w-48 
+                  text-black dark:text-white 
+                  bg-white dark:bg-gray-800 
+                  shadow-lg rounded-lg
+                ">
                   <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</Link>
                   <Link to="/orders" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Order History</Link>
                   <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</Link>
@@ -177,13 +187,13 @@ function Navbar({
             <button
               onClick={() => setShowAuthModal(true)}
               className="
-                hidden lg:block dark:border-white 
-                px-4 py-1 rounded-lg font-medium 
-                text-slate-200 hover:bg-slate-400 dark:hover:bg-gray-700
-              "
+              flex items-center gap-1
+            text-white dark:text-white 
+              px-4 py-1 rounded-lg font-medium 
+            hover:bg-yellow-400 dark:hover:bg-yellow-500"
             >
-              <User size={18} className="inline-block mr-1" />
-              Login
+              <User size={18} className="inline-block" />
+              <span className="font-poppins">Login</span>
             </button>
           )}
 
@@ -225,26 +235,24 @@ function Navbar({
             <li><Link to="#" onClick={() => setMenuOpen(false)}>About</Link></li>
             <li><Link to="/products" onClick={() => setMenuOpen(false)}>Products</Link></li>
             <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Me</Link></li>
-            {!user && (
-              <li>
-                <button
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setShowAuthModal(true);
-                  }}
-                  className="
-                    w-full text-center px-4 py-2 
-                    rounded-md border border-gray-300 dark:border-white 
-                    text-slate-800 dark:text-white 
-                    hover:bg-slate-300 dark:hover:bg-gray-700 transition
-                  "
-                >
-                  <User size={18} className="inline-block mr-1" />
-                  Login
-                </button>
-              </li>
-            )}
+
+            {/* Dark Mode (Only on small screens) */}
+            <li className="w-full flex justify-center">
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className="
+        flex items-center gap-2
+        text-slate-800 dark:text-white 
+        hover:bg-slate-300 dark:hover:bg-gray-700 
+        px-4 py-2 rounded-md transition
+      "
+              >
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+                {darkMode ? "Light Mode" : "Dark Mode"}
+              </button>
+            </li>
           </ul>
+
         </div>
       )}
 
