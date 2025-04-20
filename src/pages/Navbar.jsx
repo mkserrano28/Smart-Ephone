@@ -171,17 +171,41 @@ function Navbar({
 
               {dropdownOpen && (
                 <div className="
-                  absolute right-0 mt-2 w-48 
-                  text-black dark:text-white 
-                  bg-white dark:bg-gray-800 
-                  shadow-lg rounded-lg
-                ">
-                  <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</Link>
-                  <Link to="/orders" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Order History</Link>
-                  <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</Link>
-                  <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</button>
+    absolute right-0 mt-2 w-48 
+    text-black dark:text-white 
+    bg-white dark:bg-gray-800 
+    shadow-lg rounded-lg
+  ">
+                  <Link
+                    to="/profile"
+                    onClick={() => setDropdownOpen(false)}
+                    className="block px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    Profile
+                  </Link>
+                  <Link
+                    to="/orders"
+                    onClick={() => setDropdownOpen(false)}
+                    className="block px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    Order History
+                  </Link>
+                  <Link
+                    to="/profile"
+                    onClick={() => setDropdownOpen(false)}
+                    className="block px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    Settings
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    Logout
+                  </button>
                 </div>
               )}
+
             </div>
           ) : (
             <button
