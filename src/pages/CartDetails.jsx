@@ -57,12 +57,10 @@ function CartDetails({ darkMode, addToCart }) {
       document.body.appendChild(imgClone);
 
       requestAnimationFrame(() => {
-        imgClone.style.left = `${
-          cartRect.left + window.scrollX + cartRect.width / 2 - 20
-        }px`;
-        imgClone.style.top = `${
-          cartRect.top + window.scrollY + cartRect.height / 2 - 20
-        }px`;
+        imgClone.style.left = `${cartRect.left + window.scrollX + cartRect.width / 2 - 20
+          }px`;
+        imgClone.style.top = `${cartRect.top + window.scrollY + cartRect.height / 2 - 20
+          }px`;
         imgClone.style.width = `40px`;
         imgClone.style.height = `40px`;
         imgClone.style.opacity = "0.5";
@@ -96,11 +94,13 @@ function CartDetails({ darkMode, addToCart }) {
   return (
     <div
       className={`
-        min-h-screen p-4 md:p-8 lg:p-10 sm:mt-16
-        transition-colors duration-300
-        ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}
-      `}
+    min-h-screen p-4 md:p-8 lg:p-10 pt-24
+    transition-colors duration-300
+    ${darkMode ? "bg-gray-900 text-white" :
+     "bg-gray-100 text-black"}
+  `}
     >
+
       <div
         className="
           flex flex-col sm:mt-26 lg:flex-row
@@ -167,10 +167,9 @@ function CartDetails({ darkMode, addToCart }) {
                   onClick={() => setSelectedColor(color)}
                   className={`
                     w-8 h-8 rounded-full border-2 transition-all
-                    ${
-                      selectedColor === color
-                        ? "ring-2 ring-offset-2 ring-yellow-500"
-                        : "border-gray-300"
+                    ${selectedColor === color
+                      ? "ring-2 ring-offset-2 ring-yellow-500"
+                      : "border-gray-300"
                     }
                   `}
                 />
@@ -188,10 +187,9 @@ function CartDetails({ darkMode, addToCart }) {
                   onClick={() => setSelectedStorage(option)}
                   className={`
                     px-4 py-2 border rounded-md font-medium
-                    ${
-                      selectedStorage === option
-                        ? "bg-yellow-500 text-white"
-                        : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
+                    ${selectedStorage === option
+                      ? "bg-yellow-500 text-white"
+                      : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
                     }
                   `}
                 >
@@ -227,10 +225,9 @@ function CartDetails({ darkMode, addToCart }) {
               mt-6 py-3 px-6
               font-semibold rounded shadow-md
               transition-all
-              ${
-                darkMode
-                  ? "bg-yellow-300 text-black hover:bg-yellow-400"
-                  : "bg-yellow-500 text-white hover:bg-yellow-600"
+              ${darkMode
+                ? "bg-yellow-300 text-black hover:bg-yellow-400"
+                : "bg-yellow-500 text-white hover:bg-yellow-600"
               }
             `}
           >
