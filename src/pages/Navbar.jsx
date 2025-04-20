@@ -163,7 +163,7 @@ function Navbar({
                 className="flex text-white  items-center space-x-2 focus:outline-none"
               >
                 <User size={22} />
-                <span className="font-medium text-white 
+                <span className="text-white 
                 hidden sm:inline-block">
                   {user.username}
                 </span>
@@ -172,11 +172,10 @@ function Navbar({
 
               {dropdownOpen && (
                 <div className="
-    absolute right-0 mt-2 w-48 
-    text-black dark:text-white 
-    bg-white dark:bg-gray-800 
-    shadow-lg rounded-lg
-  ">
+                absolute right-0 mt-2 w-48 
+               text-black dark:text-white 
+               bg-white dark:bg-gray-800 
+                shadow-lg rounded-lg">
                   <Link
                     to="/profile"
                     onClick={() => setDropdownOpen(false)}
