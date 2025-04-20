@@ -7,6 +7,7 @@ function CartDetails({ darkMode, addToCart }) {
   const [product, setProduct] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedStorage, setSelectedStorage] = useState(null);
+
   const formatPeso = (amount) =>
     new Intl.NumberFormat("en-PH", {
       style: "currency",
@@ -41,7 +42,6 @@ function CartDetails({ darkMode, addToCart }) {
     if (productImage && cartIcon) {
       const imageRect = productImage.getBoundingClientRect();
       const cartRect = cartIcon.getBoundingClientRect();
-
       const imgClone = productImage.cloneNode(true);
 
       imgClone.style.position = "fixed";
@@ -57,8 +57,12 @@ function CartDetails({ darkMode, addToCart }) {
       document.body.appendChild(imgClone);
 
       requestAnimationFrame(() => {
-        imgClone.style.left = `${cartRect.left + window.scrollX + cartRect.width / 2 - 20}px`;
-        imgClone.style.top = `${cartRect.top + window.scrollY + cartRect.height / 2 - 20}px`;
+        imgClone.style.left = `${
+          cartRect.left + window.scrollX + cartRect.width / 2 - 20
+        }px`;
+        imgClone.style.top = `${
+          cartRect.top + window.scrollY + cartRect.height / 2 - 20
+        }px`;
         imgClone.style.width = `40px`;
         imgClone.style.height = `40px`;
         imgClone.style.opacity = "0.5";
@@ -78,7 +82,6 @@ function CartDetails({ darkMode, addToCart }) {
     addToCart(cartProduct);
   };
 
-
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -92,12 +95,30 @@ function CartDetails({ darkMode, addToCart }) {
 
   return (
     <div
-      className={`min-h-screen p-4 md:p-8 lg:p-10 mt-12 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
-        }`}
+      className={`
+        min-h-screen p-4 md:p-8 lg:p-10 sm:mt-16
+        transition-colors duration-300
+        ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}
+      `}
     >
-      <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center max-w-7xl mx-auto gap-10">
+      <div
+        className="
+          flex flex-col lg:flex-row
+          items-center justify-center
+          text-center lg:text-left
+          max-w-6xl mx-auto gap-10
+          min-h-[calc(100vh-200px)]
+        "
+      >
         {/* Left: Image Carousel */}
-        <div className="w-full lg:w-1/2 bg-white dark:bg-gray-800 rounded-xl p-4 shadow flex justify-center">
+        <div
+          className="
+            w-full lg:w-1/2
+            bg-white dark:bg-gray-800
+            rounded-xl p-4 shadow
+            flex justify-center
+          "
+        >
           <div className="w-full max-w-[450px]">
             <Slider {...sliderSettings}>
               {images.map((img, i) => (
@@ -105,7 +126,11 @@ function CartDetails({ darkMode, addToCart }) {
                   <img
                     src={img}
                     alt={`Product view ${i + 1}`}
-                    className="product-image w-full h-[300px] sm:h-[400px] md:h-[500px] object-contain rounded-xl"
+                    className="
+                      product-image w-full
+                      h-[300px] sm:h-[400px] md:h-[500px]
+                      object-contain rounded-xl
+                    "
                     onError={(e) => (e.target.src = "/images/placeholder.jpg")}
                   />
                 </div>
@@ -115,7 +140,14 @@ function CartDetails({ darkMode, addToCart }) {
         </div>
 
         {/* Right: Product Info */}
-        <div className="flex-1 space-y-4 w-full max-w-[500px]">
+        <div
+          className="
+            w-full lg:w-1/2
+            max-w-[500px]
+            space-y-4
+            flex flex-col items-center lg:items-start
+          "
+        >
           <div>
             <p className="text-sm font-semibold text-orange-500">New</p>
             <h2 className="text-2xl sm:text-3xl font-bolds">{product.model}</h2>
@@ -131,12 +163,16 @@ function CartDetails({ darkMode, addToCart }) {
               {colors.map((color, idx) => (
                 <button
                   key={idx}
-                  className={`w-8 h-8 rounded-full border-2 transition-all ${selectedColor === color
-                    ? "ring-2 ring-offset-2 ring-blue-500"
-                    : "border-gray-300"
-                    }`}
                   style={{ backgroundColor: color }}
                   onClick={() => setSelectedColor(color)}
+                  className={`
+                    w-8 h-8 rounded-full border-2 transition-all
+                    ${
+                      selectedColor === color
+                        ? "ring-2 ring-offset-2 ring-yellow-500"
+                        : "border-gray-300"
+                    }
+                  `}
                 />
               ))}
             </div>
@@ -150,10 +186,14 @@ function CartDetails({ darkMode, addToCart }) {
                 <button
                   key={i}
                   onClick={() => setSelectedStorage(option)}
-                  className={`px-4 py-2 border rounded-md font-medium ${selectedStorage === option
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
-                    }`}
+                  className={`
+                    px-4 py-2 border rounded-md font-medium
+                    ${
+                      selectedStorage === option
+                        ? "bg-yellow-500 text-white"
+                        : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
+                    }
+                  `}
                 >
                   {option}
                 </button>
@@ -183,11 +223,16 @@ function CartDetails({ darkMode, addToCart }) {
 
           <button
             onClick={handleAddToCart}
-            className={`mt-6 py-3 px-6 font-semibold rounded shadow-md transition-all ${
-              darkMode
-                ? "bg-yellow-300 text-black hover:bg-yellow-400"
-                : "bg-yellow-500 text-white hover:bg-yellow-600"
-            }`}
+            className={`
+              mt-6 py-3 px-6
+              font-semibold rounded shadow-md
+              transition-all
+              ${
+                darkMode
+                  ? "bg-yellow-300 text-black hover:bg-yellow-400"
+                  : "bg-yellow-500 text-white hover:bg-yellow-600"
+              }
+            `}
           >
             Add to Cart
           </button>

@@ -13,25 +13,35 @@ function InfiniteCarousel({ darkMode }) {
     "/logo/api.jpg",
   ];
 
-  // Tripled for seamless infinite loop
-  const loopImages = [...images, ...images, ...images];
+  const loopImages = [...images, ...images, ...images]; // Tripled for infinite loop
 
   return (
-    <div className={`py-10 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-      <h2 className="text-center text-4xl font-bold mb-6">
+    <div
+      className={`
+        py-6 sm:py-8
+        ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}
+      `}
+    >
+      <h2
+        className="
+          text-center text-4xl font-bold mb-6
+        "
+      >
         Powered <span className="text-yellow-500">By</span>
       </h2>
 
-      {/* Carousel wrapper without fading edges */}
+      {/* Scrolling Carousel Container */}
       <div className="relative overflow-hidden hover-pause">
-        {/* Removed fade overlay */}
-
-        {/* Scrolling track */}
         <div className="flex animate-infinite-scroll w-max">
           {loopImages.map((src, index) => (
             <div
               key={index}
-              className="w-48 h-32 mx-3 flex-shrink-0 rounded-xl bg-white shadow-md overflow-hidden"
+              className="
+                w-48 h-32 mx-3
+                flex-shrink-0
+                rounded-xl bg-white
+                shadow-md overflow-hidden
+              "
             >
               <img
                 src={src}

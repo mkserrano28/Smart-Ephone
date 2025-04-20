@@ -1,48 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
 @import "tailwindcss";
 
-
-@custom-variant dark (&:where(.dark, .dark *));
-@layer utilities {
-  @keyframes infinite-scroll {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-66.6667%);
-    }
-  }
-  
+/* 👇 Set your base font globally */
 @layer base {
   html {
     font-family: 'Poppins', sans-serif;
   }
 }
-  
+
+/* 👇 Custom variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  /* ✨ Fade-in animation */
+  @keyframes fade-in {
+    from { opacity: 0 }
+    to { opacity: 1 }
+  }
+  @keyframes fade-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-scale {
+    animation: fade-scale 0.3s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-in-out;
+  }
+
+  /* ♾️ Infinite scroll for carousel */
+  @keyframes infinite-scroll {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-66.6667%); }
+  }
+
   .animate-infinite-scroll {
     animation: infinite-scroll 80s linear infinite;
   }
-  
+
   .hover-pause:hover .animate-infinite-scroll {
     animation-play-state: paused;
   }
-    /* 🎨 Gradient background animation for Hero */
-    @keyframes gradient-bg-slide {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-  
-    .hero-gradient-animate {
-      background: linear-gradient(270deg, #facc15, #22d3ee, #fb923c, #3b82f6);
-      background-size: 800% 800%;
-      animation: gradient-bg-slide 15s ease infinite;
-    }
+
+  /* 🎨 Hero background gradient animation */
+  @keyframes gradient-bg-slide {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .hero-gradient-animate {
+    background: linear-gradient(270deg, #facc15, #22d3ee, #fb923c, #3b82f6);
+    background-size: 800% 800%;
+    animation: gradient-bg-slide 15s ease infinite;
+  }
 }

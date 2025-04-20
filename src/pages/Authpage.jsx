@@ -1,29 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import updateCart from "./updateCart"; // ✅ Import updateCart
+import updateCart from "./updateCart";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-console.log("💡 API URL:", import.meta.env.VITE_API_BASE_URL);
 
-
-
-export default function Authpage() {  
+export default function Authpage({ isOpen = true, onClose = () => {} }) {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
   const navigate = useNavigate();
 
-  console.log("API URL:", API_BASE_URL);
+  if (typeof isOpen === "boolean" && !isOpen) return null;
 
-  //  Handle Register Request
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      console.log(`🛠️ Debug: Sending registration request to ${API_BASE_URL}/register`);
-
       const response = await fetch(`${API_BASE_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,30 +25,19 @@ export default function Authpage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error(" Registration Failed:", errorData);
         throw new Error(errorData.message || "Registration failed!");
       }
 
-      const data = await response.json();
-      console.log(" Registration Successful:", data);
-
-      alert("Registration Successful! Please log in.");
-
-      // Switch to login form
-      setIsLogin(true); //  Automatically switch to login form
-
+      alert("Registration successful! You may now log in.");
+      setIsLogin(true); // Automatically switch to login
     } catch (error) {
-      console.error(" Registration Error:", error);
       setMessage(error.message);
     }
   };
 
-
-  // Handle Login and Sync Cart
   const handleLogin = async (e) => {
     e.preventDefault();
     setMessage("Logging in...");
-
     try {
       const response = await fetch(`${API_BASE_URL}/login`, {
         method: "POST",
@@ -64,61 +46,128 @@ export default function Authpage() {
       });
 
       const data = await response.json();
-      console.log("Login API Response:", data);
-
       if (!response.ok) throw new Error(data.message || "Login failed!");
-
-      alert("Login Successful!");
 
       localStorage.setItem("userId", data.user._id);
       localStorage.setItem("username", data.user.username);
+      updateCart(data.cart || []);
 
-      // Load and Sync Cart
-      const userCart = data.cart || [];
-      console.log("Updating Cart in LocalStorage:", userCart);
-      updateCart(userCart); // Sync to localStorage & MongoDB
-
+      onClose(); // Close modal
       navigate("/");
       window.location.reload();
     } catch (error) {
-      console.error("Login Error:", error);
       setMessage(error.message);
     }
   };
 
-
-
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-2xl overflow-hidden w-full max-w-sm md:max-w-4xl md:h-[500px]">
-        <div className="hidden md:flex w-1/2 h-full bg-slate-700 flex-col justify-center items-center p-6 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Welcome to Ephone Online Shopping</h2>
-          <p className="text-lg">If you don't have an account, register now and enjoy a seamless shopping experience.</p>
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/40 p-4 animate-fade-in">
+      <div className="relative w-full max-w-md rounded-xl shadow-lg overflow-hidden bg-white dark:bg-gray-900 transition duration-300 ease-in-out">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-4 text-xl font-bold text-gray-500 hover:text-red-500 z-10"
+        >
+          &times;
+        </button>
+
+        {/* Header */}
+        <div className="bg-gradient-to-br from-yellow-900 to-indigo-500 text-white text-center py-6 px-4">
+          <img src="/images/ephone-logo.webp" alt="Logo" className="w-10 mx-auto mb-2 rounded-full" />
+          <h2 className="text-xl font-semibold">
+            {isLogin ? "USER LOGIN" : "CREATE ACCOUNT"}
+          </h2>
+          <p className="text-sm">{isLogin ? "Welcome back" : "Register and Shop now"}</p>
         </div>
-        <div className="w-full md:w-1/2 p-8 bg-white text-gray-900">
-          <div className="flex justify-center mb-6 border-b pb-2 border-gray-300">
-            <button onClick={() => setIsLogin(true)} className={`px-4 py-2 text-lg font-medium ${isLogin ? "border-b-2 border-gray-900" : "text-gray-500 hover:text-gray-900"}`}>
+
+        {/* Form Section */}
+        <div className="p-6">
+          {/* Toggle Buttons */}
+          <div className="flex justify-center mb-4 gap-4">
+            <button
+              onClick={() => setIsLogin(true)}
+              className={`px-4 py-2 text-sm font-semibold rounded ${
+                isLogin
+                  ? "text-black dark:text-white border-b-2 border-yellow-500"
+                  : "text-gray-400 hover:text-black dark:hover:text-white"
+              }`}
+            >
               Login
             </button>
-            <button onClick={() => setIsLogin(false)} className={`px-4 py-2 text-lg font-medium ${!isLogin ? "border-b-2 border-gray-900" : "text-gray-500 hover:text-gray-900"}`}>
+            <button
+              onClick={() => setIsLogin(false)}
+              className={`px-4 py-2 text-sm font-semibold rounded ${
+                !isLogin
+                  ? "text-black dark:text-white border-b-2 border-yellow-500"
+                  : "text-gray-400 hover:text-black dark:hover:text-white"
+              }`}
+            >
               Register
             </button>
           </div>
 
-          {message && <p className="text-center text-md text-slate-600 mb-4">{message}</p>}
+          {/* Feedback */}
+          {message && (
+            <p className="text-center text-sm text-red-500 mb-3">{message}</p>
+          )}
 
           {isLogin ? (
-            <form className="space-y-4" onSubmit={handleLogin}>
-              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full px-4 py-2 border rounded-lg bg-gray-100" />
-              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full px-4 py-2 border rounded-lg bg-gray-100" />
-              <button type="submit" className="w-full px-4 py-2 text-white bg-slate-500 rounded-lg hover:bg-gray-700">Login</button>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
+                required
+              />
+              <button
+                type="submit"
+                className="w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded font-medium transition duration-300"
+              >
+                LOGIN
+              </button>
             </form>
           ) : (
-            <form className="space-y-4" onSubmit={handleRegister}>
-              <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required className="w-full px-4 py-2 border rounded-lg bg-gray-100" />
-              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full px-4 py-2 border rounded-lg bg-gray-100" />
-              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full px-4 py-2 border rounded-lg bg-gray-100" />
-              <button type="submit" className="w-full px-4 py-2 text-white bg-slate-500 rounded-lg hover:bg-gray-700">Register</button>
+            <form onSubmit={handleRegister} className="space-y-4">
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
+                required
+              />
+              <button
+                type="submit"
+                className="w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded font-medium transition duration-300"
+              >
+                REGISTER
+              </button>
             </form>
           )}
         </div>

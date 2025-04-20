@@ -47,26 +47,37 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
 
     return (
         <div className={darkMode ? "dark bg-gray-900 text-white" : "bg-white text-black"}>
-            {!hideNavbar && <Navbar cartItems={cartItems} darkMode={darkMode} setDarkMode={setDarkMode} searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm} />}
+            {!hideNavbar && (
+                <Navbar
+                    cartItems={cartItems}
+                    darkMode={darkMode}
+                    setDarkMode={setDarkMode}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                />
+            )}
+
             {location.pathname === "/" && (
                 <>
                     <Hero darkMode={darkMode} />
                     <Carousel darkMode={darkMode} />
                 </>
             )}
+
             <Routes>
                 <Route
                     path="/products"
                     element={
                         <Cart
-                        handleAddToCart={handleAddToCart}
-                        darkMode={darkMode}
-                        searchTerm={searchTerm}
+                            handleAddToCart={handleAddToCart}
+                            darkMode={darkMode}
+                            searchTerm={searchTerm}
+                            cartItems={cartItems}
+                            updateCartQuantity={updateCartQuantity}
                         />
                     }
                 />
-                <Route path="/" element={<Cart handleAddToCart={handleAddToCart} darkMode={darkMode} />} />
+                <Route path="/" element={<Cart handleAddToCart={handleAddToCart} searchTerm={searchTerm} darkMode={darkMode} />} />
                 <Route path="/auth" element={<Authpage />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact darkmode={darkMode} />} />
@@ -74,19 +85,6 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                     path="/cartdetails/:id"
                     element={<CartDetails darkMode={darkMode} addToCart={handleAddToCart} />}
                 />
-                <Route
-                    path="/products"
-                    element={
-                        <Cart
-                            handleAddToCart={handleAddToCart}
-                            darkMode={darkMode}
-                            cartItems={cartItems}
-                            updateCartQuantity={updateCartQuantity}
-                        />
-                    }
-                />
-
-
                 {/* 🔒 Protected Routes - Require Login */}
                 <Route element={<ProtectedRoute />}>
                     <Route
