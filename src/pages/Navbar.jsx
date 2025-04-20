@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Authpage from "./Authpage";
+import { motion } from "framer-motion";
 
 function Navbar({
   cartItems,
@@ -253,32 +254,85 @@ function Navbar({
 
       {/* Mobile Menu List */}
       {menuOpen && (
-        <div className="lg:hidden bg-gray-100 dark:bg-gray-800 py-2 px-6 space-y-4">
-          <ul className="flex flex-col space-y-4 items-center">
-            <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
-            <li><Link to="#" onClick={() => setMenuOpen(false)}>About</Link></li>
-            <li><Link to="/products" onClick={() => setMenuOpen(false)}>Products</Link></li>
-            <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Me</Link></li>
+        <>
+          {/* Backdrop to close on outside click */}
+          <div
+            onClick={() => setMenuOpen(false)}
+            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
+          />
 
-            {/* Dark Mode (Only on small screens) */}
-            <li className="w-full flex justify-center">
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="
-        flex items-center gap-2
-        text-slate-800 dark:text-white 
-        hover:bg-slate-300 dark:hover:bg-gray-700 
-        px-4 py-2 rounded-md transition
+          {/* Slide + fade animated dropdown */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.2 }}
+            className="
+        lg:hidden absolute top-16 right-4 w-60
+        bg-white dark:bg-gray-800 text-black dark:text-white 
+        rounded-xl shadow-lg px-4 py-4 space-y-3 z-50
       "
-              >
-                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                {darkMode ? "Light Mode" : "Dark Mode"}
-              </button>
-            </li>
-          </ul>
+          >
+            <ul className="space-y-2 text-sm font-semibold">
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/products"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  Contact Me
+                </Link>
+              </li>
+            </ul>
 
-        </div>
+            {/* Dark mode toggle */}
+            <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => {
+                  setDarkMode(!darkMode);
+                  setMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center gap-2 py-2 rounded 
+            bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+              >
+                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+                <span className="text-sm">
+                  {darkMode ? "Light Mode" : "Dark Mode"}
+                </span>
+              </button>
+            </div>
+          </motion.div>
+        </>
       )}
+
+
 
       {/* Auth Modal */}
       <Authpage isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />

@@ -67,7 +67,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
       `}
     >
       {/* Category Filter */}
-      <div className="mb-6 mt-10">
+      <div className="mb-6 mt-16">
         <h2 className="text-lg font-bold mb-3">Category</h2>
         <div className="flex gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
           {categories.map((category, index) => (

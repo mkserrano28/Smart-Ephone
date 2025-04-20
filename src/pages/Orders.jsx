@@ -37,14 +37,14 @@ function Orders() {
       const data = await response.json();
       setSmartphones(data.smartphones);
     } catch (err) {
-      console.error("❌ Failed to load smartphone data:", err);
+      console.error("Failed to load smartphone data:", err);
     }
   };
 
   const fetchOrders = async () => {
     const userId = localStorage.getItem("userId");
     if (!userId) {
-      setError("❌ You must be logged in to view your orders.");
+      setError("You must be logged in to view your orders.");
       setLoading(false);
       return;
     }
@@ -77,10 +77,10 @@ function Orders() {
       });
       if (!response.ok) throw new Error("Cancel request failed");
 
-      alert("🚫 Order has been cancelled.");
+      alert("Order has been cancelled.");
       fetchOrders();
     } catch (error) {
-      console.error("❌ Failed to cancel order:", error);
+      console.error("Failed to cancel order:", error);
     }
   };
 
@@ -91,10 +91,10 @@ function Orders() {
       });
       if (!response.ok) throw new Error("Order received request failed");
 
-      alert("✅ Thank you! Your order has been marked as received.");
+      alert("Thank you! Your order has been marked as received.");
       fetchOrders();
     } catch (error) {
-      console.error("❌ Failed to mark order as received:", error);
+      console.error("Failed to mark order as received:", error);
     }
   };
 
@@ -138,7 +138,7 @@ function Orders() {
       transition-colors duration-300"
     >
       <h2 className="text-2xl font-bold 
-      mb-4 text-center mt-20">📦 Your Orders</h2>
+      mb-4 text-center mt-20">Your Orders</h2>
       <div className="flex justify-center 
       gap-3 border-b pb-3 mb-6 
       overflow-x-auto"
