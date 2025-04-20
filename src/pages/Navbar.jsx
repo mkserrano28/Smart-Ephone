@@ -61,7 +61,11 @@ function Navbar({
         ${darkMode ? "dark bg-gray-900 text-white" : "bg-slate-800 text-black"}
       `}
     >
-      <div className="container mx-auto flex flex-wrap items-center py-4 px-6">
+      <div className="
+      container mx-auto 
+      flex flex-wrap 
+      items-center px-4 py-3 
+      sm:py-4 md:py-5 lg:py-6">
         {/* Left Section: Logo + Navigation */}
         <div className="flex items-center gap-4 sm:gap-6">
           <Link
@@ -179,7 +183,10 @@ function Navbar({
                   <Link
                     to="/profile"
                     onClick={() => setDropdownOpen(false)}
-                    className="block px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="
+                      block px-4 py-2 text-black dark:text-white
+                     hover:bg-gray-100
+                      dark:hover:bg-gray-700"
                   >
                     Profile
                   </Link>
