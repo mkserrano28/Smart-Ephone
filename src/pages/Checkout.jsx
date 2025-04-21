@@ -129,13 +129,22 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                     />
                     <div>
                       <h3 className="font-semibold text-lg">{item.model}</h3>
-                      <p className="text-sm text-gray-500">
-                        Color: <span
-                          className="inline-block w-4 h-4 rounded-full align-middle mx-1"
-                          style={{ backgroundColor: item.selectedColor || '#ccc' }}
-                        ></span>
-                        | Storage: {item.selectedStorage || 'N/A'}
-                      </p>
+                      <div className="flex items-center text-sm text-gray-500 mt-1 gap-4">
+                        <div className="flex items-center gap-1">
+                          <span>Color:</span>
+                          <span
+                            className="inline-block w-4 h-4 rounded-full border"
+                            style={{ backgroundColor: item.selectedColor || '#ccc' }}
+                          ></span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span>Storage:</span>
+                          <span className="font-medium text-gray-700 dark:text-gray-300">
+                            {item.selectedStorage || 'N/A'}
+                          </span>
+                        </div>
+                      </div>
+
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
                           FREE SHIPPING
@@ -149,7 +158,7 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
 
                   {/* Right: Price + Actions */}
                   <div className="mt-4 sm:mt-0 sm:text-right w-full sm:w-1/3 flex flex-col items-end gap-2">
-                    <div className="text-lg font-bold text-pink-600">
+                    <div className="text-lg font-bold text-yellow-600">
                       {formatPeso(item.price * item.quantity)}
                     </div>
                     <div className="line-through text-sm text-gray-400">
@@ -177,10 +186,10 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                     <button
                       onClick={() => handleRemoveItem(item.id)}
                       className={`
-            mt-2 py-1 px-4 text-sm font-semibold rounded shadow-md transition-all
-            ${darkMode
-                          ? 'bg-red-600 text-white hover:bg-red-700'
-                          : 'bg-red-500 text-white hover:bg-red-600'}
+                       mt-2 py-1 px-4 text-sm font-semibold rounded shadow-md transition-all
+                      ${darkMode
+                          ? 'bg-yellow-400 text-white hover:bg-yellow-500'
+                          : 'bg-yellow-400 text-white hover:bg-yellow-500'}
           `}
                     >
                       Delete
