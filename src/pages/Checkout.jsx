@@ -142,6 +142,18 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                           <span className="text-base">{item.quantity}</span>
                           <button onClick={() => updateCartQuantity(item.id, "increase")} className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm">+</button>
                         </div>
+                        <button
+                          onClick={() => handleRemoveItem(item.id)}
+                          className={`
+                           mt-2 sm:mt-0 text-sm font-semibold
+                           px-3 py-1 rounded
+                           ${darkMode
+                              ? "bg-red-500 text-white hover:bg-red-600"
+                              : "bg-red-600 text-white hover:bg-red-700"}
+                           `}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>
