@@ -69,19 +69,29 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
       {/* Category Filter */}
       <div className="mb-6 mt-16">
         <h2 className="text-lg font-bold mb-3">Category</h2>
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
+        <div
+          className="
+          flex flex-wrap sm:flex-nowrap
+          justify-start sm:justify-center
+          gap-2 sm:gap-3
+          overflow-x-auto
+           px-1 py-2
+           scrollbar-hide
+          "
+        >
           {categories.map((category, index) => (
             <button
               key={index}
               className={`
-                px-4 py-2 rounded-full font-medium text-sm whitespace-nowrap
-                transition
-                ${
-                  selectedCategory === category
-                    ? "bg-yellow-300"
-                    : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white"
+              text-sm sm:text-base
+              px-3 py-1.5 sm:px-4 sm:py-2
+              rounded-full font-medium
+              transition whitespace-nowrap
+              ${selectedCategory === category
+                  ? "bg-yellow-300 text-black"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white"
                 }
-              `}
+    `}
               onClick={() => {
                 setSelectedCategory(category);
                 setVisibleCount(16); // reset scroll on new category
@@ -90,6 +100,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
               {category}
             </button>
           ))}
+
         </div>
       </div>
 
