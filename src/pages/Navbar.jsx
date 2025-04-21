@@ -108,7 +108,7 @@ function Navbar({
           {/* Nav Links (Desktop) */}
           <ul className="hidden lg:flex space-x-6 text-gray-200">
             <li><Link to="/" className="hover:text-yellow-400">Home</Link></li>
-            <li><Link to="#" className="hover:text-yellow-400">About</Link></li>
+            <li><Link to="/about" className="hover:text-yellow-400">About</Link></li>
             <li><Link to="/products" className="hover:text-yellow-400">Products</Link></li>
             <li><Link to="/contact" className="hover:text-yellow-400">Contact Me</Link></li>
           </ul>
