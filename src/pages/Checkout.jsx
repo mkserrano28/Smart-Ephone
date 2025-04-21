@@ -6,6 +6,7 @@ import {
   CreditCard,
   Truck,
 } from "lucide-react";
+import { useSwipeable } from "react-swipeable";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -87,11 +88,9 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
 
   return (
     <div className={`
-    min-h-screen pt-24 px-4 sm:px-6 
-    transition-all duration-300
-    ${darkMode ?
-        "bg-gray-900 text-white"
-        : "bg-gray-100 text-black"}
+      min-h-screen pt-24 px-4 sm:px-6
+      transition-all duration-300
+      ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}
     `}>
       <div className="container mx-auto max-w-6xl p-6">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">🛒 YOUR CART</h2>
@@ -101,194 +100,115 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
           </p>
         ) : (
           <div className="flex flex-col md:flex-row gap-6">
-            {/* Cart Items */}
-            <div className="w-full md:w-2/3 bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[600px]">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left pb-2">Product</th>
-                      <th className="text-center pb-2">Price</th>
-                      <th className="text-center pb-2">Quantity</th>
-                      <th className="text-right pb-2">Subtotal</th>
-                      <th className="text-center pb-2">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cartItems.map((item) => (
-                      <tr key={item.id} className="border-b">
-                        <td className="py-4 flex items-center">
-                          <img
-                            src={Array.isArray(item.image) ? item.image[0] : item.image}
-                            alt={item.model}
-                            onError={(e) => (e.target.src = "/images/placeholder.jpg")}
-                            className="
-                            w-16 h-16 object-contain
-                            rounded-lg mr-4
-                          "
-                          />
-                          <div>
-                            <h3 className="font-semibold">{item.model}</h3>
-                            <p className="text-gray-500 text-sm">
-                              RAM: {item.specifications?.ram || "N/A"}
-                            </p>
-                            <p className="text-gray-500 text-sm">
-                              Storage: {item.selectedStorage || "N/A"}
-                            </p>
-                            <p className="text-gray-500 text-sm">
-                              Color:{" "}
-                              <span
-                                className="
-                                inline-block w-4 h-4
-                                rounded-full align-middle ml-1
-                              "
-                                style={{
-                                  backgroundColor: item.selectedColor || "#ccc",
-                                }}
-                              ></span>
-                            </p>
-                          </div>
-                        </td>
-                        <td className="text-center">{formatPeso(item.price)}</td>
-                        <td className="text-center">
-                          <div className="flex items-center justify-center">
-                            <button
-                              onClick={() => updateCartQuantity(item.id, "decrease")}
-                              className="
-                              px-2 py-1
-                              bg-gray-300 dark:bg-gray-700
-                              rounded-md
-                            "
-                            >
-                              -
-                            </button>
-                            <span className="mx-2">{item.quantity}</span>
-                            <button
-                              onClick={() => updateCartQuantity(item.id, "increase")}
-                              className="
-                              px-2 py-1
-                              bg-gray-300 dark:bg-gray-700
-                              rounded-md
-                            "
-                            >
-                              +
-                            </button>
-                          </div>
-                        </td>
-                        <td className="text-right font-semibold">
-                          ₱{(item.price * item.quantity).toFixed(2)}
-                        </td>
-                        <td className="text-center">
-                          <button
-                            onClick={() => handleRemoveItem(item.id)}
-                            className={`
-                            py-1 px-4 text-sm font-semibold rounded shadow-md
-                            transition-all
-                            ${darkMode
-                                ? "bg-yellow-300 text-black hover:bg-yellow-400"
-                                : "bg-yellow-500 text-white hover:bg-yellow-600"
-                              }
-                          `}
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            <div className="w-full md:w-2/3 space-y-4">
+              {cartItems.map((item) => {
+                const swipeHandlers = useSwipeable({
+                  onSwipedLeft: () => handleRemoveItem(item.id),
+                  delta: 50,
+                  preventScrollOnSwipe: true,
+                  trackTouch: true,
+                });
+
+                return (
+                  <div key={item.id} {...swipeHandlers} className="relative group">
+                    <div className="absolute inset-0 flex items-center justify-end pr-6 bg-red-600 text-white font-bold rounded-xl z-0">
+                      Delete
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow flex gap-4 items-start sm:items-center z-10 relative transition-transform duration-200">
+                      <img
+                        src={Array.isArray(item.image) ? item.image[0] : item.image}
+                        alt={item.model}
+                        className="w-20 h-20 object-contain rounded-lg"
+                        onError={(e) => (e.target.src = "/images/placeholder.jpg")}
+                      />
+                      <div className="flex-1 space-y-2">
+                        <h3 className="text-base font-semibold">{item.model}</h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-300">
+                          Color: {item.selectedColor || 'N/A'} | Storage: {item.selectedStorage || 'N/A'}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2 text-xs">
+                          <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">FREE SHIPPING</span>
+                          <span className="px-2 py-1 bg-red-100 text-red-600 rounded-full">Best Price</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end justify-between gap-2 ml-auto">
+                        <div className="text-right">
+                          <p className="text-pink-600 font-bold text-lg">{formatPeso(item.price)}</p>
+                          <p className="line-through text-gray-400 text-sm">{formatPeso(item.price * 1.5)}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button onClick={() => updateCartQuantity(item.id, "decrease")} className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm">-</button>
+                          <span className="text-base">{item.quantity}</span>
+                          <button onClick={() => updateCartQuantity(item.id, "increase")} className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Summary */}
             <div className="w-full md:w-1/3 bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
-            <h3 className="text-lg sm:text-xl font-bold border-b pb-2">CART TOTALS</h3>
-            <div className="flex justify-between text-lg py-3">
-              <span>Subtotal:</span>
-              <span>{formatPeso(subtotal)}</span>
-            </div>
-            <div className="flex justify-between text-lg pb-3">
-              <span>Shipping:</span>
-              <span className="text-yellow-500">
-                {shipping === 0 ? "FREE" : formatPeso(shipping)}
-              </span>
-            </div>
-            <div className="flex justify-between text-xl font-bold py-3 border-t">
-              <span>Total:</span>
-              <span>{formatPeso(totalAmount)}</span>
-            </div>
-
-            {/* Payment */}
-            <h3 className="text-lg font-bold mt-4">Choose Payment Method</h3>
-            <div className="relative mt-2">
-              <button
-                onClick={() => setShowDropdown((prev) => !prev)}
-                className="
-                    w-full px-3 py-2
-                    flex items-center justify-between
-                    text-sm border rounded-md shadow-sm
-                    bg-white dark:bg-gray-700 dark:text-white
-                  "
-              >
-                <span className="flex items-center gap-2">
-                  {paymentMethod === "cod" ? <Truck size={14} /> : <CreditCard size={14} />}
-                  {paymentMethod === "cod"
-                    ? "Cash on Delivery"
-                    : "Online Payment (GCash)"}
+              <h3 className="text-lg sm:text-xl font-bold border-b pb-2">CART TOTALS</h3>
+              <div className="flex justify-between text-lg py-3">
+                <span>Subtotal:</span>
+                <span>{formatPeso(subtotal)}</span>
+              </div>
+              <div className="flex justify-between text-lg pb-3">
+                <span>Shipping:</span>
+                <span className="text-yellow-500">
+                  {shipping === 0 ? "FREE" : formatPeso(shipping)}
                 </span>
-                {showDropdown ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-              </button>
+              </div>
+              <div className="flex justify-between text-xl font-bold py-3 border-t">
+                <span>Total:</span>
+                <span>{formatPeso(totalAmount)}</span>
+              </div>
 
-              {showDropdown && (
-                <div
-                  className="
-                      absolute z-10 w-full mt-1
-                      border rounded-md shadow-md
-                      bg-white dark:bg-gray-800
-                    "
+              <h3 className="text-lg font-bold mt-4">Choose Payment Method</h3>
+              <div className="relative mt-2">
+                <button
+                  onClick={() => setShowDropdown((prev) => !prev)}
+                  className="w-full px-3 py-2 flex items-center justify-between text-sm border rounded-md shadow-sm bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  {["cod", "gcash"].map((method) => (
-                    <button
-                      key={method}
-                      onClick={() => {
-                        setPaymentMethod(method);
-                        setShowDropdown(false);
-                      }}
-                      className="
-                          w-full px-3 py-2 text-left text-sm
-                          flex items-center gap-2
-                          hover:bg-gray-100 dark:hover:bg-gray-700
-                        "
-                    >
-                      {method === "cod" ? <Truck size={14} /> : <CreditCard size={14} />}
-                      {method === "cod"
-                        ? "Cash on Delivery"
-                        : "Online Payment (GCash)"}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                  <span className="flex items-center gap-2">
+                    {paymentMethod === "cod" ? <Truck size={14} /> : <CreditCard size={14} />}
+                    {paymentMethod === "cod" ? "Cash on Delivery" : "Online Payment (GCash)"}
+                  </span>
+                  {showDropdown ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                </button>
 
-            {/* Confirm Button */}
-            <button
-              onClick={handleCheckout}
-              className={`
-                  mt-6 py-2 px-6 text-sm font-semibold rounded shadow-md
-                  transition-all
-                  ${darkMode
-                  ? "bg-yellow-300 text-black hover:bg-yellow-400"
-                  : "bg-yellow-500 text-white hover:bg-yellow-600"
-                }
-                `}
-            >
-              {paymentMethod === "gcash" ? "Pay Now" : "Confirm Order"}
-            </button>
-          </div>
+                {showDropdown && (
+                  <div className="absolute z-10 w-full mt-1 border rounded-md shadow-md bg-white dark:bg-gray-800">
+                    {["cod", "gcash"].map((method) => (
+                      <button
+                        key={method}
+                        onClick={() => {
+                          setPaymentMethod(method);
+                          setShowDropdown(false);
+                        }}
+                        className="w-full px-3 py-2 text-left text-sm flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      >
+                        {method === "cod" ? <Truck size={14} /> : <CreditCard size={14} />}
+                        {method === "cod" ? "Cash on Delivery" : "Online Payment (GCash)"}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button
+                onClick={handleCheckout}
+                className={`mt-6 py-2 px-6 text-sm font-semibold rounded shadow-md transition-all ${darkMode ? "bg-yellow-300 text-black hover:bg-yellow-400" : "bg-yellow-500 text-white hover:bg-yellow-600"}`}
+              >
+                {paymentMethod === "gcash" ? "Pay Now" : "Confirm Order"}
+              </button>
+            </div>
           </div>
         )}
+      </div>
     </div>
-    </div >
   );
 }
 
