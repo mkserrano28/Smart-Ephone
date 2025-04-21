@@ -105,106 +105,91 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
             {/* Cart Items */}
             <div
               className="
-                w-full md:w-2/3
-                bg-white dark:bg-gray-800
-                p-6 rounded-lg shadow-md
-              "
+               w-full md:w-2/3
+            bg-white dark:bg-gray-800
+               p-6 rounded-lg shadow-md
+               space-y-4"
             >
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left pb-2">Product</th>
-                    <th className="text-center pb-2">Price</th>
-                    <th className="text-center pb-2">Quantity</th>
-                    <th className="text-right pb-2">Subtotal</th>
-                    <th className="text-center pb-2">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item) => (
-                    <tr key={item.id} className="border-b">
-                      <td className="py-4 flex items-center">
-                        <img
-                          src={Array.isArray(item.image) ? item.image[0] : item.image}
-                          alt={item.model}
-                          onError={(e) => (e.target.src = "/images/placeholder.jpg")}
-                          className="
-                            w-16 h-16 object-contain
-                            rounded-lg mr-4
-                          "
-                        />
-                        <div>
-                          <h3 className="font-semibold">{item.model}</h3>
-                          <p className="text-gray-500 text-sm">
-                            RAM: {item.specifications?.ram || "N/A"}
-                          </p>
-                          <p className="text-gray-500 text-sm">
-                            Storage: {item.selectedStorage || "N/A"}
-                          </p>
-                          <p className="text-gray-500 text-sm">
-                            Color:{" "}
-                            <span
-                              className="
-                                inline-block w-4 h-4
-                                rounded-full align-middle ml-1
-                              "
-                              style={{
-                                backgroundColor: item.selectedColor || "#ccc",
-                              }}
-                            ></span>
-                          </p>
-                        </div>
-                      </td>
-                      <td className="text-center">{formatPeso(item.price)}</td>
-                      <td className="text-center">
-                        <div className="flex items-center justify-center">
-                          <button
-                            onClick={() => updateCartQuantity(item.id, "decrease")}
-                            className="
-                              px-2 py-1
-                              bg-gray-300 dark:bg-gray-700
-                              rounded-md
-                            "
-                          >
-                            -
-                          </button>
-                          <span className="mx-2">{item.quantity}</span>
-                          <button
-                            onClick={() => updateCartQuantity(item.id, "increase")}
-                            className="
-                              px-2 py-1
-                              bg-gray-300 dark:bg-gray-700
-                              rounded-md
-                            "
-                          >
-                            +
-                          </button>
-                        </div>
-                      </td>
-                      <td className="text-right font-semibold">
-                        ₱{(item.price * item.quantity).toFixed(2)}
-                      </td>
-                      <td className="text-center">
-                        <button
-                          onClick={() => handleRemoveItem(item.id)}
-                          className={`
-                            py-1 px-4 text-sm font-semibold rounded shadow-md
-                            transition-all
-                            ${
-                              darkMode
-                                ? "bg-yellow-300 text-black hover:bg-yellow-400"
-                                : "bg-yellow-500 text-white hover:bg-yellow-600"
-                            }
-                          `}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+              {cartItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="
+        flex flex-col sm:flex-row justify-between items-center
+        border rounded-lg p-4 shadow-sm bg-white dark:bg-gray-800
+      "
+                >
+                  {/* Left: Product Info */}
+                  <div className="flex items-center w-full sm:w-2/3">
+                    <img
+                      src={Array.isArray(item.image) ? item.image[0] : item.image}
+                      alt={item.model}
+                      onError={(e) => (e.target.src = '/images/placeholder.jpg')}
+                      className="w-16 h-16 object-contain rounded-lg mr-4"
+                    />
+                    <div>
+                      <h3 className="font-semibold text-lg">{item.model}</h3>
+                      <p className="text-sm text-gray-500">
+                        Color: <span
+                          className="inline-block w-4 h-4 rounded-full align-middle mx-1"
+                          style={{ backgroundColor: item.selectedColor || '#ccc' }}
+                        ></span>
+                        | Storage: {item.selectedStorage || 'N/A'}
+                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                          FREE SHIPPING
+                        </span>
+                        <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+                          Best Price
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right: Price + Actions */}
+                  <div className="mt-4 sm:mt-0 sm:text-right w-full sm:w-1/3 flex flex-col items-end gap-2">
+                    <div className="text-lg font-bold text-pink-600">
+                      {formatPeso(item.price * item.quantity)}
+                    </div>
+                    <div className="line-through text-sm text-gray-400">
+                      {formatPeso(item.originalPrice || item.price * 1.5)}
+                    </div>
+
+                    {/* Quantity Controls */}
+                    <div className="flex items-center space-x-2 mt-1">
+                      <button
+                        onClick={() => updateCartQuantity(item.id, 'decrease')}
+                        className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded"
+                      >
+                        -
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button
+                        onClick={() => updateCartQuantity(item.id, 'increase')}
+                        className="px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    {/* Delete */}
+                    <button
+                      onClick={() => handleRemoveItem(item.id)}
+                      className={`
+            mt-2 py-1 px-4 text-sm font-semibold rounded shadow-md transition-all
+            ${darkMode
+                          ? 'bg-red-600 text-white hover:bg-red-700'
+                          : 'bg-red-500 text-white hover:bg-red-600'}
+          `}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
+
 
             {/* Summary */}
             <div
@@ -288,10 +273,9 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                 className={`
                   mt-6 py-2 px-6 text-sm font-semibold rounded shadow-md
                   transition-all
-                  ${
-                    darkMode
-                      ? "bg-yellow-300 text-black hover:bg-yellow-400"
-                      : "bg-yellow-500 text-white hover:bg-yellow-600"
+                  ${darkMode
+                    ? "bg-yellow-300 text-black hover:bg-yellow-400"
+                    : "bg-yellow-500 text-white hover:bg-yellow-600"
                   }
                 `}
               >
