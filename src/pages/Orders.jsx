@@ -139,25 +139,31 @@ function Orders() {
     >
       <h2 className="text-2xl font-bold 
       mb-4 text-center mt-20">Your Orders</h2>
-      <div className="flex justify-center 
-      gap-3 border-b pb-3 mb-6 
-      overflow-x-auto"
+      <div
+        className="
+       flex flex-wrap sm:flex-nowrap justify-center
+       gap-2 sm:gap-3
+       border-b pb-3 mb-6
+       overflow-x-auto px-2"
       >
+
         {tabs.map((tab, index) => (
           <button
             key={index}
             onClick={() => setSelectedTab(tab)}
             className={`
-              px-4 py-2
-              rounded-full font-medium
-              transition whitespace-nowrap
-              ${selectedTab === tab
-                ? "bg-yellow-200"
+             text-sm sm:text-base
+             px-3 py-1.5 sm:px-4 sm:py-2
+             rounded-full font-medium
+            transition whitespace-nowrap
+            ${selectedTab === tab
+                ? "bg-yellow-300 text-black"
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white"}
-            `}
+  `}
           >
             {tab}
           </button>
+
         ))}
       </div>
 
@@ -210,8 +216,8 @@ function Orders() {
                       <button
                         onClick={() => handleCancel(order._id)}
                         className="
-                          px-3 py-1 bg-red-600 text-white
-                          rounded hover:bg-red-700
+                          px-3 py-1 bg-yellow-400 text-white
+                          rounded hover:bg-yellow-500
                         "
                       >
                         Cancel Order
@@ -220,8 +226,8 @@ function Orders() {
                         <button
                           onClick={() => window.open(order.paymentUrl, "_blank")}
                           className="
-                            px-3 py-1 bg-blue-600 text-white
-                            rounded hover:bg-blue-700
+                            px-3 py-1 bg-yellow-400 text-white
+                            rounded hover:bg-yellow-600
                           "
                         >
                           💳 Pay Now
