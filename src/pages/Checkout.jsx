@@ -115,42 +115,43 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                       Delete
                     </div>
 
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow flex gap-4 items-start sm:items-center z-10 relative transition-transform duration-200">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow flex flex-col sm:flex-row gap-4 items-start sm:items-center z-10 relative transition-transform duration-200">
                       <img
                         src={Array.isArray(item.image) ? item.image[0] : item.image}
                         alt={item.model}
-                        className="w-20 h-20 object-contain rounded-lg"
+                        className="w-24 h-24 object-contain rounded-lg"
                         onError={(e) => (e.target.src = "/images/placeholder.jpg")}
                       />
-                      <div className="flex-1 space-y-2">
-                        <h3 className="text-base font-semibold">{item.model}</h3>
+
+                      <div className="flex-1 w-full space-y-2">
+                        <h3 className="text-lg font-bold">{item.model}</h3>
                         <p className="text-sm text-gray-500 dark:text-gray-300">
-                          Color: {item.selectedColor || 'N/A'} | Storage: {item.selectedStorage || 'N/A'}
+                          Color: <span className="font-mono">{item.selectedColor || 'N/A'}</span> | Storage: {item.selectedStorage || 'N/A'}
                         </p>
                         <div className="flex flex-wrap items-center gap-2 text-xs">
                           <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">FREE SHIPPING</span>
                           <span className="px-2 py-1 bg-red-100 text-red-600 rounded-full">Best Price</span>
                         </div>
                       </div>
-                      <div className="flex flex-col items-end justify-between gap-2 ml-auto">
+
+                      <div className="flex flex-col items-end gap-2 w-full sm:w-auto">
                         <div className="text-right">
-                          <p className="text-pink-600 font-bold text-lg">{formatPeso(item.price)}</p>
+                          <p className="text-pink-600 font-bold text-xl">{formatPeso(item.price)}</p>
                           <p className="line-through text-gray-400 text-sm">{formatPeso(item.price * 1.5)}</p>
                         </div>
+
                         <div className="flex items-center gap-2">
                           <button onClick={() => updateCartQuantity(item.id, "decrease")} className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm">-</button>
                           <span className="text-base">{item.quantity}</span>
                           <button onClick={() => updateCartQuantity(item.id, "increase")} className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm">+</button>
                         </div>
+
                         <button
                           onClick={() => handleRemoveItem(item.id)}
                           className={`
-                           mt-2 sm:mt-0 text-sm font-semibold
-                           px-3 py-1 rounded
-                           ${darkMode
-                              ? "bg-red-500 text-white hover:bg-red-600"
-                              : "bg-red-600 text-white hover:bg-red-700"}
-                           `}
+              mt-1 sm:mt-0 text-sm font-semibold px-3 py-1 rounded
+              ${darkMode ? "bg-red-500 text-white hover:bg-red-600" : "bg-red-600 text-white hover:bg-red-700"}
+            `}
                         >
                           Delete
                         </button>
@@ -159,6 +160,7 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                   </div>
                 );
               })}
+
             </div>
 
             <div className="w-full md:w-1/3 bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md">
