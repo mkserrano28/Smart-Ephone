@@ -11,7 +11,7 @@ function About({ darkMode }) {
         >
             <div className="max-w-4xl mx-auto space-y-10">
                 <h1 className="text-4xl font-extrabold text-center mb-10">
-                    About Smart-Ephone 📱
+                    About Smart-Ephone
                 </h1>
                 <section className="space-y-4">
                     <h2 className="text-2xl font-semibold">Our Mission</h2>
