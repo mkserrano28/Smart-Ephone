@@ -13,6 +13,7 @@ import Orders from "./pages/Orders"; // ✅ Import Orders Page
 import updateCart from "./pages/updateCart";
 import ProtectedRoute from "./pages/ProtectedRoute"; // ✅ Import Protected Route
 import Contact from "./pages/Contact"
+import About from "./pages/About";
 
 
 
