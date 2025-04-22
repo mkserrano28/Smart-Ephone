@@ -53,6 +53,35 @@ function Navbar({
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const checkUserFromLocalStorage = () => {
+    const storedUserId = localStorage.getItem("userId");
+    const storedUsername = localStorage.getItem("username");
+    return storedUserId && storedUsername
+      ? { _id: storedUserId, username: storedUsername }
+      : null;
+  };
+  
+  useEffect(() => {
+    setUser(checkUserFromLocalStorage());
+  }, []);
+  
+  useEffect(() => {
+    if (showAuthModal === false) {
+      setUser(checkUserFromLocalStorage());
+    }
+  }, [showAuthModal]);
+  
+  
+  
+
   return (
     <div
       className={`
@@ -142,21 +171,15 @@ function Navbar({
 
 
           {/* Cart */}
-          <Link to="/checkout" className="relative cursor-pointer">
-            <ShoppingCart
-              id="cart-icon"
-              size={26}
-              className="text-slate-200 dark:text-white"
-            />
-            {cartItems.length > 0 && (
-              <span
-                className="absolute -top-2 -right-2 
-                  bg-red-500 text-white text-xs font-bold 
-                  rounded-full px-2 py-0.5"
-              >
-                {cartItems.reduce((total, item) => total + item.quantity, 0)}
-              </span>
-            )}
+          <Link to="/checkout" id="cart-icon" className="cursor-pointer">
+            <div className="relative min-w-[40px]">
+              <ShoppingCart size={26} className="text-slate-200 dark:text-white" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                  {cartItems.reduce((total, item) => total + item.quantity, 0)}
+                </span>
+              )}
+            </div>
           </Link>
 
           {/* Auth / Dropdown */}
@@ -231,7 +254,6 @@ function Navbar({
           {/* Mobile Menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`lg:hidden ${darkMode ? "text-white" : "text-white"}`}
           >
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -337,9 +359,6 @@ function Navbar({
           </motion.div>
         </>
       )}
-
-
-
       {/* Auth Modal */}
       <Authpage isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
