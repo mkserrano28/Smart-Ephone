@@ -56,7 +56,7 @@ const Contact = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               type="text"
               name="first"
@@ -65,12 +65,12 @@ const Contact = () => {
               onChange={handleChange}
               required
               className="
-                w-1/2 px-4 py-2
-                border rounded
-                bg-white dark:bg-gray-800
-                text-black dark:text-white
-                focus:outline-none focus:ring-2 focus:ring-orange-400
-              "
+              w-full px-4 py-2
+              border rounded
+             bg-white dark:bg-gray-800
+             text-black dark:text-white
+              focus:outline-none focus:ring-2 focus:ring-orange-400
+            "
             />
             <input
               type="text"
@@ -80,15 +80,14 @@ const Contact = () => {
               onChange={handleChange}
               required
               className="
-                w-1/2 px-4 py-2
-                border rounded
-                bg-white dark:bg-gray-800
-                text-black dark:text-white
-                focus:outline-none focus:ring-2 focus:ring-orange-400
+              w-full px-4 py-2
+              border rounded
+             bg-white dark:bg-gray-800
+            text-black dark:text-white
+              focus:outline-none focus:ring-2 focus:ring-orange-400
               "
             />
           </div>
-
           <input
             type="email"
             name="email"
