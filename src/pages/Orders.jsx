@@ -130,6 +130,12 @@ function Orders() {
   if (loading) return <p className="text-center">⏳ Loading orders...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
+  const orderCounts = tabs.reduce((acc, tab) => {
+    acc[tab] = orders.filter((o) => o.status === tab).length;
+    return acc;
+  }, {});
+
+
   return (
     <div className="
       container mx-auto px-4 sm:px-6 lg:px-8 
@@ -152,17 +158,25 @@ function Orders() {
             key={index}
             onClick={() => setSelectedTab(tab)}
             className={`
-             text-sm sm:text-base
-             px-3 py-1.5 sm:px-4 sm:py-2
-             rounded-full font-medium
-            transition whitespace-nowrap
-            ${selectedTab === tab
+           text-sm sm:text-base
+           px-3 py-1.5 sm:px-4 sm:py-2
+           rounded-full font-medium
+          transition whitespace-nowrap
+          ${selectedTab === tab
                 ? "bg-yellow-300 text-black"
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white"}
-  `}
+            `}
           >
-            {tab}
+            <span className="relative inline-flex items-center">
+              {tab}
+              {orderCounts[tab] > 0 && (
+                <span className="ml-2 inline-flex items-center justify-center min-w-[20px] h-[20px] px-1.5 text-xs font-bold bg-red-500 text-white rounded-full">
+                  {orderCounts[tab]}
+                </span>
+              )}
+            </span>
           </button>
+
 
         ))}
       </div>
