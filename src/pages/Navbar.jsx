@@ -68,19 +68,19 @@ function Navbar({
       ? { _id: storedUserId, username: storedUsername }
       : null;
   };
-  
+
   useEffect(() => {
     setUser(checkUserFromLocalStorage());
   }, []);
-  
+
   useEffect(() => {
     if (showAuthModal === false) {
       setUser(checkUserFromLocalStorage());
     }
   }, [showAuthModal]);
-  
-  
-  
+
+
+
 
   return (
     <div
@@ -254,9 +254,11 @@ function Navbar({
           {/* Mobile Menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden text-white"
           >
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
+
         </div>
       </div>
 
