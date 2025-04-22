@@ -291,7 +291,7 @@ function Navbar({
               </li>
               <li>
                 <Link
-                  to="#"
+                  to="/about"
                   onClick={() => setMenuOpen(false)}
                   className="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
