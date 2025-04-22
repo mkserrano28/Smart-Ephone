@@ -129,23 +129,23 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                     />
                     <div>
                       <h3 className="font-semibold text-lg">{item.model}</h3>
-                      <div className="flex items-center text-sm text-gray-500 mt-1 gap-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center text-sm text-gray-500 mt-1 gap-1 sm:gap-4">
                         <div className="flex items-center gap-1">
                           <span>Color:</span>
                           <span
                             className="inline-block w-4 h-4 rounded-full border"
-                            style={{ backgroundColor: item.selectedColor || '#ccc' }}
+                            style={{ backgroundColor: item.selectedColor || "#ccc" }}
                           ></span>
                         </div>
                         <div className="flex items-center gap-1">
                           <span>Storage:</span>
                           <span className="font-medium text-gray-700 dark:text-gray-300">
-                            {item.selectedStorage || 'N/A'}
+                            {item.selectedStorage || "N/A"}
                           </span>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2 mt-1">
+                      <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 mt-1">
                         <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
                           FREE SHIPPING
                         </span>
@@ -153,6 +153,7 @@ function Checkout({ cartItems = [], setCartItems, darkMode, updateCartQuantity }
                           Best Price
                         </span>
                       </div>
+
                     </div>
                   </div>
 
