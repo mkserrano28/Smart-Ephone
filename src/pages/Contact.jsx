@@ -22,7 +22,7 @@ const Contact = () => {
   return (
     <div
       className="
-    max-w-7xl mx-auto
+    max-w-7xl mx-auto mt-20
     px-6 py-10
     sm:px-8 sm:py-16
     lg:px-12 lg:py-20
