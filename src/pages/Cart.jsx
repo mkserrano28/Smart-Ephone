@@ -68,7 +68,6 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
     >
       {/* Category Filter */}
       <div className="mb-6 mt-16">
-        <h2 className="text-lg font-bold mb-3">Category</h2>
         <div
           className="
           flex flex-wrap sm:flex-nowrap
