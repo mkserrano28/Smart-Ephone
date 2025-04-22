@@ -164,16 +164,6 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
             >
               <ShoppingCart size={16} />
             </Link>
-
-            {/* Favorite */}
-            <button
-              className="
-                absolute top-2 right-2
-                text-gray-400 hover:text-red-500
-              "
-            >
-              <Heart size={16} />
-            </button>
           </div>
         ))}
       </div>
