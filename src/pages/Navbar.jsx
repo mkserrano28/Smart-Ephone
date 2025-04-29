@@ -79,6 +79,9 @@ function Navbar({
     }
   }, [showAuthModal]);
 
+
+
+
   return (
     <div
       className={`
@@ -87,7 +90,11 @@ function Navbar({
         ${darkMode ? "dark bg-gray-900 text-white" : "bg-slate-800 text-black"}
       `}
     >
-      <div className="w-full flex justify-between items-center flex-wrap px-6 py-3 sm:py-4 md:py-5 lg:py-6">
+      <div className="
+      container mx-auto 
+      flex flex-wrap 
+      items-center px-4 py-3 
+      sm:py-4 md:py-5 lg:py-6">
         {/* Left Section: Logo + Navigation */}
         <div className="flex items-center gap-4 sm:gap-6">
           <Link
@@ -137,7 +144,7 @@ function Navbar({
         </div>
 
         {/* Right Section: Icons + Auth */}
-        <div className="flex items-center space-x-4 lg:space-x-6 mt-4 sm:mt-0 pr-4">
+        <div className="flex items-center space-x-4 lg:space-x-6 ml-auto mt-4 sm:mt-0">
           {/* Mobile Search */}
           <button
             onClick={() => setShowMobileSearch(!showMobileSearch)}
@@ -245,7 +252,7 @@ function Navbar({
           )}
 
           {/* Mobile Menu */}
-          <button
+          <button 
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden text-white"
           >
