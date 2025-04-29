@@ -12,7 +12,9 @@ function Footer() {
               <span className="text-white text-xl font-semibold ml-2">Smart-Ephone</span>
             </div>
             <p className="max-w-xs">
-              Smart-Ephone is a modern tech e-commerce built with React.js, Tailwind CSS, Node.js, MongoDB, AWS S3, and Vercel. Bringing smart technology closer to you.
+            “I named it Smart-Ephone because it's an e-commerce platform built specifically
+             for smartphones and accessories. The name blends 'smart' technology 
+            with 'e-commerce phones' to reflect the platform's focus — fast, modern, and mobile-first.”
             </p>
           </div>
 
@@ -32,8 +34,8 @@ function Footer() {
             <ul className="space-y-2">
               <li><a href="https://reactjs.org/" className="hover:underline" target="_blank" rel="noopener noreferrer">React.js</a></li>
               <li><a href="https://tailwindcss.com/" className="hover:underline" target="_blank" rel="noopener noreferrer">Tailwind CSS</a></li>
-              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">AWS S3/CloudFront/ACM/ElasticBeanstalk/VPC/EC2</a></li>
-              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">Route53/Load balancer/IAM</a></li>
+              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">AWS S3/CloudFront/ACM/ElasticBeanstalk/</a></li>
+              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">Route53/Load balancer/IAM/VPC/EC2</a></li>
               <li><a href="https://vercel.com/" className="hover:underline" target="_blank" rel="noopener noreferrer">Node.JS/PostMan-API/MongoDB Atlas</a></li>
             </ul>
           </div>

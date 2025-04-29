@@ -105,19 +105,31 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="px-2">
+      <div className="
+  grid
+  grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6
+  gap-4
+  items-start
+">
         {displayed.map((phone, index) => (
           <div
-            key={phone.id}
-            ref={index === displayed.length - 1 ? lastItemRef : null}
-            className="
-              relative w-full
-              bg-white dark:bg-gray-800
-              rounded-lg shadow-md overflow-hidden
-              transform transition duration-300
-              hover:scale-[1.02] hover:shadow-lg
-            "
-          >
+  key={phone.id}
+  ref={index === displayed.length - 1 ? lastItemRef : null}
+  className="
+    relative
+    w-full
+    mx-[20px]
+    bg-white dark:bg-gray-900
+    rounded-lg overflow-hidden
+    transform transition duration-300
+    hover:scale-[1.02] hover:shadow-lg
+    border border-transparent dark:border-gray-700
+  "
+>
+
+
+
             <Link to={`/cartdetails/${phone.id}`}>
               <div
                 className="
@@ -157,15 +169,17 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
             <Link
               to={`/cartdetails/${phone.id}`}
               className="
-                absolute top-2 left-2
-                bg-yellow-400 hover:bg-yellow-500
-                text-white p-1 rounded-full shadow
-              "
+              absolute bottom-2 right-2
+            bg-yellow-500 hover:bg-yellow-600
+            text-white p-1 rounded-full shadow
+  "
             >
               <ShoppingCart size={16} />
             </Link>
+
           </div>
         ))}
+      </div>
       </div>
 
       {/* Spinner */}
