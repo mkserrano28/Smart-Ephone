@@ -105,7 +105,6 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
       </div>
 
       {/* Product Grid */}
-      <div className="px-2">
       <div className="
   grid
   grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6
@@ -119,7 +118,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
   className="
     relative
     w-full
-    mx-[20px]
+    lg:mx-[10px]
     bg-white dark:bg-gray-900
     rounded-lg overflow-hidden
     transform transition duration-300
@@ -127,6 +126,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
     border border-transparent dark:border-gray-700
   "
 >
+
 
 
 
@@ -180,7 +180,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
           </div>
         ))}
       </div>
-      </div>
+
 
       {/* Spinner */}
       {loading && visibleCount < filteredSmartphones.length && (

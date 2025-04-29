@@ -34,8 +34,10 @@ function Footer() {
             <ul className="space-y-2">
               <li><a href="https://reactjs.org/" className="hover:underline" target="_blank" rel="noopener noreferrer">React.js</a></li>
               <li><a href="https://tailwindcss.com/" className="hover:underline" target="_blank" rel="noopener noreferrer">Tailwind CSS</a></li>
-              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">AWS S3/CloudFront/ACM/ElasticBeanstalk/</a></li>
-              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">Route53/Load balancer/IAM/VPC/EC2</a></li>
+              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">AWS S3/CloudFront/ACM</a></li>
+              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">ElasticBeanstalk</a></li>
+              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">Route53/Load balancer</a></li>
+              <li><a href="https://aws.amazon.com/s3/" className="hover:underline" target="_blank" rel="noopener noreferrer">EC2/VPC</a></li>
               <li><a href="https://vercel.com/" className="hover:underline" target="_blank" rel="noopener noreferrer">Node.JS/PostMan-API/MongoDB Atlas</a></li>
             </ul>
           </div>
