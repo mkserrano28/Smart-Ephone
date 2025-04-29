@@ -97,22 +97,23 @@ function CartDetails({ darkMode, addToCart }) {
   return (
     <div
       className={`
-    min-h-screen p-4 md:p-8 lg:p-10 pt-24
+    px-4 md:px-8 lg:px-10 pt-24 pb-12
     transition-colors duration-300
-    ${darkMode ? "bg-gray-900 text-white" :
-          "bg-gray-100 text-black"}
+    ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}
   `}
     >
-
       <div
         className="
-          flex flex-col sm:mt-26 lg:flex-row
-          items-center justify-center
-          text-center lg:text-left
-          max-w-6xl mx-auto gap-10
-          min-h-[calc(100vh-200px)]
-        "
+      flex flex-col sm:mt-16 lg:flex-row
+      items-center justify-center
+      text-center lg:text-left
+      max-w-6xl mx-auto gap-10
+     min-h-[calc(100vh-250px)]
+      py-10
+  "
       >
+
+
         {/* Left: Image Carousel */}
         <div
           className="

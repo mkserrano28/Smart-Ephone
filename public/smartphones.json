@@ -3,8 +3,8 @@
     {
       "id": "1",
       "image": [
-        "/products/iphone/ip15.jpg",
-        "/products/iphone/ip15pink.jpg"
+        "/products/iphone/ip15.png",
+        "/products/iphone/ip15pink.png"
       ],
       "brand": "Apple",
       "model": "EPhone 15 Pro",
@@ -47,7 +47,7 @@
     {
       "id": "2",
       "image": [
-        "/products/Samsung/galaxy23.jpg",
+        "/products/Samsung/galaxy23.png",
         "/products/Samsung/galaxy23green.png"
       ],
       "brand": "Samsung",
@@ -89,8 +89,8 @@
     {
       "id": "3",
       "image": [
-        "/products/Google/pixel9.jpg",
-        "/products/Google/pixel91.jpg"
+        "/products/Google/pixel9.png",
+        "/products/Google/pixel91.png"
       ],
       "brand": "Google",
       "model": "EPixel 9 Pro",
@@ -132,8 +132,8 @@
     {
       "id": "4",
       "image": [
-        "/products/Google/pixel8.jpeg",
-        "/products/Google/pixel81.jpg"
+        "/products/Google/pixel8.png",
+        "/products/Google/pixel81.png"
       ],
       "brand": "Google",
       "model": "EPixel 8 Pro",
@@ -175,8 +175,8 @@
     {
       "id": "5",
       "image": [
-        "/products/Samsung/s24.jpg",
-        "/products/Samsung/s241.jpg"
+        "/products/Samsung/s24.png",
+        "/products/Samsung/s241.png"
       ],
       "brand": "Samsung",
       "model": "ESamsung s24",
@@ -218,8 +218,8 @@
     {
       "id": "6",
       "image": [
-        "/products/xiaomi/x13.jpg",
-        "/products/xiaomi/xiaomi13.jpg"
+        "/products/xiaomi/x13.png",
+        "/products/xiaomi/xiaomi13.png"
       ],
       "brand": "Xiaomi",
       "model": "Xiaomi 13 Pro",
@@ -260,8 +260,8 @@
     {
       "id": "7",
       "image": [
-        "/products/Samsung/fold1.jpg",
-         "/products/Samsung/galaxyfold.jpg"
+        "/products/Samsung/fold1.png",
+         "/products/Samsung/galaxyfold.png"
       ],
       "brand": "Samsung",
       "model": "Galaxy Z Fold 5",
@@ -301,7 +301,7 @@
     {
       "id": "8",
       "image": [
-        "/products/Google/pixel7.jpg",
+        "/products/Google/pixel7.png",
          "/products/Google/pixel71.png"
       ],
       "brand": "Google",
@@ -342,7 +342,7 @@
     {
       "id": "9",
       "image": [
-        "/products/oneplus/one2.jpg",
+        "/products/oneplus/one2.png",
          "/products/oneplus/one3.png"
       ],
       "brand": "OnePlus",
@@ -382,8 +382,8 @@
     {
       "id": "10",
       "image": [
-        "/products/Realme/realme.jpeg",
-         "/products/Realme/realme1.jpg"
+        "/products/Realme/realme.png",
+         "/products/Realme/realme1.png"
       ],
       "brand": "Realme",
       "model": "Realme GT 3",
@@ -423,8 +423,8 @@
     {
       "id": "11",
       "image": [
-        "/products/sony/xperia.jpg",
-         "/products/sony/xperia1.jpg"
+        "/products/sony/xperia.png",
+         "/products/sony/xperia1.png"
       ],
       "brand": "Sony",
       "model": "Xperia 1 V",
@@ -465,7 +465,7 @@
     {
       "id": "12",
       "image": [
-        "/products/rog/rog1.jpeg",
+        "/products/rog/rog1.png",
          "/products/rog/rog2.png"
       ],
       "brand": "Asus",

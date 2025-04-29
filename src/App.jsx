@@ -47,7 +47,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
 
 
     return (
-        <div className={darkMode ? "dark bg-gray-900 text-white" : "bg-white text-black"}>
+        <div className={`${darkMode ? "dark bg-gray-900 text-white" : "bg-white text-black"} flex flex-col min-h-screen`}>
             {!hideNavbar && (
                 <Navbar
                     cartItems={cartItems}
@@ -57,7 +57,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                     setSearchTerm={setSearchTerm}
                 />
             )}
-
+             <main className="flex-grow">
             {location.pathname === "/" && (
                 <>
                     <Hero darkMode={darkMode} />
@@ -96,6 +96,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                     <Route path="/orders" element={<Orders />} />
                 </Route>
             </Routes>
+            </main>
             <Footer />
         </div>
     );

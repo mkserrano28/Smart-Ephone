@@ -60,7 +60,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
   return (
     <div
       className={`
-        min-h-screen w-full
+        w-full
         px-4 pt-[60px] sm:pt-[80px] pb-16
         transition-all duration-300
         ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}
@@ -70,14 +70,15 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
       <div className="mb-6 mt-16">
         <div
           className="
-          flex flex-wrap sm:flex-nowrap
-          justify-start sm:justify-center
-          gap-2 sm:gap-3
-          overflow-x-auto
-           px-1 py-2
-           scrollbar-hide
-          "
+        flex flex-wrap sm:flex-nowrap
+        justify-start
+        gap-2 sm:gap-3
+        overflow-x-auto
+        px-1 py-2
+        scrollbar-hide
+         "
         >
+
           {categories.map((category, index) => (
             <button
               key={index}
