@@ -22,13 +22,7 @@ function InfiniteCarousel({ darkMode }) {
         ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}
       `}
     >
-      <h2
-        className="
-          text-center text-4xl font-bold mb-6
-        "
-      >
-        Powered <span className="text-yellow-500">By</span>
-      </h2>
+
 
       {/* Scrolling Carousel Container */}
       <div className="relative overflow-hidden hover-pause">

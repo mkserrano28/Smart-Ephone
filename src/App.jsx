@@ -61,7 +61,6 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
             {location.pathname === "/" && (
                 <>
                     <Hero darkMode={darkMode} />
-                    <Carousel darkMode={darkMode} />
                 </>
             )}
 
@@ -97,6 +96,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                 </Route>
             </Routes>
             </main>
+            <Carousel darkMode={darkMode} />
             <Footer />
         </div>
     );

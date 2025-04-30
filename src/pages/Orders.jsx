@@ -251,7 +251,7 @@ function Orders() {
                   )}
 
                   {selectedTab !== "To Pay" &&
-                    selectedTab !== "Cancelled" &&
+                    selectedTab !== "Cancelled" && 
                     selectedTab !== "Completed" && (
                       <>
                         <button
@@ -278,7 +278,7 @@ function Orders() {
                             hover:brightness-110
                           "
                         >
-                          Cancel Order
+                          CancelOrder
                         </button>
                       </>
                     )}
@@ -310,7 +310,7 @@ function Orders() {
                           rounded-lg mr-4
                         "
                         onError={(e) =>
-                          (e.target.src = "/images/placeholder.jpg")
+                          (e.target.src = "/images/placeholder.png")
                         }
                       />
 
