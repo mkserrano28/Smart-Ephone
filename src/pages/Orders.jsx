@@ -251,7 +251,7 @@ function Orders() {
                   )}
 
                   {selectedTab !== "To Pay" &&
-                    selectedTab !== "Cancelled" && 
+                    selectedTab !== "Cancelled" &&
                     selectedTab !== "Completed" && (
                       <>
                         <button
@@ -303,16 +303,16 @@ function Orders() {
                       "
                     >
                       <img
-                        src={Array.isArray(item.image) ? item.image[0] : item.image}
-                        alt={item.model}
-                        className="
-                          w-16 h-16 object-contain
-                          rounded-lg mr-4
-                        "
-                        onError={(e) =>
-                          (e.target.src = "/images/placeholder.png")
+                        src={
+                          Array.isArray(item.image)
+                            ? `/images/${item.image[0]}`
+                            : `/images/${item.image}`
                         }
+                        alt={item.model}
+                        className="w-16 h-16 object-contain rounded-lg mr-4"
+                        onError={(e) => (e.target.src = "/images/placeholder.png")}
                       />
+
 
                       <div>
                         <h4 className="font-semibold text-xl">
