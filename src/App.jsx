@@ -94,9 +94,9 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                     />
                     <Route path="/orders" element={<Orders />} />
                 </Route>
-            </Routes>
+            </Routes>   
             </main>
-            <Carousel darkMode={darkMode} />
+            {location.pathname === "/" && <Carousel darkMode={darkMode} />}
             <Footer />
         </div>
     );
