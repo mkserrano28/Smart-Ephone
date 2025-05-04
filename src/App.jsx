@@ -14,6 +14,7 @@ import updateCart from "./pages/updateCart";
 import ProtectedRoute from "./pages/ProtectedRoute"; // ✅ Import Protected Route
 import Contact from "./pages/Contact"
 import About from "./pages/About";
+import Layout from "./pages/Layout";
 
 
 
@@ -48,56 +49,75 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
 
     return (
         <div className={`${darkMode ? "dark bg-gray-900 text-white" : "bg-white text-black"} flex flex-col min-h-screen`}>
+
             {!hideNavbar && (
-                <Navbar
-                    cartItems={cartItems}
-                    darkMode={darkMode}
-                    setDarkMode={setDarkMode}
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                />
+                <Layout>
+                    <Navbar
+                        cartItems={cartItems}
+                        darkMode={darkMode}
+                        setDarkMode={setDarkMode}
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                    />
+                </Layout>
             )}
-             <main className="flex-grow">
+            <Layout>
+                {location.pathname === "/" && <Hero darkMode={darkMode} />}
+            </Layout>
+
+            <Layout>
+                <main className="flex-grow">
+                    <Routes>
+                        <Route path="/" element={
+                            <Cart
+                                handleAddToCart={handleAddToCart}
+                                searchTerm={searchTerm}
+                                darkMode={darkMode}
+                            />
+                        } />
+                        <Route path="/products" element={
+                            <Cart
+                                handleAddToCart={handleAddToCart}
+                                darkMode={darkMode}
+                                searchTerm={searchTerm}
+                                cartItems={cartItems}
+                                updateCartQuantity={updateCartQuantity}
+                            />
+                        } />
+                        <Route path="/auth" element={<Authpage />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/about" element={<About darkMode={darkMode} />} />
+                        <Route path="/contact" element={<Contact darkmode={darkMode} />} />
+                        <Route path="/cartdetails/:id" element={
+                            <CartDetails darkMode={darkMode} addToCart={handleAddToCart} />
+                        } />
+                        <Route element={<ProtectedRoute />}>
+                            <Route path="/checkout" element={
+                                <Checkout
+                                    cartItems={cartItems}
+                                    setCartItems={setCartItems}
+                                    updateCartQuantity={updateCartQuantity}
+                                    darkMode={darkMode}
+                                />
+                            } />
+                            <Route path="/orders" element={<Orders />} />
+                        </Route>
+                    </Routes>
+                </main>
+            </Layout>
+
             {location.pathname === "/" && (
-                <>
-                    <Hero darkMode={darkMode} />
-                </>
+                <Layout>
+                    <Carousel darkMode={darkMode} />
+                </Layout>
             )}
 
-            <Routes>
-                <Route
-                    path="/products"
-                    element={
-                        <Cart
-                            handleAddToCart={handleAddToCart}
-                            darkMode={darkMode}
-                            searchTerm={searchTerm}
-                            cartItems={cartItems}
-                            updateCartQuantity={updateCartQuantity}
-                        />
-                    }
-                />
-                <Route path="/" element={<Cart handleAddToCart={handleAddToCart} searchTerm={searchTerm} darkMode={darkMode} />} />
-                <Route path="/auth" element={<Authpage />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/about" element={<About darkMode={darkMode} />} />
-                <Route path="/contact" element={<Contact darkmode={darkMode} />} />
-                <Route
-                    path="/cartdetails/:id"
-                    element={<CartDetails darkMode={darkMode} addToCart={handleAddToCart} />}
-                />
-                {/* 🔒 Protected Routes - Require Login */}
-                <Route element={<ProtectedRoute />}>
-                    <Route
-                        path="/checkout"
-                        element={<Checkout cartItems={cartItems} setCartItems={setCartItems} updateCartQuantity={updateCartQuantity} darkMode={darkMode} />}
-                    />
-                    <Route path="/orders" element={<Orders />} />
-                </Route>
-            </Routes>   
-            </main>
-            {location.pathname === "/" && <Carousel darkMode={darkMode} />}
-            <Footer />
+            <Layout>
+                <Footer />
+            </Layout>
+
+
+
         </div>
     );
 }
