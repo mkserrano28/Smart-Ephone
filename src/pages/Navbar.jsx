@@ -90,28 +90,23 @@ function Navbar({
         ${darkMode ? "dark bg-gray-900 text-white" : "bg-slate-800 text-black"}
       `}
     >
-      <div className="
-      container mx-auto 
-      flex flex-wrap 
-      items-center px-4 py-3 
-      sm:py-4 md:py-5 lg:py-6">
+      <div
+        className="
+    w-full max-w-[1440px] mx-auto
+    flex items-center justify-between
+    px-4 py-3
+  "
+      >
+
         {/* Left Section: Logo + Navigation */}
         <div className="flex items-center gap-4 sm:gap-6">
-          <Link
-            to="/"
-            className="flex items-center space-x-2 min-w-fit"
-          >
+          <Link to="/" className="flex items-center space-x-2">
             <img
               src="/images/ephone-logo.webp"
               alt="Ephone Logo"
               className="h-8 w-auto rounded-4xl"
             />
-            <span
-              className={`
-                text-lg sm:text-xl font-poppins font-semibold 
-                ${darkMode ? "text-yellow-400" : "text-slate-200"}
-              `}
-            >
+            <span className="hidden sm:inline text-lg font-semibold text-yellow-400">
               Smart-Ephone
             </span>
           </Link>
@@ -144,7 +139,7 @@ function Navbar({
         </div>
 
         {/* Right Section: Icons + Auth */}
-        <div className="flex items-center space-x-4 lg:space-x-6 ml-auto mt-4 sm:mt-0">
+        <div className="flex items-center gap-3 ml-auto">
           {/* Mobile Search */}
           <button
             onClick={() => setShowMobileSearch(!showMobileSearch)}
@@ -161,7 +156,6 @@ function Navbar({
           </button>
 
           {/* Dark Mode */}
-          {/* Dark Mode (Large screens only) */}
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="hidden lg:inline-block text-slate-200 dark:text-white"
@@ -241,18 +235,18 @@ function Navbar({
             <button
               onClick={() => setShowAuthModal(true)}
               className="
-              flex items-center gap-1
-            text-white dark:text-white 
-              px-4 py-1 rounded-lg font-medium 
-            hover:bg-yellow-400 dark:hover:bg-yellow-500"
+    flex items-center gap-1
+    text-white dark:text-white 
+    py-1 rounded-lg "
             >
               <User size={18} className="inline-block" />
-              <span className="font-poppins">Login</span>
+              <span className="hidden sm:inline font-poppins">Login</span>
             </button>
+
           )}
 
           {/* Mobile Menu */}
-          <button 
+          <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden text-white"
           >

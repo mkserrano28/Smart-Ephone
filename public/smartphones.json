@@ -502,6 +502,89 @@
           "Amazon"
         ]
       }
+    },
+    {
+      "id": "13",
+      "image": [
+        "/products/rog/rog1.png",
+         "/products/rog/rog2.png"
+      ],
+      "brand": "Asus",
+      "model": "ROG Phone 8",
+      "price": 7000.99,
+      "currency": "PHP",
+      "colors": ["black"],
+      "release_date": "2023-04-14",
+      "specifications": {
+        "display": "6.78-inch AMOLED",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "16GB",
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "50MP + 13MP + 5MP",
+          "front": "32MP"
+        },
+        "battery": "6000mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Asus Store",
+          "Amazon"
+        ]
+      }
+    },
+    {
+      "id": "14",
+      "image": [
+        "/products/sony/xperia.png",
+         "/products/sony/xperia1.png"
+      ],
+      "brand": "Sony",
+      "model": "Xperia 2 VX",
+      "price": 16000.99,
+      "colors": ["silver", "black"],
+      "currency": "PHP",
+      "release_date": "2023-05-11",
+      "specifications": {
+        "display": "6.5-inch 4K OLED",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "12GB",
+        "storage": [
+          "256GB",
+          "512GB"
+        ],
+        "camera": {
+          "rear": "48MP + 12MP + 12MP",
+          "front": "12MP"
+        },
+        "battery": "5000mAh",
+        "os": "Android 13",
+        "connectivity": [
+          "5G",
+          "Wi-Fi 6E",
+          "Bluetooth 5.3",
+          "USB-C"
+        ]
+      },
+      "availability": {
+        "in_stock": true,
+        "stores": [
+          "Sony Store",
+          "Amazon",
+          "Best Buy"
+        ]
+      }
     }
   ]
 }
