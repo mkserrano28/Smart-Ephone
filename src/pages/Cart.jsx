@@ -113,22 +113,19 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
 ">
         {displayed.map((phone, index) => (
           <div
-  key={phone.id}
-  ref={index === displayed.length - 1 ? lastItemRef : null}
-  className="
+            key={phone.id}
+            ref={index === displayed.length - 1 ? lastItemRef : null}
+            className="
     relative
     w-full
     lg:mx-[10px]
-    bg-white dark:bg-gray-900
+    bg-slate-100 dark:bg-slate-800
     rounded-lg overflow-hidden
     transform transition duration-300
     hover:scale-[1.02] hover:shadow-lg
     border border-transparent dark:border-gray-700
   "
->
-
-
-
+          >
 
             <Link to={`/cartdetails/${phone.id}`}>
               <div
@@ -154,7 +151,7 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
                 <h3 className="text-sm font-semibold line-clamp-2">
                   {phone.model}
                 </h3>
-                <p className="font-bold text-sm">
+                <p className="text-sm">
                   {new Intl.NumberFormat("en-PH", {
                     style: "currency",
                     currency: "PHP",
