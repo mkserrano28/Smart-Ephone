@@ -304,14 +304,15 @@ function Orders() {
                     >
                       <img
                         src={
-                          Array.isArray(item.image)
-                            ? `/images/${item.image[0]}`
-                            : `/images/${item.image}`
+                          Array.isArray(fullProduct?.image)
+                            ? fullProduct.image[0]
+                            : fullProduct?.image
                         }
                         alt={item.model}
                         className="w-16 h-16 object-contain rounded-lg mr-4"
-                        onError={(e) => (e.target.src = "/images/placeholder.png")}
+                        onError={(e) => (e.currentTarget.src = "/images/placeholder.png")}
                       />
+
 
 
                       <div>
