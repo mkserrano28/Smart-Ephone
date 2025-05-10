@@ -11,11 +11,22 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
   const observer = useRef();
 
   useEffect(() => {
+    let initialCount = 6; // default for desktop
+
+    if (window.innerWidth < 640) {
+      initialCount = 2; // mobile
+    } else if (window.innerWidth < 1024) {
+      initialCount = 3; // tablet
+    }
+
+    setVisibleCount(initialCount);
+
     fetch("/smartphones.json")
       .then((response) => response.json())
       .then((data) => setSmartphones(data.smartphones))
       .catch((error) => console.error("❌ Error loading smartphones:", error));
   }, []);
+
 
   const categories = ["All", "Apple", "Samsung", "Google", "Xiaomi", "OnePlus"];
 
@@ -36,10 +47,20 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
   const loadMore = useCallback(() => {
     setLoading(true);
     setTimeout(() => {
-      setVisibleCount((prev) => prev + 8);
+      let increment = 6; // default desktop
+
+      if (window.innerWidth < 640) {
+        increment = 2; // mobile
+      } else if (window.innerWidth < 1024) {
+        increment = 3; // tablet
+      }
+
+      setVisibleCount((prev) => prev + increment);
       setLoading(false);
     }, 800);
   }, []);
+
+
 
   const lastItemRef = useCallback(
     (node) => {
@@ -124,8 +145,10 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
     transform transition duration-300
     hover:scale-[1.02] hover:shadow-lg
     border border-transparent dark:border-gray-700
+    opacity-0 animate-fade-in
   "
           >
+
 
             <Link to={`/cartdetails/${phone.id}`}>
               <div
@@ -181,16 +204,21 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
 
       {/* Spinner */}
       {loading && visibleCount < filteredSmartphones.length && (
-        <div className="flex justify-center mt-6">
-          <div
-            className="
-              w-8 h-8
-              border-4 border-yellow-400 border-t-transparent
-              rounded-full animate-spin
-            "
-          />
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-6">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className="
+          bg-gray-200 dark:bg-gray-700
+          h-[180px]
+          rounded-lg
+          animate-pulse
+        "
+            />
+          ))}
         </div>
       )}
+
     </div>
   );
 }
