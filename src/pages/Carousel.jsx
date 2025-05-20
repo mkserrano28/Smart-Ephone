@@ -21,6 +21,7 @@ function InfiniteCarousel({ darkMode }) {
         py-6 sm:py-8
         ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}
       `}
+        data-aos="fade-up"
     >
 
 

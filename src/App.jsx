@@ -15,6 +15,10 @@ import ProtectedRoute from "./pages/ProtectedRoute"; // ✅ Import Protected Rou
 import Contact from "./pages/Contact"
 import About from "./pages/About";
 import Layout from "./pages/Layout";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 
 
 
@@ -22,6 +26,10 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
     const location = useLocation();
     const hideNavbar = location.pathname === "/auth";
     const [searchTerm, setSearchTerm] = useState("");
+
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, []);
 
 
     useEffect(() => {

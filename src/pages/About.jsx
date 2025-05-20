@@ -2,6 +2,7 @@ import React from "react";
 
 function About({ darkMode }) {
     return (
+           <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1500">
         <div
             className={`
             min-h-screen px-6 py-16 pt-[100px]
@@ -57,6 +58,7 @@ function About({ darkMode }) {
                     </p>
                 </section>
             </div>
+        </div>
         </div>
     );
 }

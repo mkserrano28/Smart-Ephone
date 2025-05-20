@@ -12,7 +12,6 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
 
   useEffect(() => {
     let initialCount = 6; // default for desktop
-
     if (window.innerWidth < 640) {
       initialCount = 2; // mobile
     } else if (window.innerWidth < 1024) {

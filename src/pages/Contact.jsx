@@ -20,6 +20,7 @@ const Contact = () => {
   };
 
   return (
+       <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1500">
     <div
       className="
     max-w-7xl mx-auto mt-20
@@ -148,6 +149,7 @@ const Contact = () => {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

@@ -19,12 +19,17 @@ function Hero({ darkMode }) {
           text-center max-w-5xl mx-auto mt-30
         "
       >
+           <div data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
           Save big on <span className="text-yellow-500">on every Season</span>
         </h1>
+        </div>
+           <div data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
         <p className="text-lg sm:text-xl max-w-xl">
           Discover the best discounts on tech. Grab limited-time offers now!
         </p>
+        </div>
+         <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1500">
         <Link to="/products">
           <button
             className={`
@@ -39,8 +44,10 @@ function Hero({ darkMode }) {
           </button>
         </Link>
       </div>
+      </div>
 
       {/* Product Tiles */}
+        <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1500">
       <div
         className="
           relative z-20 mt-10 grid grid-cols-1 
@@ -70,6 +77,7 @@ function Hero({ darkMode }) {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }
