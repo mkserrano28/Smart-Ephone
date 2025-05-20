@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ShoppingCart, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
-function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
+function Cart({ darkMode, handleAddToCart, searchTerm = "", onProductsLoaded }) {
   const [smartphones, setSmartphones] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [visibleCount, setVisibleCount] = useState(16);
   const [loading, setLoading] = useState(false);
 
   const observer = useRef();
+
+
 
   useEffect(() => {
     let initialCount = 6; // default for desktop
@@ -42,6 +44,15 @@ function Cart({ darkMode, handleAddToCart, searchTerm = "" }) {
 
     return matchesCategory && matchesSearch;
   });
+
+
+  useEffect(() => {
+    if (filteredSmartphones.length > 0 && visibleCount >= filteredSmartphones.length) {
+      if (onProductsLoaded) {
+        onProductsLoaded();
+      }
+    }
+  }, [filteredSmartphones.length, visibleCount, onProductsLoaded]);
 
   const loadMore = useCallback(() => {
     setLoading(true);

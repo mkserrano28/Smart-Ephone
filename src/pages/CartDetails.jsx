@@ -95,6 +95,7 @@ function CartDetails({ darkMode, addToCart }) {
   };
 
   return (
+     <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1500">
     <div
       className={`
     px-4 md:px-8 lg:px-10 pt-24 pb-12
@@ -239,6 +240,7 @@ function CartDetails({ darkMode, addToCart }) {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }

@@ -17,6 +17,7 @@ import About from "./pages/About";
 import Layout from "./pages/Layout";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ScrollToTop from "./pages/ScrollToTop";
 
 
 
@@ -26,6 +27,11 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
     const location = useLocation();
     const hideNavbar = location.pathname === "/auth";
     const [searchTerm, setSearchTerm] = useState("");
+    const [showExtras, setShowExtras] = useState(false);
+
+    const handleProductsLoaded = () => {
+        setShowExtras(true);
+    };
 
     useEffect(() => {
         AOS.init({ duration: 1000 });
@@ -81,6 +87,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                                 handleAddToCart={handleAddToCart}
                                 searchTerm={searchTerm}
                                 darkMode={darkMode}
+                                onProductsLoaded={handleProductsLoaded}
                             />
                         } />
                         <Route path="/products" element={
@@ -90,6 +97,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                                 searchTerm={searchTerm}
                                 cartItems={cartItems}
                                 updateCartQuantity={updateCartQuantity}
+                                onProductsLoaded={handleProductsLoaded}
                             />
                         } />
                         <Route path="/auth" element={<Authpage />} />
@@ -114,15 +122,18 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                 </main>
             </Layout>
 
-            {location.pathname === "/" && (
+            {location.pathname === "/" && showExtras && (
                 <Layout>
                     <Carousel darkMode={darkMode} />
                 </Layout>
             )}
 
-            <Layout>
-                <Footer />
-            </Layout>
+            {showExtras && (
+                <Layout>
+                    <Footer />
+                </Layout>
+            )}
+
 
 
 
@@ -183,6 +194,7 @@ function App() {
 
     return (
         <Router>
+            <ScrollToTop />
             <AppContent cartItems={cartItems} setCartItems={setCartItems} handleAddToCart={handleAddToCart} updateCartQuantity={updateCartQuantity} darkMode={darkMode} setDarkMode={setDarkMode} />
         </Router>
     );

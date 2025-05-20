@@ -2,6 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
+     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="1800">
     <footer className="bg-gray-900 text-gray-400 text-sm font-poppins w-full">
       <div className="max-w-screen-2xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
@@ -71,6 +72,7 @@ function Footer() {
         </div>
       </div>
     </footer>
+    </div>
   );
 }
 

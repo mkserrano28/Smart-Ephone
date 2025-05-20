@@ -16,6 +16,7 @@ function InfiniteCarousel({ darkMode }) {
   const loopImages = [...images, ...images, ...images]; // Tripled for infinite loop
 
   return (
+       <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="1500">
     <div
       className={`
         py-6 sm:py-8
@@ -48,6 +49,7 @@ function InfiniteCarousel({ darkMode }) {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }
