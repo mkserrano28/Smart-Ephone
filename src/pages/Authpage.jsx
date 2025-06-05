@@ -4,18 +4,27 @@ import updateCart from "./updateCart";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export default function Authpage({ isOpen = true, onClose = () => {} }) {
+export default function Authpage({ isOpen = true, onClose = () => { } }) {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+
 
   if (typeof isOpen === "boolean" && !isOpen) return null;
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match.");
+      return;
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/register`, {
         method: "POST",
@@ -29,11 +38,12 @@ export default function Authpage({ isOpen = true, onClose = () => {} }) {
       }
 
       alert("Registration successful! You may now log in.");
-      setIsLogin(true); // Automatically switch to login
+      setIsLogin(true);
     } catch (error) {
       setMessage(error.message);
     }
   };
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -86,21 +96,19 @@ export default function Authpage({ isOpen = true, onClose = () => {} }) {
           <div className="flex justify-center mb-4 gap-4">
             <button
               onClick={() => setIsLogin(true)}
-              className={`px-4 py-2 text-sm font-semibold rounded ${
-                isLogin
-                  ? "text-black dark:text-white border-b-2 border-yellow-500"
-                  : "text-gray-400 hover:text-black dark:hover:text-white"
-              }`}
+              className={`px-4 py-2 text-sm font-semibold rounded ${isLogin
+                ? "text-black dark:text-white border-b-2 border-yellow-500"
+                : "text-gray-400 hover:text-black dark:hover:text-white"
+                }`}
             >
               Login
             </button>
             <button
               onClick={() => setIsLogin(false)}
-              className={`px-4 py-2 text-sm font-semibold rounded ${
-                !isLogin
-                  ? "text-black dark:text-white border-b-2 border-yellow-500"
-                  : "text-gray-400 hover:text-black dark:hover:text-white"
-              }`}
+              className={`px-4 py-2 text-sm font-semibold rounded ${!isLogin
+                ? "text-black dark:text-white border-b-2 border-yellow-500"
+                : "text-gray-400 hover:text-black dark:hover:text-white"
+                }`}
             >
               Register
             </button>
@@ -122,13 +130,25 @@ export default function Authpage({ isOpen = true, onClose = () => {} }) {
                 required
               />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
                 required
               />
+              <div className="flex items-center text-sm gap-2 text-gray-600 dark:text-gray-300">
+                <input
+                  type="checkbox"
+                  id="showPassword"
+                  checked={showPassword}
+                  onChange={() => setShowPassword((prev) => !prev)}
+                  className="accent-yellow-500"
+                />
+                <label htmlFor="showPassword">Show Password</label>
+              </div>
+
+
               <button
                 type="submit"
                 className="w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded font-medium transition duration-300"
@@ -155,13 +175,31 @@ export default function Authpage({ isOpen = true, onClose = () => {} }) {
                 required
               />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
                 required
               />
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded text-black dark:text-white"
+                required
+              />
+              <div className="flex items-center text-sm gap-2 text-gray-600 dark:text-gray-300">
+                <input
+                  type="checkbox"
+                  id="showPassword"
+                  checked={showPassword}
+                  onChange={() => setShowPassword((prev) => !prev)}
+                  className="accent-yellow-500"
+                />
+                <label htmlFor="showPassword">Show Password</label>
+              </div>
               <button
                 type="submit"
                 className="w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded font-medium transition duration-300"
@@ -169,6 +207,7 @@ export default function Authpage({ isOpen = true, onClose = () => {} }) {
                 REGISTER
               </button>
             </form>
+
           )}
         </div>
       </div>

@@ -21,8 +21,6 @@ import ScrollToTop from "./pages/ScrollToTop";
 
 
 
-
-
 function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuantity, darkMode, setDarkMode }) {
     const location = useLocation();
     const hideNavbar = location.pathname === "/auth";
@@ -47,18 +45,50 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
     }, [darkMode]);
 
     useEffect(() => {
-        const userId = localStorage.getItem("userId");
-        if (userId) {
-            const savedCart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
-            setCartItems(savedCart);
-        }
+        localStorage.setItem("theme", darkMode ? "dark" : "light");
+    }, [darkMode]);
 
-        // ✅ Listen for cart updates (triggered when payment is successful)
+
+    // 1️⃣ Handle cart merge on login or guest
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+
+        if (userId) {
+            const userCartKey = `cart_${userId}`;
+            const savedUserCart = JSON.parse(localStorage.getItem(userCartKey)) || [];
+            const guestCart = JSON.parse(localStorage.getItem("guest_cart")) || [];
+
+            const mergedCart = [...guestCart, ...savedUserCart].reduce((acc, item) => {
+                const existing = acc.find((i) =>
+                    i.id === item.id &&
+                    i.selectedColor === item.selectedColor &&
+                    i.selectedStorage === item.selectedStorage
+                );
+                if (existing) {
+                    existing.quantity += item.quantity;
+                } else {
+                    acc.push({ ...item });
+                }
+                return acc;
+            }, []);
+
+            localStorage.setItem(userCartKey, JSON.stringify(mergedCart));
+            localStorage.removeItem("guest_cart");
+
+            setCartItems(mergedCart);
+        } else {
+            const guestCart = JSON.parse(localStorage.getItem("guest_cart")) || [];
+            setCartItems(guestCart);
+        }
+    }, []);
+
+    // 2️⃣ Separate useEffect for cart update listener
+    useEffect(() => {
         const handleCartUpdate = () => setCartItems([]);
         window.addEventListener("cartUpdated", handleCartUpdate);
-
         return () => window.removeEventListener("cartUpdated", handleCartUpdate);
     }, []);
+
 
 
     return (
@@ -143,7 +173,10 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => {
+        return localStorage.getItem("theme") === "dark";
+    });
+
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
@@ -155,11 +188,16 @@ function App() {
 
     const saveCart = (updatedCart) => {
         const userId = localStorage.getItem("userId");
-        if (!userId) return;
 
-        localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
+        if (userId) {
+            localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
+        } else {
+            localStorage.setItem("guest_cart", JSON.stringify(updatedCart));
+        }
+
         updateCart(updatedCart);
     };
+
 
     const handleAddToCart = (phone) => {
         setCartItems((prevCart) => {
