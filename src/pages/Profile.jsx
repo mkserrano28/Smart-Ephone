@@ -53,11 +53,11 @@ function Profile({ darkMode }) {
   };
 
 if (!token) {
-  return <div className="text-center mt-20 text-red-500">⚠️ Not logged in</div>;
+  return <div className="text-center mt-20 text-red-500">Comming soon...</div>;
 }
 
 if (!user) {
-  return <div className="text-center mt-20">🔄 Loading user...</div>;
+  return <div className="text-center mt-20"> Comming soon...</div>;
 }
 
 
