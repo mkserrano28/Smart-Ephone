@@ -8,7 +8,7 @@ function Profile({ darkMode }) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/get-user`, {
+        const res = await fetch(`${API_BASE_URL}/get-user`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -27,7 +27,7 @@ function Profile({ darkMode }) {
 
   const handleChangePassword = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/change-password`, {
+      const res = await fetch(`${API_BASE_URL}/change-password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
