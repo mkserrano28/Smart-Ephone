@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function Profile({ darkMode }) {
   const [user, setUser] = useState(null);
   const [newPassword, setNewPassword] = useState("");
   const token = localStorage.getItem("token");
+
 
   useEffect(() => {
     const fetchUser = async () => {
