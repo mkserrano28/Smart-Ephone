@@ -79,7 +79,7 @@ export default function userProfile() {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow text-black dark:text-white">
+    <div className="max-w-xl mx-auto mt-30 p-6 bg-white dark:bg-gray-800 rounded shadow text-black dark:text-white">
       <h2 className="text-2xl font-bold mb-6">👤 Profile Settings</h2>
 
       <div className="mb-4">
@@ -88,7 +88,7 @@ export default function userProfile() {
       </div>
 
       <div className="mb-4">
-        <label className="block font-medium">Address:</label>
+        <label className="block font-medium">User Address:</label>
         <input
           type="text"
           value={address}
