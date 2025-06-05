@@ -52,7 +52,7 @@ function Profile({ darkMode }) {
   }
 
   return (
-    <div className={`mt-16 p-6 rounded max-w-md mx-auto ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+    <div className={`mt-28 p-6 rounded max-w-md mx-auto ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
       <h1 className="text-2xl font-bold mb-4">👤 My Profile</h1>
       
       <div className="mb-4">
