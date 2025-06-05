@@ -18,57 +18,72 @@ export default function Authpage({ isOpen = true, onClose = () => { } }) {
 
   if (typeof isOpen === "boolean" && !isOpen) return null;
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match.");
-      return;
+const handleRegister = async (e) => {
+  e.preventDefault();
+
+  if (password !== confirmPassword) {
+    setMessage("Passwords do not match.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Registration failed!");
     }
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      });
+    // ✅ Store token and user info in localStorage
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("userId", data.user._id);
+    localStorage.setItem("username", data.user.username);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Registration failed!");
-      }
+    updateCart(data.cart || []);
 
-      alert("Registration successful! You may now log in.");
-      setIsLogin(true);
-    } catch (error) {
-      setMessage(error.message);
-    }
-  };
+    // Optional: Redirect or reload
+    onClose(); // close modal
+    navigate("/");
+    window.location.reload();
+  } catch (error) {
+    setMessage(error.message);
+  }
+};
 
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setMessage("Logging in...");
-    try {
-      const response = await fetch(`${API_BASE_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setMessage("Logging in...");
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Login failed!");
+  try {
+    const response = await fetch(`${API_BASE_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-      localStorage.setItem("userId", data.user._id);
-      localStorage.setItem("username", data.user.username);
-      updateCart(data.cart || []);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || "Login failed!");
 
-      onClose(); // Close modal
-      navigate("/");
-      window.location.reload();
-    } catch (error) {
-      setMessage(error.message);
-    }
-  };
+    // ✅ Store user info and token
+    localStorage.setItem("token", data.token);             // <-- add this
+    localStorage.setItem("userId", data.user._id);
+    localStorage.setItem("username", data.user.username);
+
+    // Optionally update cart
+    updateCart(data.cart || []);
+
+    onClose(); // Close modal
+    navigate("/");
+    window.location.reload();
+  } catch (error) {
+    setMessage(error.message);
+  }
+};
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/40 p-4 animate-fade-in">
