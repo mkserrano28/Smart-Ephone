@@ -52,13 +52,13 @@ function Profile({ darkMode }) {
     }
   };
 
-  if (!token) {
-    return <div className="text-center mt-20 text-red-500">⚠️ Not logged in</div>;
-  }
+if (!token) {
+  return <div className="text-center mt-20 text-red-500">⚠️ Not logged in</div>;
+}
 
-  if (!user) {
-    return <div className="text-center mt-20">🔄 Loading user...</div>;
-  }
+if (!user) {
+  return <div className="text-center mt-20">🔄 Loading user...</div>;
+}
 
 
   return (
