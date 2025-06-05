@@ -48,7 +48,7 @@ function Profile({ darkMode }) {
   };
 
   if (!user) {
-    return <div className="text-center mt-10">🔄 Loading user...</div>;
+    return <div className="text-center mt-20">🔄 Loading user...</div>;
   }
 
   return (
