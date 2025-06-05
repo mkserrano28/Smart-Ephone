@@ -1,87 +1,123 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-export default function UserProfile() {
+export default function userProfile() {
   const [user, setUser] = useState(null);
+  const [newPassword, setNewPassword] = useState("");
+  const [address, setAddress] = useState("");
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:5001/get-user", {
+        const res = await fetch("https://your-api.com/get-user", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
-        if (res.ok) setUser(data);
-        else alert(data.message);
+        if (res.ok) {
+          setUser(data);
+          setAddress(data.profile?.address || "");
+        } else {
+          console.error("❌", data.message);
+        }
       } catch (err) {
-        console.error("Error loading user:", err);
+        console.error("🔥 Error loading user:", err);
       }
     };
-    fetchUser();
-  }, []);
+
+    if (token) fetchUser();
+  }, [token]);
+
+  const handlePasswordChange = async () => {
+    try {
+      const res = await fetch("https://your-api.com/change-password", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ password: newPassword }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Password updated!");
+        setNewPassword("");
+      } else {
+        alert("⚠️ " + data.message);
+      }
+    } catch (err) {
+      console.error("❌ Error changing password:", err);
+    }
+  };
+
+  const handleAddressUpdate = async () => {
+    try {
+      const res = await fetch("https://your-api.com/update-profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          profile: {
+            address,
+          },
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Address updated!");
+      } else {
+        alert("⚠️ " + data.message);
+      }
+    } catch (err) {
+      console.error("❌ Error updating address:", err);
+    }
+  };
 
   if (!user) {
-    return <div className="text-center mt-5">🔄 Loading...</div>;
+    return <div className="text-center mt-10">🔄 Loading Profile...</div>;
   }
 
-  const maskEmail = (email) => {
-    const [name, domain] = email.split("@");
-    return `${name[0]}**********${name.slice(-1)}@${domain}`;
-  };
-
-  const maskPhone = (phone) => {
-    return phone.length >= 2 ? "*****" + phone.slice(-2) : "*****";
-  };
-
   return (
-    <div className="max-w-md mx-auto mt-6 p-4 bg-white dark:bg-gray-900 text-black dark:text-white rounded-lg shadow">
-      <h1 className="text-xl font-semibold mb-4 text-center">Account & Security</h1>
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow text-black dark:text-white">
+      <h2 className="text-2xl font-bold mb-6">👤 Profile Settings</h2>
 
-      <ul className="divide-y divide-gray-300 dark:divide-gray-700">
-        <Item label="My Profile" onClick={() => navigate("/profile")} />
-        <Item label="Username" value={user.username} />
-        <Item label="Phone" value={maskPhone(user.profile?.phone || "")} />
-        <Item label="Email" value={maskEmail(user.email)} />
-        <Item label="Social Media Accounts" onClick={() => alert("Coming soon")} />
-        <Item label="Change Password" onClick={() => alert("Redirect to password change")} />
-        <ToggleItem label="Face ID Authentication" enabled={true} />
-        <Item label="Check Account Activity" onClick={() => alert("View activity")} />
-        <Item label="Manage Login Device" showAlertDot onClick={() => alert("View devices")} />
-      </ul>
+      <div className="mb-4">
+        <label className="block font-medium">Username:</label>
+        <p className="p-2 bg-gray-100 dark:bg-gray-700 rounded">{user.username}</p>
+      </div>
+
+      <div className="mb-4">
+        <label className="block font-medium">Address:</label>
+        <input
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="w-full p-2 rounded bg-white text-black"
+        />
+        <button
+          onClick={handleAddressUpdate}
+          className="mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
+        >
+          Save Address
+        </button>
+      </div>
+
+      <div className="mb-4">
+        <label className="block font-medium">Change Password:</label>
+        <input
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          className="w-full p-2 rounded bg-white text-black"
+        />
+        <button
+          onClick={handlePasswordChange}
+          className="mt-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
+        >
+          Update Password
+        </button>
+      </div>
     </div>
-  );
-}
-
-function Item({ label, value, onClick, showAlertDot }) {
-  return (
-    <li
-      className="flex justify-between items-center py-3 cursor-pointer"
-      onClick={onClick}
-    >
-      <div className="flex items-center">
-        <span>{label}</span>
-        {showAlertDot && <span className="ml-2 h-2 w-2 bg-red-500 rounded-full" />}
-      </div>
-      <div className="flex items-center text-gray-500">
-        {value && <span className="mr-2">{value}</span>}
-        <span className="text-xl">›</span>
-      </div>
-    </li>
-  );
-}
-
-function ToggleItem({ label, enabled }) {
-  return (
-    <li className="flex justify-between items-center py-3">
-      <span>{label}</span>
-      <input
-        type="checkbox"
-        checked={enabled}
-        readOnly
-        className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-      />
-    </li>
   );
 }
