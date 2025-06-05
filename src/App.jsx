@@ -144,6 +144,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                             }
                         />
 
+
                         <Route path="/cartdetails/:id" element={
                             <CartDetails darkMode={darkMode} addToCart={handleAddToCart} />
                         } />
