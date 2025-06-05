@@ -1,10 +1,11 @@
 import React from "react";
 
-function Profile(){
+function Profile({ darkMode }){
     return (
         <>
 
-        <h1 className="mt-10 text-red-500">Username</h1>
+     <h1 className={`mt-10 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>Username Visible Test</h1>
+
         </>
     )
 }

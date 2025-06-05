@@ -131,8 +131,8 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                         } />
                         <Route path="/auth" element={<Authpage />} />
                         <Route path="/about" element={<About darkMode={darkMode} />} />
-                        <Route path="/contact" element={<Contact darkmode={darkMode} />} />
-                         <Route path="/profile" element={<Profile darkmode={darkMode} />} />
+                        <Route path="/contact" element={<Contact darkMode={darkMode} />} />
+                         <Route path="/profile" element={<Profile darkMode={darkMode} />} />
                         <Route path="/cartdetails/:id" element={
                             <CartDetails darkMode={darkMode} addToCart={handleAddToCart} />
                         } />
