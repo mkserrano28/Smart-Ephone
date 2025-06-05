@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const Profile = () => {
+const UserProfile = () => {
   const [user, setUser] = useState(null);
-  const [orders, setOrders] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -24,29 +24,25 @@ const Profile = () => {
       }
     };
 
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch("http://localhost:5001/api/orders", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setOrders(data.orders);
-        } else {
-          console.error("Error fetching orders:", data.message);
-        }
-      } catch (error) {
-        console.error("🔥 Error fetching orders:", error);
-      }
-    };
-
     if (token) {
       fetchUserProfile();
-      fetchOrders();
     }
   }, [token]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (["fullName", "phone", "address", "bio"].includes(name)) {
+      setUser((prev) => ({
+        ...prev,
+        profile: {
+          ...prev.profile,
+          [name]: value,
+        },
+      }));
+    } else {
+      setUser((prev) => ({ ...prev, [name]: value }));
+    }
+  };
 
   const handleSaveProfile = async () => {
     try {
@@ -69,21 +65,6 @@ const Profile = () => {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (["fullName", "phone", "address", "bio"].includes(name)) {
-      setUser((prev) => ({
-        ...prev,
-        profile: {
-          ...prev.profile,
-          [name]: value,
-        },
-      }));
-    } else {
-      setUser((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
   if (!user) {
     return (
       <div className="text-center mt-5 text-gray-700 dark:text-gray-200">
@@ -101,7 +82,7 @@ const Profile = () => {
         text-black dark:text-white
       "
     >
-      <h1 className="text-3xl font-bold mb-4">👤 My Profile</h1>
+      <h1 className="text-3xl font-bold mb-4">👤 Edit Profile</h1>
 
       <label className="block mt-2">
         Username:
@@ -175,25 +156,11 @@ const Profile = () => {
         💾 Save Profile
       </button>
 
-      <h2 className="mt-8 text-2xl font-semibold">📦 My Orders</h2>
-      {orders.length === 0 ? (
-        <p className="mt-2">No orders found.</p>
-      ) : (
-        <ul className="mt-4">
-          {orders.map((order) => (
-            <li
-              key={order._id}
-              className="border p-3 rounded shadow mb-2 bg-white text-black"
-            >
-              Order #{order._id} - Status:{" "}
-              <strong>{order.status}</strong> - Total:{" "}
-              <strong>${order.totalPrice}</strong>
-            </li>
-          ))}
-        </ul>
-      )}
+      <Link to="/profile" className="mt-4 inline-block text-blue-400 underline">
+        ← Back to Profile
+      </Link>
     </div>
   );
 };
 
-export default Profile;
+export default UserProfile;

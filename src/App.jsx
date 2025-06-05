@@ -18,6 +18,7 @@ import Layout from "./pages/Layout";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ScrollToTop from "./pages/ScrollToTop";
+import UserProfile from "./pages/userProfile";
 
 
 
@@ -134,6 +135,15 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/about" element={<About darkMode={darkMode} />} />
                         <Route path="/contact" element={<Contact darkmode={darkMode} />} />
+                        <Route
+                            path="/profile/edit"
+                            element={
+                                <ProtectedRoute>
+                                    <UserProfile />
+                                </ProtectedRoute>
+                            }
+                        />
+
                         <Route path="/cartdetails/:id" element={
                             <CartDetails darkMode={darkMode} addToCart={handleAddToCart} />
                         } />
