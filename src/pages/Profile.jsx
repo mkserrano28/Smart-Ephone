@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 function Profile({ darkMode }) {
   const [user, setUser] = useState(null);
   const [newPassword, setNewPassword] = useState("");
   const token = localStorage.getItem("token");
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
   useEffect(() => {
@@ -50,14 +52,19 @@ function Profile({ darkMode }) {
     }
   };
 
+  if (!token) {
+    return <div className="text-center mt-20 text-red-500">⚠️ Not logged in</div>;
+  }
+
   if (!user) {
     return <div className="text-center mt-20">🔄 Loading user...</div>;
   }
 
+
   return (
     <div className={`mt-28 p-6 rounded max-w-md mx-auto ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
       <h1 className="text-2xl font-bold mb-4">👤 My Profile</h1>
-      
+
       <div className="mb-4">
         <label className="font-medium">Username:</label>
         <p className="p-2 rounded bg-gray-100 dark:bg-gray-700">{user.username}</p>
