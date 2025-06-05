@@ -7,7 +7,6 @@ import Cart from "./pages/Cart";
 import CartDetails from "./pages/CartDetails";
 import Checkout from "./pages/Checkout";
 import Authpage from "./pages/Authpage";
-import Profile from "./pages/Profile";
 import Footer from "./pages/Footer";
 import Orders from "./pages/Orders"; // ✅ Import Orders Page
 import updateCart from "./pages/updateCart";
@@ -131,7 +130,6 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                             />
                         } />
                         <Route path="/auth" element={<Authpage />} />
-                        <Route path="/profile" element={<Profile />} />
                         <Route path="/about" element={<About darkMode={darkMode} />} />
                         <Route path="/contact" element={<Contact darkmode={darkMode} />} />
                         <Route path="/cartdetails/:id" element={
