@@ -136,7 +136,7 @@ function AppContent({ cartItems, setCartItems, handleAddToCart, updateCartQuanti
                         <Route path="/about" element={<About darkMode={darkMode} />} />
                         <Route path="/contact" element={<Contact darkmode={darkMode} />} />
                         <Route
-                            path="/profile/edit"
+                            path="/userprofile"
                             element={
                                 <ProtectedRoute>
                                     <UserProfile />
